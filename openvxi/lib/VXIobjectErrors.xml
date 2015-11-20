@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!-- Copyright (c) 2001 SpeechWorks International -->
+<ErrorMessages moduleName="*OSBobject">
+    <error num="100" severity="1">OSBobject: Out of memory </error>
+    <error num="101" severity="1">OSBobject: Initialized twice </error>
+    <error num="102" severity="1">OSBobject: Not initialized </error>
+    <error num="103" severity="1">OSBobject: Invalid argument to
+    OSBobjectCreateResource( ) </error>
+
+    <error num="200" severity="2">OSBobject: Invalid argument to
+    VXIobject::Execute( ) </error>
+    <error num="201" severity="2">OSBobject: Invalid argument to
+    VXIobject::Validate( ) </error>
+    <error num="202" severity="2">OSBobject: Missing parameter for an
+    object execution </error>
+    <error num="203" severity="2">OSBobject: Invalid type for an object
+    parameter </error>
+    <error num="204" severity="2">OSBobject: Invalid value for an object
+    parameter </error>
+    <error num="205" severity="2">OSBobject: File open failed for
+    recording write </error>
+    <error num="206" severity="2">OSBobject: File writes disabled for
+    com.speechworks.saveRecording due to security concerns, rebuild
+    SBobject.cpp with SBOBJECT_PERMIT_FILE_WRITES defined if desired </error>
+</ErrorMessages>

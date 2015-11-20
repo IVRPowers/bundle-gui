@@ -1,0 +1,63 @@
+<module>
+	<rawname>voicemail</rawname>
+	<repo>standard</repo>
+	<name>Voicemail</name>
+	<version>12.0.36</version>
+	<publisher>FreePBX</publisher>
+	<licenselink>http://www.gnu.org/licenses/gpl-3.0.txt</licenselink>
+	<license>GPLv3+</license>
+	<candisable>no</candisable>
+	<canuninstall>no</canuninstall>
+	<changelog>
+		*12.0.36* Localization Fixes
+		*12.0.35* FREEPBX-9081 UCP changing email address in VM settings does not apply
+		*12.0.34* FREEPBX-8982 click to call/copy for voicemail in UCP
+		*12.0.33* FREEPBX-8927 Badge count equal to 1 when no voicemail
+		*12.0.32* Fix bug in UCP when there are no mailboxes assigned
+		*12.0.31* FREEPBX-8275 Missed Features from ARI Voicemail interface
+		*12.0.30* Remove commented out code, centralize voicemail counter
+		*12.0.29* Bug fixes
+		*12.0.28* FREEPBX-8602, FREEPBX-8575, FREEPBX-8348, plus speed improvements
+		*12.0.27* Audio playback progress and error reporting in UCP
+		*12.0.26* FREEPBX-7723 - allow minpassword to be set from voicemail admin
+		*12.0.25* FREEPBX-8226 Names dont show up on virtual extensions in UCP
+		*12.0.24* Dont support range on a download, cleanup so that cdr and this look similar
+		*12.0.23* Declare the wav file as a usable format
+		*12.0.22* Fixes to allow playback in Safari and Mobile devices (yes including apple and android)
+		*12.0.21* Speeds up load page exponentially in UCP
+		*12.0.20* pagination fixes
+		*12.0.19* FREEPBX-8211 Improvements to UCP Voicemail/CDR Playback
+		*12.0.18* Restructure Voicemail in UCP, FREEPBX-8198 Add pagination, FREEPBX-8207 fix converting process
+		*12.0.17* Add res_mwi_devstate now for 12 installations
+		*12.0.16* Tweaks for UCP
+		*12.0.15* Stop playing voicemails in UCP when they are deleted
+		*12.0.14* FREEPBX-7542 fixes UCP not renumbering voicemails
+		*12.0.13* FREEPBX-7500 Make User voicemail settings uniform
+		*12.0.12* FREEPBX-7326 fixes issue of enabling setting if module doesnt exist.
+		*12.0.11* VmX Temp addition and Fixes and UCP conflict fixes
+		*12.0.10* Part fix for #6923 language not being set.
+		*12.0.9* Restructure Parts of UCP
+		*12.0.8* Cleanup in UCP
+		*12.0.7* Auto Saving for UCP
+		*12.0.6* UCP Module Adjustments
+		*12.0.5* Small fixes for UCP FREEPBX-7293
+		*12.0.4* Set message limit for UCP display
+		*12.0.3* Work on GUI for button work in Framework, numerous changes and additions for User Control Panel on the backend
+		*12.0.2* FREEPBX-6471 allow asterisk in password field
+		*12.0.1* Use BMO object to add the Asterisk mwi module if it exists
+	</changelog>
+	<description>This module allows you to configure Voicemail for a user or extension</description>
+	<category>Settings</category>
+	<menuitems>
+		<voicemail>Voicemail Admin</voicemail>
+	</menuitems>
+	<depends>
+		<module>core ge 12.0.23</module>
+		<version>12.0.1alpha54</version>
+	</depends>
+	<supported>
+		<version>12.0</version>
+	</supported>
+	<location>release/2.11/voicemail-2.11.1.0.tgz</location>
+	<md5sum>442f0ba3a17bedc96f4cb75c53ccf99b</md5sum>
+</module>

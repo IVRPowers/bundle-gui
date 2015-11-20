@@ -1,0 +1,123 @@
+#!/bin/sh
+
+# $Id: vxiasterisk,v 1.5b 2006/10/10
+#
+# openvxi    Starts, Stops and Reloads vxiasterisk.
+#
+# chkconfig: 2345 70 70
+# description: VXI* VoiceXML browser daemon.
+# processname: openvxi
+# pidfile: /var/run/asterisk.pid
+#
+
+# Use this option to specify a different configuration directory
+OPENVXI_CONFIG=/etc/openvxi
+
+# Installation directory
+OPENVXI_SBIN=/usr/sbin
+
+# Uncomment the following and set them to the user/groups that you
+# want to run Asterisk as. NOTE: this requires substantial work to
+# be sure that Asterisk's environment has permission to write the
+# files required  for  its  operation, including logs, its comm
+# socket, the asterisk database, etc.
+#OPENVXI_USER="root"
+#OPENVXI_GROUP="root"
+
+# Source function library.
+. /etc/init.d/functions
+
+if ! [ -x $OPENVXI_SBIN/openvxi ] ; then
+	echo "ERROR: $OPENVXI_SBIN/openvxi not found"
+	exit 0
+fi
+
+if ! [ -d $OPENVXI_CONFIG ] ; then
+	echo "ERROR: $OPENVXI_CONFIG directory not found"
+	exit 0
+fi
+
+# Uncomment this ONLY if you know what you are doing.
+# export LD_ASSUME_KERNEL=2.4.1
+
+# Full path to asterisk binary
+DAEMON=$OPENVXI_SBIN/openvxi
+
+# Full path to safe_openvxi script
+SAFE_OPENVXI=$OPENVXI_SBIN/safe_openvxi
+
+# Allow configuration overrides in /etc/sysconfig/openvxi
+CONFIG0=`readlink $0`
+if [ "$CONFIG0" = "" ]; then
+	CONFIGFILE=/etc/sysconfig/`basename $0`
+else
+	CONFIGFILE=/etc/sysconfig/`basename $CONFIG0`
+fi
+[ -x $CONFIGFILE ] && . $CONFIGFILE
+
+RETVAL=0
+
+start() {
+	# Start daemons.
+	echo -n $"Starting openvxi: "
+       if [ -f $SAFE_OPENVXI ] ; then
+		DAEMON=$SAFE_OPENVXI
+	fi
+	if [ $OPENVXI_USER ] ; then
+		OPENVXIARGS="-U $OPENVXI_USER"
+	fi
+	if [ $OPENVXI_GROUP ] ; then
+		OPENVXIARGS="$OPENVXIARGS -G $OPENVXI_GROUP"
+	fi
+	if [ $AST_CONFIG ]; then
+		OPENVXIARGS="$OPENVXIARGS -C $OPENVXI_CONFIG"
+	fi
+	daemon $DAEMON $OPENVXIARGS
+	RETVAL=$?
+	[ $RETVAL -eq 0 ] && touch /var/lock/subsys/openvxi
+	echo
+	return $RETVAL
+}
+
+stop() {
+	# Stop daemons.
+	echo -n $"Shutting down openvxi: "
+	if [ -f $SAFE_ASTERISK ]; then
+		killall -9 safe_openvxi
+	fi
+	killproc openvxi
+	RETVAL=$?
+	[ $RETVAL -eq 0 ] && rm -f /var/lock/subsys/openvxi
+	echo
+	return $RETVAL
+}
+
+restart() {
+	stop
+	start
+}
+
+
+# See how we were called.
+case "$1" in
+  start)
+	start
+	;;
+  stop)
+	stop
+	;;
+  restart)
+	restart
+	;;
+  condrestart)
+	[ -f /var/lock/subsys/openvxi ] && restart || :
+	;;
+  status)
+	status openvxi
+	;;
+  *)
+	echo "Usage: openvxi {start|stop|restart|condrestart|status}"
+	exit 1
+esac
+
+exit $?

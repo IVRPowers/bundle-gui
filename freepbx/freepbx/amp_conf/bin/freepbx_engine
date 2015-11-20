@@ -1,0 +1,733 @@
+#!/usr/bin/env bash
+
+# Visual formating variables
+# use like: ${b}text$bx - ${b} starts bold, $bx end it, etc.
+# you must use echo -e for formating to be valid
+b="\033[1m"
+bx="\033[0m"
+u="\e[4m"
+ux="\e[0m"
+
+ROOT_UID=0	 # root uid is 0
+E_NOTROOT=67 # Non-root exit error
+
+echo
+# check to see if we are root
+if [ "$UID" -ne "$ROOT_UID" ]
+then
+	echo "Sorry, you must be root to run this script."
+	echo
+	exit $E_NOTROOT
+fi
+
+# function to eventually get freepbx.conf to /etc
+move_freepbxconf() {
+	if [ -e /etc/asterisk/freepbx.conf -a ! -e /etc/freepbx.conf ]; then
+		echo moving /etc/asterisk/freepbx.conf to /etc/freepbx.conf
+		mv /etc/asterisk/freepbx.conf /etc/
+	  	if [ "$?" -ne "0" ]; then
+				echo "unable to move, FreePBX will function fine but you will"
+				echo "get this error until the file can be successfully moved"
+			else
+				FREEPBX_CONF="/etc/freepbx.conf"
+	  	fi
+	fi
+}
+
+# define freepbx config file if not already set
+if [ -z "$FREEPBX_CONF" ]; then
+	if [ -e "/etc/freepbx.conf" ]; then
+		FREEPBX_CONF="/etc/freepbx.conf"
+	elif [ -e "/etc/asterisk/freepbx.conf" ]; then
+		FREEPBX_CONF="/etc/asterisk/freepbx.conf"
+		 move_freepbxconf
+	else
+		FREEPBX_CONF="/etc/freepbx.conf"
+	fi
+fi
+
+
+# Set some defaults which can be re-defined from the config file/db
+AMPDEVUSER=asterisk
+AMPDEVGROUP=asterisk
+AMPASTERISKUSER=asterisk
+AMPASTERISKGROUP=asterisk
+AMPASTERISKWEBUSER=$AMPASTERISKUSER
+AMPASTERISKWEBGROUP=$AMPASTERISKGROUP
+AMPVMUMASK=077
+ASTETCDIR=/etc/asterisk
+FPBXDBUGFILE=/var/log/asterisk/freepbx_debug
+ASTSTOPTIMEOUT=120
+ASTSTOPPOLLINT=2
+
+write_freepbxconf() {
+	if [ ! -e $FREEPBX_CONF  ]; then
+		cat > $FREEPBX_CONF <<-EOF
+		<?php
+		\$amp_conf['AMPDBUSER']	= '$AMPDBUSER';
+		\$amp_conf['AMPDBPASS']	= '$AMPDBPASS';
+		\$amp_conf['AMPDBHOST']	= '$AMPDBHOST';
+		\$amp_conf['AMPDBNAME']	= '$AMPDBNAME';
+		\$amp_conf['AMPDBENGINE'] = '$AMPDBENGINE';
+		\$amp_conf['datasource']	= ''; //for sqlite3
+
+		require_once('${AMPWEBROOT}/admin/bootstrap.php');
+
+		EOF
+	fi
+	if [ -e /etc/asterisk/freepbx.conf -a ! -e /etc/freepbx.conf ]; then
+		echo moving /etc/asterisk/freepbx.conf to /etc/freepbx.conf
+		mv /etc/asterisk/freepbx.conf /etc/
+  	if [ "$?" -ne "0" ]; then
+			echo "unable to move, FreePBX will function fine but you will"
+			echo "get this error until the file can be successfully moved"
+  	fi
+	fi
+}
+
+# get settings from db/config file
+if [[ -e $FREEPBX_CONF && -w "/etc/amportal.conf" && -z "$FORCE_AMPORTAL_CONF" ]]; then
+	# get the path of this file to call the gen_amp_conf.php script which will
+	# generate all the amp_conf variables that can be exported
+	#
+	progdir=`dirname $0`
+	sv_pwd=$PWD
+        cd $progdir
+        gen_path=$PWD
+        cd $sv_pwd
+	`$gen_path/gen_amp_conf.php`
+elif [ -e "/etc/amportal.conf" ]; then # Check if file exists, if it does read it and then write out /etc/freepbx.conf
+	. /etc/amportal.conf
+	write_freepbxconf
+else
+	echo;
+    echo "FreePBX config file not found!";
+	echo "Have you installed FreePBX?";
+	exit;
+fi
+
+if [ -z $PIDOF ]; then
+    PIDOF=pidof
+fi
+
+if [ -e $AMPBIN/amportal ]; then
+	if [ ! -e $AMPSBIN/amportal ] || [ ! -h $AMPSBIN/amportal ]; then
+		cmp -s $AMPBIN/amportal $AMPSBIN/amportal > /dev/null
+		if [ $? -eq 1 ]; then
+		  echo "new amportal script detected, copying it to $AMPSBIN and attempting to backup up old"
+		  # just in case it isn't there though it should be
+		  if [ -e $AMPSBIN/amportal ]; then
+		    mv $AMPSBIN/amportal $AMPSBIN/amportal.bak
+		  fi
+		  cp $AMPBIN/amportal $AMPSBIN/amportal
+		  if [ "$?" -ne "0" ]; then
+		    echo "unable to update to new amportal, check permissions and try again"
+		  fi
+		  chown root:root $AMPSBIN/amportal
+		  chmod +x $AMPSBIN/amportal
+		else
+			rm -f $AMPBIN/amportal
+		fi
+	fi
+fi
+
+if [ "$ASTRUNDIR" = "/var/run" ]
+  then
+    echo "**** ERROR IN CONFIGURATION ****"
+    echo "astrundir in '$ASTETCDIR' is set to '/var/run' - THIS IS WRONG."
+    echo "Please change it to something sensible (eg, '/var/run/asterisk') and re-run"
+    echo "install_amp"
+    exit;
+fi
+
+if [ ! -d "$ASTRUNDIR" ]
+  then
+    echo "**** WARNING: ERROR IN CONFIGURATION ****"
+    echo "astrundir in '$ASTETCDIR' is set to $ASTRUNDIR but the directory"
+		echo "does not exists. Attempting to create it with: 'mkdir -p $ASTRUNDIR'"
+		echo
+		mkdir -p $ASTRUNDIR
+		RET=$?
+		if [ $RET != 0 ]
+		then
+    	echo "**** ERROR: COULD NOT CREATE $ASTRUNDIR ****"
+			echo "Attempt to execute 'mkdir -p $ASTRUNDIR' failed with an exit code of $RET"
+    	echo "You must create this directory and the try again."
+			exit
+		fi
+fi
+
+############ freepbx_engine_hooks #########################
+#
+# Look for any file in THIS directory (bin) that is of the format of
+#
+# freepbx_engine_hook_*
+#
+# If we find it then source it. That file should provide any required
+# code that may need to be initialized and then functions that are
+# called by call_hook below
+#
+##########################################################
+
+CURDIR="$( cd -P "$( dirname "$0" )" && pwd )"
+for VAR in `ls ${CURDIR}/freepbx_engine_hook_* 2>/dev/null`
+do
+	. ${VAR}
+done
+
+
+# call_hook
+#
+# takes as argument the name of a function and checks if there are any hooks declared
+# in the form of NAME_hook_* and if so will execute those. This is used in conjunction
+# with the various operaitonal built in commands  such as start, stop, restart, etc.
+# for functions such as a module that may need a daemon started and stopped when Asterisk
+# is started and stopped, such as FOP with op_server.pl
+#
+call_hook() {
+
+	HOOKPRE=${1}_hook_;
+	HOOKLEN=${#HOOKPRE}
+	RETCODE=1
+	# echo "LOOKING FOR:  ${HOOKPRE}* LEN: ${HOOKLEN}"
+
+	for VAR in `typeset -F`
+	do
+		HOOKBASE=${VAR:0:${HOOKLEN}}
+		if [ "${HOOKBASE}" == "${HOOKPRE}" ]
+		then
+			# echo "GOT ONE ${VAR} now trying to call it"
+			${VAR}
+			RETCODE=0
+		fi
+	done
+	return ${RETCODE}
+}
+
+chown_asterisk() {
+	echo -n SETTING FILE PERMISSIONS
+
+	# Get our PHP session directory.
+	SESSDIR=$(php -r "echo ini_get('session.save_path');")
+	[ ! $SESSDIR ] && SESSDIR=/var/lib/php/session
+	# If it's not a directory AND it's not a link, it's broken. Fix it.
+	if [ ! -d $SESSDIR -a ! -h $SESSDIR ]; then
+		mv $SESSDIR $SESSDIR.$$
+		mkdir $SESSDIR
+	fi
+
+	ASTERISKOWNED=("$ASTRUNDIR" "$ASTETCDIR" "$ASTVARLIBDIR" "$ASTLOGDIR" "$AMPBIN" "$ASTAGIDIR" \
+		"/etc/dahdi" "/etc/wanpipe" "/etc/odbc.ini" "/usr/local/asterisk" "/dev/tty9" \
+		"/etc/amportal.conf")
+	WEBOWNED=("$AMPWEBROOT/admin" "$AMPWEBROOT/recordings" "$FPBXDBUGFILE" "$FPBX_LOG_FILE" "$SESSDIR")
+	PRIVFILES=("$FREEPBX_CONF" "$ASTVARLIBDIR/.ssh/.id_rsa")
+	DEVICES=("/dev/zap" "/dev/dahdi" "/dev/capi20" "/dev/misdn" "/dev/mISDN" "/dev/dsp")
+
+	for target in "${WEBOWNED[@]}"; do
+		[ ! -e "$target" ] && continue
+		L=$(readlink -f $target)
+		chown -R $AMPASTERISKWEBUSER:$AMPASTERISKWEBGROUP $L
+		chmod -R 775 $L
+		echo -n .
+	done
+
+	for target in "${ASTERISKOWNED[@]}"; do
+		[ ! -e "$target" ] && continue
+		L=$(readlink -f $target)
+		chown -R $AMPASTERISKUSER:$AMPASTERISKGROUP $L
+		chmod -R 775 $L
+		echo -n .
+	done
+
+	for file in "${PRIVFILES[@]}"; do
+		[ ! -e "$file" ] && continue
+		L=$(readlink -f $file)
+		chown $AMPASTERISKWEBUSER:$AMPASTERISKWEBGROUP $L
+		chmod 600 $L
+		echo -n .
+	done
+
+	for dev in "${DEVICES[@]}"; do
+		[ ! -e "$dev" ] && continue
+		chown -R $AMPDEVUSER:$AMPDEVGROUP $dev
+		echo -n .
+	done
+
+	# This can take a while, so run it in the background
+	( D=$(readlink -f $ASTSPOOLDIR); chown -R $AMPASTERISKUSER:$AMPASTERISKGROUP $D; chmod -R g+w $D ) &
+
+	# Make sure that everything in AMPWEBROOT is owned by asterisk.
+	# Edit: No. Don't chown EVERYTHING. Takes too long. Chown
+	# the directory itself, and all of the first level directories.
+	# We've already recursed into admin and recordings above
+	chown $AMPASTERISKWEBUSER:$AMPASTERISKWEBGROUP $AMPWEBROOT
+	chown $AMPASTERISKWEBUSER:$AMPASTERISKWEBGROUP $AMPWEBROOT/* 2>/dev/null # Silence dangling symlink errors, cleared later
+
+	chown $AMPASTERISKUSER:$AMPASTERISKGROUP /usr/local/sbin/amportal
+
+	# Fix immutable files
+	chattr -i $AMPWEBROOT/* > /dev/null 2>&1
+
+	echo Done
+	call_hook chown_asterisk
+}
+
+remove_dangling_links() {
+	#find -L /var/www/html/admin/assets 2>&1 >/dev/null | grep -i 'too many levels of symbolic links' | sed 's/\(.*\)\/.*/\1/'
+	#rm -Rf /var/www/html/admin/assets/superfecta/images/*
+	echo Removing any dangling symlinks
+	find -L $AMPWEBROOT -type l -delete
+	find -L $AMPBIN -type l -delete
+	find -L $ASTETCDIR -type l -delete
+	find -L $ASTVARLIBDIR -type l -delete
+	find -L $ASTSPOOLDIR -type l -delete
+	find -L $ASTAGIDIR -type l -delete
+	echo Dangling symlinks removed
+}
+
+check_asterisk() {
+# check to see if asterisk is running
+# Note, this isn't fool-proof.  If safe_asterisk is constantly restarting a dying asterisk,
+# then there is a chance pidof will return non zero.  We call this twice to reduce chances of this happening
+pid_length=`$PIDOF asterisk|awk '{print length($0)}'`
+	if [ "$pid_length" == "0" -a "$pid_length" != "" ]
+		then
+				killall -9 safe_asterisk
+				killall -9 mpg123 > /dev/null
+				echo
+				echo "-----------------------------------------------------"
+				echo "Asterisk could not start!"
+				echo "Use 'tail $ASTLOGDIR/full' to find out why."
+				echo "-----------------------------------------------------"
+				exit 0
+		fi
+	call_hook check_asterisk
+}
+
+run_asterisk() {
+# check to see if asterisk is running
+echo
+echo "STARTING ASTERISK"
+pid_length=`$PIDOF asterisk|awk '{print length($0)}'`
+	if [ "$pid_length" != "0" -a "$pid_length" != "" ]
+		then
+			echo "Asterisk is already running"
+		else
+			# su - asterisk -c "export PATH=$PATH:/usr/sbin && export LD_LIBRARY_PATH=/usr/local/lib && /usr/sbin/safe_asterisk"
+			export LD_LIBRARY_PATH=/usr/local/lib
+			umask $AMPVMUMASK
+			/usr/sbin/safe_asterisk -U $AMPASTERISKUSER -G $AMPASTERISKGROUP 2>&1 >/dev/null
+			sleep 5
+			check_asterisk
+			sleep 1
+			check_asterisk
+			echo "Asterisk Started"
+			if [ "$DYNAMICHINTS" == "TRUE" ]
+			then
+				echo "Reloading Asterisk because of Dynamic Hints"
+				/usr/sbin/asterisk -rx 'core reload' 2>&1 >/dev/null
+			fi
+		fi
+	call_hook run_asterisk
+}
+
+stop_asterisk() {
+echo
+echo "STOPPING ASTERISK"
+echo "Waiting for Asterisk to Stop Gracefully..."
+pid_length=`$PIDOF asterisk|awk '{print length($0)}'`
+	if [ "$pid_length" != "0" -a "$pid_length" != "" ]
+		then
+			/usr/sbin/asterisk -rx "core stop gracefully" 2>&1 >/dev/null | grep -v "No such command"
+			/usr/sbin/asterisk -rx "stop gracefully" 2>&1 >/dev/null | grep -v -E "No such command|deprecated|Unable to connect to remote"
+
+			pid_length=`$PIDOF asterisk|awk '{print length($0)}'`
+			if [ "$pid_length" = "0" -o "$pid_length" = "" ]
+			then
+				ast_not_stopped=false
+			else
+				echo "All calls will be dropped once the timer hits 0. To cancel, press CTL-C"
+				ast_not_stopped=true
+				time_to_wait=$ASTSTOPTIMEOUT
+
+				while [ $time_to_wait -gt 0 ];
+				do
+					echo -ne "Waiting for Asterisk to Stop" $time_to_wait "\r"
+					sleep $ASTSTOPPOLLINT
+					let time_to_wait=time_to_wait-ASTSTOPPOLLINT
+					pid_length=`$PIDOF asterisk|awk '{print length($0)}'`
+					if [ "$pid_length" = "0" -o "$pid_length" = "" ]
+					then
+						ast_not_stopped=false
+						break
+					fi
+				done
+			fi
+
+			if $ast_not_stopped ;
+			then
+				echo "Waiting for Asterisk to Stop    "
+			else
+				echo
+			fi
+
+			if $ast_not_stopped ;
+			then
+				echo "Force stopping Asterisk and hanging up active channels"
+				/usr/sbin/asterisk -rx "core stop now" 2>&1 >/dev/null | grep -v "No such command"
+				/usr/sbin/asterisk -rx "stop now" 2>&1 >/dev/null | grep -v -E "No such command|deprecated|Unable to connect to remote"
+				pid_length=`$PIDOF asterisk|awk '{print length($0)}'`
+				if [ "$pid_length" != "0" -a "$pid_length" != "" ]
+				then
+					time_to_wait=20
+					while [ $time_to_wait -gt 0 ];
+					do
+						echo -ne "Waiting for Asterisk to Stop" $time_to_wait "\r"
+						sleep 1
+						let time_to_wait=time_to_wait-1
+						pid_length=`$PIDOF asterisk|awk '{print length($0)}'`
+						if [ "$pid_length" = "0" -o "$pid_length" = "" ]
+						then
+							ast_not_stopped=false
+							break
+						fi
+					done
+
+					if $ast_not_stopped ;
+					then
+						echo "Waiting for Asterisk to Stop    "
+					else
+						echo
+					fi
+
+				else
+					ast_not_stopped=false
+				fi
+
+				if $ast_not_stopped ;
+				then
+					echo "Asterisk has still not stopped, killing Asterisk processes"
+					killall -9 safe_asterisk
+					killall -9 asterisk
+
+					pid_length=`$PIDOF asterisk|awk '{print length($0)}'`
+					if [ "$pid_length" != "0" -a "$pid_length" != "" ]
+					then
+						echo "[FATAL] Could not kill Asterisk process, exiting"
+						exit 1
+					fi
+				fi
+			fi
+			echo -ne "Asterisk Stopped" "\n\n"
+
+		fi
+	call_hook stop_asterisk
+}
+
+kill_amp() {
+	echo
+	echo "KILLING AMP PROCESSES"
+	killall -9 safe_asterisk
+	killall -9 asterisk
+	killall -9 mpg123
+	ps -ef | grep safe_opserver | grep -v grep | awk '{print $2}' | xargs kill -9
+	killall -9 op_server.pl
+	call_hook kill_amp
+}
+
+
+case "$1" in
+	start)
+		chown_asterisk
+		remove_dangling_links
+		run_asterisk
+	;;
+	stop)
+		stop_asterisk
+	;;
+	restart)
+		stop_asterisk
+		sleep 1
+		chown_asterisk
+		remove_dangling_links
+		run_asterisk
+	;;
+
+	reload)
+		killall -HUP asterisk
+	;;
+	chown)
+		chown_asterisk
+		remove_dangling_links
+	;;
+	kill)
+		kill_amp
+	;;
+	#Added some admin/dev oriented options:
+	#see usage in help text below
+	admin|a)
+		case $2 in
+			reload|r)
+				$AMPBIN/module_admin reload
+			;;
+			context|ctx)
+			case $3 in
+				list|l)
+				#asterisk -rx 'dialplan show'|grep Context|awk '{print $3}'|sed "s/'//g"|sort
+					cat $ASTETCDIR/extensions*|grep '^\['|sed 's/[][]//g'|sort
+				;;
+				contains|con)
+					awk -v var="[$4]" 'f && /^;/{exit} f{print} index($0,var){f=1}' /etc/asterisk/extensions_additional.conf
+				;;
+				*)
+					for i in $ASTETCDIR/extensions*; do	awk -v "var=$3" '$0 ~ "^\\[" var "\\]", /^;/ { print }'  $i; done
+				;;
+			esac
+			;;
+			userman)
+				case $3 in
+					migrate|m)
+						out=`php -r '
+						set_time_limit(0);
+						$bootstrap_settings["freepbx_auth"] = false;
+						if (!@include_once(getenv("FREEPBX_CONF") ? getenv("FREEPBX_CONF") : "/etc/freepbx.conf")) {
+							include_once("/etc/asterisk/freepbx.conf");
+						}
+						if(!FreePBX::Modules()->checkStatus("userman")) {
+							echo "Userman is not installed!";
+							exit();
+						}
+						$userman = FreePBX::Userman();
+						if(method_exists($userman, "migrateVoicemailUsers")) {
+							$userman->migrateVoicemailUsers("'$4'");
+						} else {
+							echo "Please update User Manager";
+						}
+						'`
+						echo -e $out
+					;;
+					*)
+						#formating variables defined at top of file
+						echo -e "                         $b $u User Manager admin options menu$ux$bx
+
+usage: ${b}amportal$bx (${b}admin$bx|${b}a$bx) ${b}userman$bx <option>
+
+options:
+
+${b}migrate$bx|${b}m$bx: Migrates all Voicemail users to User Manager. If no context is supplied the default will be used Ex: amportal a userman m <vmcontext>
+\n\n\n"
+					;;
+				esac
+			;;
+			ucp)
+				case $3 in
+					enableall|ea)
+						out=`php -r '
+						set_time_limit(0);
+						$bootstrap_settings["freepbx_auth"] = false;
+						$bootstrap_settings["skip_astman"] = true;
+						$restrict_mods = true;
+						if (!@include_once(getenv("FREEPBX_CONF") ? getenv("FREEPBX_CONF") : "/etc/freepbx.conf")) {
+							include_once("/etc/asterisk/freepbx.conf");
+						}
+						if(!FreePBX::Modules()->checkStatus("ucp")) {
+							echo "UCP is not installed!";
+							exit();
+						}
+						$ucp = FreePBX::Ucp();
+						if(method_exists($ucp, "enableAllUsers")) {
+							if($ucp->enableAllUsers()) {
+								echo "All Users have been successfully enabled!";
+							} else {
+								echo "There was an error";
+							}
+						}
+						'`
+						echo $out
+					;;
+					unlock|u)
+						if [ -z "$4" ]; then
+							echo "Invalid Command"
+							echo 'amportal a ucp u <username> <session>'
+							exit
+						fi
+						if [ -z "$5" ]; then
+							echo "Invalid Command"
+							echo "amportal a ucp u $5 <session>"
+							exit
+						fi
+						out=`php -r '
+						$bootstrap_settings["freepbx_auth"] = false;
+						$bootstrap_settings["skip_astman"] = true;
+						$restrict_mods = true;
+						if (!@include_once(getenv("FREEPBX_CONF") ? getenv("FREEPBX_CONF") : "/etc/freepbx.conf")) {
+							include_once("/etc/asterisk/freepbx.conf");
+						}
+						if(!FreePBX::Modules()->checkStatus("ucp")) {
+							echo "UCP is not installed!";
+							exit();
+						}
+						$ucp = FreePBX::Ucp();
+						if(method_exists($ucp, "sessionUnlock")) {
+							if($ucp->sessionUnlock("'$4'","'$5'")) {
+								echo "UCP Session Unlocked!";
+							} else {
+								echo "User Doesnt Exist";
+							}
+						}
+						'`
+						echo $out
+					;;
+					*)
+						#formating variables defined at top of file
+						echo -e "                         $b $u UCP admin options menu$ux$bx
+
+usage: ${b}amportal$bx (${b}admin$bx|${b}a$bx) ${b}ucp$bx <option>
+
+options:
+
+${b}enableall$bx|${b}en$bx: Enables UCP login for all User Manager users
+${b}unlock$bx|${b}u$bx: Allows remote session unlock in UCP. Ex: amportal a ucp u <user> <session>
+\n\n\n"
+					;;
+				esac
+			;;
+			modadmin|ma)
+				$AMPBIN/module_admin $3 $4
+			;;
+			freepbx_setting|fs)
+				$AMPBIN/freepbx_setting $3 $4
+			;;
+			auth_database|ad)
+				$AMPBIN/freepbx_setting AUTHTYPE database
+			;;
+			auth_none|an)
+				$AMPBIN/freepbx_setting AUTHTYPE none
+			;;
+			externalip|extip)
+				echo `wget http://mirror.freepbx.org/whatismyip.php -O - -q|sed 's/<[^>]*>//g'`
+			;;
+			dbug)
+				if [ ! -f $FPBXDBUGFILE ]; then
+					touch tail -f $FPBXDBUGFILE
+					chown $AMPASTERISKUSER:$AMPASTERISKGROUP $FPBXDBUGFILE
+				fi
+				if [ -f '/var/log/httpd/error_log' ]; then
+					httpd_error='/var/log/httpd/error_log'
+				fi
+				#enable dbug in case its disabled
+				$AMPBIN/freepbx_setting FPBXDBUGDISABLE 0
+				#tail the freepbx logfile as well FREEPBX-7067
+				tail -f $FPBXDBUGFILE $httpd_error $FPBX_LOG_FILE
+			;;
+			mysql|m)
+				mysql -u$AMPDBUSER -D$AMPDBNAME -p$AMPDBPASS
+			;;
+			syncmanager|s)
+				`php -r '
+				$bootstrap_settings["freepbx_auth"] = false;
+				$bootstrap_settings["skip_astman"] = true;
+				$restrict_mods = true;
+				if (!@include_once(getenv("FREEPBX_CONF") ? getenv("FREEPBX_CONF") : "/etc/freepbx.conf")) {
+					include_once("/etc/asterisk/freepbx.conf");
+				}
+				fpbx_ami_update(true,true,true);
+				'`
+				if [[ $? = 0 ]]; then
+					echo 'Manager ReSynced, restarting Asterisk'
+					stop_asterisk
+					sleep 1
+					chown_asterisk
+					remove_dangling_links
+					run_asterisk
+				else
+					echo 'um, something went wrong...'
+				fi
+			;;
+			unlock|u)
+				if [ -z "$3" ]; then
+					echo 'cant unlock a blank session!'
+				else
+					`php -r '
+					$bootstrap_settings["freepbx_auth"] = false;
+					$bootstrap_settings["skip_astman"] = true;
+					$restrict_mods = true;
+					if (!@include_once(getenv("FREEPBX_CONF") ? getenv("FREEPBX_CONF") : "/etc/freepbx.conf")) {
+						include_once("/etc/asterisk/freepbx.conf");
+					}
+					session_id("'$3'");
+					session_start();
+					if (!isset($_SESSION["AMP_user"])) {
+						$_SESSION["AMP_user"] = new ampuser($amp_conf["AMPDBUSER"]);
+						$_SESSION["AMP_user"]->setAdmin();
+					}
+					'`
+					if [[ $? = 0 ]]; then
+						echo 'session unlocked!'
+					else
+						echo 'um, something went wrong...'
+					fi
+				fi
+			;;
+			genunlockkey)
+				echo "If REMOTEUNLOCK is enabled, you will receive a value for KEY. You can use"
+				echo "that as a parameter to config.php, thus:"
+				echo "http://192.168.1.1/admin/config.php?unlock=abc123def... "
+				echo ""
+				env php -r '$bootstrap_settings["freepbx_auth"] = false; $bootstrap_settings["skip_astman"] = true; $restrict_mods = true;
+					if (!@include_once(getenv("FREEPBX_CONF") ? getenv("FREEPBX_CONF") : "/etc/freepbx.conf")) { include_once("/etc/asterisk/freepbx.conf"); }
+					print "KEY=".$bmo->Unlock->genUnlockKey()."\n";'
+			;;
+			rmsymlinks)
+				remove_dangling_links
+			;;
+		*)
+
+#formating variables defined at top of file
+echo -e "                         $b $u FPBX admin options menu$ux$bx
+
+
+usage: ${b}amportal$bx (${b}admin$bx|${b}a$bx) <option>
+
+options:
+
+${b}externalip$bx|${b}extip$bx: Returns the external ip for the default gateway
+${b}dbug$bx:		Shows the freepbx debug log file and any update
+${b}context$bx|${b}cxt$bx:   Show's the specified context from the dialplan. This is extremely
+               useful when developing dialplan on a system with many modules,
+               where it is not feasible to look thru the whole extensions_additional
+               every time to see how a specific context was generated.
+               When run with the 'list' or 'l' option, will list all available
+               contexts as they appear in extensions* files
+${b}modadmin$bx|${b}ma$bx:  Runs the module_admin script with additional arguments as passed
+${b}mysql$bx|${b}m$bx:	Connect to freebx's mysql connection (assumes server is on localhost)
+${b}rmsymlinks$bx:		Cleans up dangling links left over from uninstalled modules
+${b}reload$bx|${b}r$bx:      Does a full dialplan regeneration/reload (like clicking
+               the red 'Apply Changes' button)
+${b}unlock$bx|${b}u$bx:	Unlock the web gui from the cli (requires root)
+${b}ucp$bx:           UCP Specific Operations (requires root) (Type 'amportal a ucp' to see more)
+${b}userman$bx:           Usermanager Specific Operations (requires root) (Type 'amportal a userman' to see more)
+${b}syncmanager$bx|${b}s$bx:	Resyncs the Asterisk manager credentials then restarts Asterisk
+\n\n\n"
+		;;
+	esac
+	;;
+	*)
+
+		call_hook $1
+		if [ "$?" -ne "0" ]; then
+			echo "-------------FreePBX Control Script-----------------------------------------------"
+			echo
+			echo "Usage:       amportal start|stop|restart|kill|chown"
+			echo
+			echo "start:       Starts Asterisk and Flash Operator Panel server if enabled"
+			echo "stop:        Gracefully stops Asterisk"
+			echo "restart:     Stop and Starts"
+			echo "kill:        Kills Asterisk"
+			echo "chown:       Sets appropriate permissions on files"
+			echo
+			call_hook help
+			exit 1
+		fi
+	;;
+esac

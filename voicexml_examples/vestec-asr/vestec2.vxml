@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<vxml version="2.0" xmlns="http://www.w3.org/2001/vxml" xml:lang="es-ES">
+ <form>
+  <property name="inputmodes" value="voice"/>
+  <property name="timeout" value="5s"/>
+  <field name="text">
+   <grammar mode="voice" src="yesno_es.grm"/>
+   <catch event="noinput nomatch">
+    <reprompt/>
+   </catch>
+   <prompt>
+    Por favor diga, si o no
+   </prompt>
+  </field>
+  <filled>
+   <prompt>
+    Ha dicho :
+    <value expr="text.Yesno" />
+   </prompt>
+   <clear namelist="text" />
+  </filled>
+ </form>
+</vxml>

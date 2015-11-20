@@ -1,0 +1,18 @@
+/*
+  Vestec Automatic Speech Recognition Engine Version 1.0
+  Copyright (c) 2009 Voice Enabling Systems Technology, Inc. All rights reserved.
+ */
+
+#ABNF 1.0;
+
+$Yesno = $Yes {si} | $No {no};
+
+$Yes =
+  si
+  | sip
+  | claro
+  ;
+
+$No =
+  no
+  ;

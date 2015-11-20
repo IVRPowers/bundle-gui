@@ -1,0 +1,61 @@
+<?xml version="1.0"?> 
+<vxml version="2.0" xmlns="http://www.w3.org/2001/vxml"> 
+  <var name="utc_month" />
+  <var name="utc_day" />
+  <var name="utc_year" />
+
+<script>
+  <![CDATA[
+    // explicitly declare d using var
+     var d = new Date();
+    // store the month
+     utc_month = d.getUTCMonth();
+    // store the day of the month
+     utc_day = d.getUTCDate();
+    // store the year including the century
+     utc_year = d.getUTCFullYear();
+  ]]> 
+</script>
+<form id="main">
+  <block>
+    <prompt> Today's date is </prompt>
+
+    <if cond="0 == utc_month">
+	<prompt> january </prompt>
+    <elseif cond="1 == utc_month" />
+        <prompt> february </prompt>
+    <elseif cond="2 == utc_month" />
+        <prompt> march </prompt>
+    <elseif cond="3 == utc_month" />
+        <prompt> april </prompt>
+    <elseif cond="4 == utc_month" />
+        <prompt> may </prompt>
+    <elseif cond="5 == utc_month" />
+        <prompt> june </prompt>
+    <elseif cond="6 == utc_month" />
+        <prompt> july </prompt>
+    <elseif cond="7 == utc_month" />
+        <prompt> august </prompt>
+    <elseif cond="8 == utc_month" />
+        <prompt> september </prompt>
+    <elseif cond="9 == utc_month" />
+        <prompt> october </prompt>
+    <elseif cond="10 == utc_month" />
+        <prompt> november </prompt>
+    <elseif cond="11 == utc_month" />
+        <prompt> december </prompt>
+    </if>
+
+    <prompt>       
+       <value expr="utc_day" />
+    </prompt>
+    <prompt>       
+       <value expr="utc_year"/>
+    </prompt>
+    <prompt>       
+       Have a nice day.
+    </prompt>
+    
+  </block>
+</form>
+</vxml>

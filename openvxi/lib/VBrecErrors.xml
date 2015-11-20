@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!-- Copyright (c) 2001 SpeechWorks International -->
+<ErrorMessages moduleName="*.VXIrec">
+  <error num="200" severity="2">VXIrec: VXIrec::ConvertGrammar - No
+  support for mixed DTMF and speech grammars </error>
+  <error num="201" severity="2">VXIrec: VXIrec::ConvertGrammar -
+  Mismatched { } pair </error>
+  <error num="202" severity="2">VXIrec: VXIrec::ConvertGrammar - Empty
+  { } pair </error>
+  <error num="203" severity="2">VXIrec: VXIrec::ConvertGrammar - Add
+  word failed </error>
+</ErrorMessages>

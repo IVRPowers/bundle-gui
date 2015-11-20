@@ -1,0 +1,139 @@
+#! /bin/sh
+# $id$
+#
+# Start/stop/restart the VoiceXML Browser
+#
+# chkconfig: 2345 70 70
+# description: OpenVXI VoiceXML browser daemon.
+# processname: openvxi
+# pidfile: /var/run/openvxi.pid
+
+
+# Use this option to specify a different configuration directory
+OPENVXI_CONFIG=/etc/openvxi
+
+# Installation directory
+OPENVXI_SBIN=/usr/sbin
+CONSOLE=${OPENVXI_SBIN}/adminvxi
+
+# Uncomment the following and set them to the user/groups that you
+# want to run OpenVXI as. NOTE: this requires substantial work to
+# be sure that OpenVXI's environment has permission to write the
+# files required  for  its  operation, including logs, its comm
+# socket, the openvxi database, etc.
+#OPENVXI_USER="root"
+#OPENVXI_GROUP="root"
+
+# Source function library.
+. /lib/lsb/init-functions
+
+if ! [ -x $OPENVXI_SBIN/openvxi ] ; then
+	echo "ERROR: $OPENVXI_SBIN/openvxi not found"
+	exit 0
+fi
+
+if ! [ -d $OPENVXI_CONFIG ] ; then
+	echo "ERROR: $OPENVXI_CONFIG directory not found"
+	exit 0
+fi
+
+# Uncomment this ONLY if you know what you are doing.
+# export LD_ASSUME_KERNEL=2.4.1
+
+# Full path to openvxi binary
+DAEMON=$OPENVXI_SBIN/openvxi
+
+# Full path to safe_openvxi script
+#SAFE_OPENVXI=$OPENVXI_SBIN/safe_openvxi
+
+# Allow configuration overrides in /etc/sysconfig/openvxi
+CONFIG0=`readlink $0`
+if [ "$CONFIG0" = "" ]; then
+	CONFIGFILE=/etc/sysconfig/`basename $0`
+else
+	CONFIGFILE=/etc/sysconfig/`basename $CONFIG0`
+fi
+[ -x $CONFIGFILE ] && . $CONFIGFILE
+
+RETVAL=0
+
+start() {
+	# Check if OpenVXI is already running.  If it is, then bug out, because
+	# starting up OpenVXI when OpenVXI is already running is very bad.
+	COUNTER=`ps -ef | grep -v grep | grep "/usr/sbin/openvxi" | wc -l`
+	if [ "$COUNTER" -gt "0" ]; then
+		echo "OpenVXI is already running."
+		exit 1
+	fi
+
+	# Start daemons.
+	echo -n $"Starting openvxi: "	
+	if [ "$SAFE_OPENVXI" = "" ]; then        
+		DAEMON=$OPENVXI_SBIN/openvxi
+	else
+		if [ -f $SAFE_OPENVXI ] ; then
+		DAEMON=$SAFE_OPENVXI
+		fi
+	fi
+	if [ $OPENVXI_USER ] ; then
+		OPENVXIARGS="$OPENVXIARGS -U $OPENVXI_USER"
+	fi
+	if [ $OPENVXI_GROUP ] ; then
+		OPENVXIARGS="$OPENVXIARGS -G $OPENVXI_GROUP"
+	fi
+	if [ $OPENVXI_CONFIG ]; then
+		OPENVXIARGS="$OPENVXIARGS -config $OPENVXI_CONFIG/client.cfg -mute"
+	fi
+	$DAEMON $OPENVXIARGS &
+	RETVAL=$?
+	[ $RETVAL -eq 0 ] && touch /var/lock/subsys/openvxi
+	echo
+	return $RETVAL
+}
+
+stop() {
+	# Stop daemons.
+	echo -n $"Shutting down openvxi: "
+	killproc openvxi
+	RETVAL=$?
+	[ $RETVAL -eq 0 ] && rm -f /var/lock/subsys/openvxi
+	ipcrm -Q 0x7b5
+	echo
+	return $RETVAL
+}
+
+restart() {
+	stop
+	start
+}
+
+# See how we were called.
+case "$1" in
+  start)
+	start
+	;;
+  stop)
+	stop
+	;;
+  restart)
+	restart
+	;;
+	 kill)
+	echo -n $"Killing $DESC: $NAME"
+  ipcrm -Q 0x7b5
+	killall -9 openvxi
+	sleep 1
+	log_end_msg $?  
+	;;
+  condrestart)
+	[ -f /var/lock/subsys/openvxi ] && restart || :
+	;;
+  status)
+	status openvxi
+	;;
+  *)
+	echo "Usage: openvxi {start|stop|restart|condrestart|status}"
+	exit 1
+esac
+
+exit $?

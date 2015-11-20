@@ -1,0 +1,649 @@
+# CREDITS for JAPANESE TRANSLATION
+# ================================
+# Current translation & maintenance: QLOOG, Inc. (Kobe, Japan)
+# Inquiries: info@qloog.com / www.qloog.com
+#
+# This translation is a culmination of the hard work of
+# several outstanding individuals, which started in 2009 with the 
+# first-ever Japanese localization of VoiceXML IVR by Kenichi Fukaumi 
+# and Kazuhiro Tokuyama (VoiceXML IVR Japanized Project).
+#
+# Beginning in 2013, with the approval of the original authors, 
+# QLOOG undertook a large scale overhaul of the translation to 
+# expand it for compatibility with VoiceXML IVR 2.11. Our work is, 
+# of course, released under the same GPLv2 license as VoiceXML IVR. 
+# We only ask that you kindly retain these credits in honor of 
+# the time and effort that all of us have contributed. Enjoy!
+#
+# This file is part of VoiceXML IVR.
+#
+#    VoiceXML IVR is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 2 of the License, or
+#    (at your option) any later version.
+#
+#    VoiceXML IVR is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with VoiceXML IVR.  If not, see <http://www.gnu.org/licenses/>.
+#
+# VoiceXML IVR language template for dashboard
+# Copyright (C) 2008, 2009, 2010 Bandwith.com
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: VoiceXML IVR 2.10.0.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-04-13 05:07+1000\n"
+"PO-Revision-Date: 2015-02-21 14:32+0200\n"
+"Last-Translator: Kevin <kevin@qloog.com>\n"
+"Language-Team: Japanese <http://weblate.freepbx.org/projects/freepbx/"
+"dashboard/ja_JP/>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ja_JP\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 2.2-dev\n"
+
+#: classes/Statistics.class.php:365 classes/Statistics.class.php:368
+#, php-format
+msgid "%s Min Avg"
+msgstr ""
+
+#: views/sections/overview.php:66 views/sections/uptime.php:6
+#, php-format
+msgid "%s ago"
+msgstr "%s 前"
+
+#: classes/TimeUtils.class.php:23
+msgid "0 seconds"
+msgstr "0秒"
+
+#: views/sections/uptime.php:16
+msgid "1 Minute"
+msgstr "1分"
+
+#: views/sections/uptime.php:22
+msgid "15 Minutes"
+msgstr "15分"
+
+#: views/sections/uptime.php:19
+msgid "5 Minutes"
+msgstr "5分"
+
+#: sections/Overview.class.php:41
+#, php-format
+msgid ""
+"<strong>'%s'</strong><br><i>(You can change this name in Advanced Settings)</"
+"i>"
+msgstr ""
+
+#: views/sections/statistics.php:299
+msgid "Active Calls"
+msgstr ""
+
+#: classes/Statistics.class.php:306
+msgid "Active Chans"
+msgstr ""
+
+#: classes/Statistics.class.php:121 sections/Overview.class.php:139
+msgid "Asterisk"
+msgstr "Asterisk"
+
+#: classes/Statistics.class.php:113
+msgid "Asterisk Uptime"
+msgstr "Asterisk稼働時間"
+
+#: sections/Blogs.class.php:34 sections/Blogs.class.php:42
+msgid "Blogs"
+msgstr "ブログ"
+
+#: classes/Statistics.class.php:266 views/sections/statistics.php:199
+msgid "Buffers"
+msgstr ""
+
+#: classes/Statistics.class.php:122
+msgid "CPU"
+msgstr "CPU"
+
+#: classes/Statistics.class.php:368
+msgid "CPU Temp"
+msgstr ""
+
+#: classes/Statistics.class.php:265 views/sections/statistics.php:198
+msgid "Cached"
+msgstr ""
+
+#: sections/Overview.class.php:128
+msgid "Critical Errors found"
+msgstr "致命的なエラーが見つかりました"
+
+#: dashboard.i18n.php:14
+msgid "Dashboard Info Update Frequency"
+msgstr "ダッシュボード情報の更新間隔"
+
+#: dashboard.i18n.php:20
+msgid "Dashboard Max Calls Initial Scale"
+msgstr "ダッシュボードの最大通話数初期スケール"
+
+#: dashboard.i18n.php:28
+msgid "Dashboard Non-Std SSH Port"
+msgstr "ダッシュボード非標準SSHポート"
+
+#: dashboard.i18n.php:24
+msgid "Dashboard Stats Update Frequency"
+msgstr "ダッシュボード統計値の更新間隔"
+
+#: classes/Statistics.class.php:134 classes/Statistics.class.php:145
+#: classes/Statistics.class.php:156 classes/Statistics.class.php:167
+#: classes/Statistics.class.php:178 classes/Statistics.class.php:189
+#: views/sections/statistics.php:10 views/sections/statistics.php:21
+#: views/sections/statistics.php:32 views/sections/statistics.php:43
+#: views/sections/statistics.php:54 views/sections/statistics.php:65
+msgid "Day"
+msgstr ""
+
+#: views/sections/overview.php:54
+msgid "Delete This"
+msgstr "削除する"
+
+#: classes/Statistics.class.php:124 views/sections/statistics.php:50
+msgid "Disk"
+msgstr "ディスク"
+
+#: sections/Blogs.class.php:33 sections/Blogs.class.php:41
+msgid "Feed"
+msgstr "フィード"
+
+#: classes/Statistics.class.php:264 views/sections/statistics.php:197
+msgid "Free Mem"
+msgstr ""
+
+#: views/main.php:6
+msgid "Frobulating"
+msgstr ""
+
+#: dashboard.i18n.php:16
+msgid "GUI Behavior"
+msgstr "GUIの動作"
+
+#: classes/Statistics.class.php:133 classes/Statistics.class.php:144
+#: classes/Statistics.class.php:155 classes/Statistics.class.php:166
+#: classes/Statistics.class.php:177 classes/Statistics.class.php:188
+#: views/sections/statistics.php:9 views/sections/statistics.php:20
+#: views/sections/statistics.php:31 views/sections/statistics.php:42
+#: views/sections/statistics.php:53 views/sections/statistics.php:64
+msgid "Hour"
+msgstr ""
+
+#: views/sections/overview.php:53
+msgid "Ignore This"
+msgstr "無視する"
+
+#: classes/Statistics.class.php:14
+msgid "Invalid Selection"
+msgstr ""
+
+#: classes/Statistics.class.php:26
+msgid "Invalid period"
+msgstr ""
+
+#: classes/Statistics.class.php:377
+msgid "Load"
+msgstr ""
+
+#: views/sections/uptime.php:13
+msgid "Load Averages"
+msgstr "ロードアベレージ"
+
+#: classes/Statistics.class.php:123 views/sections/statistics.php:39
+msgid "Memory"
+msgstr "メモリー"
+
+#: classes/Statistics.class.php:136 classes/Statistics.class.php:147
+#: classes/Statistics.class.php:158 classes/Statistics.class.php:169
+#: classes/Statistics.class.php:180 classes/Statistics.class.php:191
+#: views/sections/statistics.php:12 views/sections/statistics.php:23
+#: views/sections/statistics.php:34 views/sections/statistics.php:45
+#: views/sections/statistics.php:56 views/sections/statistics.php:67
+msgid "Month"
+msgstr ""
+
+#: sections/Overview.class.php:140
+msgid "MySQL"
+msgstr "MySQLサーバー"
+
+#: classes/Statistics.class.php:125 views/sections/statistics.php:61
+msgid "Network"
+msgstr "ネットワーク"
+
+#: sections/Overview.class.php:100
+msgid "No critical issues found"
+msgstr "クリティカルな問題は見つかりませんでした"
+
+#: sections/Overview.class.php:16
+msgid "Overview"
+msgstr "一覧"
+
+#: sections/Overview.class.php:127 sections/Overview.class.php:131
+msgid "Please check for errors in the notification section"
+msgstr "通知セクションでエラーを確認してください"
+
+#: dashboard.i18n.php:8
+msgid ""
+"Provides a system information dashboard, showing information about Calls, "
+"CPU, Memory, Disks, Network, and processes."
+msgstr ""
+"システム情報を表示するダッシュボードです。通話数、CPU、メモリ、ディスク、ネッ"
+"トワークの負荷状況等を表示します。"
+
+#: classes/Statistics.class.php:107
+msgid "Reload"
+msgstr ""
+
+#: dashboard.i18n.php:6 dashboard.i18n.php:12
+msgid "Reports"
+msgstr "レポート"
+
+#: dashboard.i18n.php:32
+msgid ""
+"SSH port number configured on your system if not using the default port 22, "
+"this allows the dashboard monitoring to watch the poper port."
+msgstr ""
+"SSHのポート番号をデフォルトの 22番から変更している場合には、この設定項目を設"
+"定してください。"
+
+#: sections/Overview.class.php:109
+msgid "Security Issue"
+msgstr "セキュリティ問題"
+
+#: views/sections/overview.php:75
+msgid "Show All"
+msgstr "全て表示"
+
+#: views/sections/overview.php:77
+msgid "Show New"
+msgstr "新規を表示"
+
+#: classes/Statistics.class.php:90 classes/Statistics.class.php:114
+msgid "Since Reload"
+msgstr ""
+
+#: sections/Statistics.class.php:27 sections/Statistics.class.php:28
+#: sections/Uptime.class.php:16
+msgid "Statistics"
+msgstr "統計"
+
+#: views/sections/overview.php:23
+msgid "Summary"
+msgstr "サマリー"
+
+#: classes/Statistics.class.php:268 views/sections/statistics.php:201
+msgid "Swap Used"
+msgstr ""
+
+#: views/sections/overview.php:36
+#, php-format
+msgid "SysInfo updated %s seconds ago"
+msgstr "%s 秒前にシステム情報を更新済み"
+
+#: classes/Statistics.class.php:88 classes/Statistics.class.php:108
+msgid "System"
+msgstr ""
+
+#: sections/Overview.class.php:98
+msgid "System Alerts"
+msgstr "システム通知"
+
+#: dashboard.i18n.php:4
+msgid "System Dashboard"
+msgstr "システムダッシュボード"
+
+#: views/sections/uptime.php:5
+msgid "System Last Rebooted"
+msgstr "最後の再起動"
+
+#: sections/Overview.class.php:15
+msgid "System Overview"
+msgstr "システム一覧"
+
+#: dashboard.i18n.php:30
+msgid "System Setup"
+msgstr "システムセットアップ"
+
+#: dashboard.i18n.php:10
+msgid "System Status"
+msgstr "システムステータス"
+
+#: classes/Statistics.class.php:112
+msgid "System Uptime"
+msgstr "システム稼働時間"
+
+#: classes/Statistics.class.php:349 classes/Statistics.class.php:378
+msgid "Temp"
+msgstr ""
+
+#: sections/Overview.class.php:110
+msgid "This is a critical issue and should be resolved urgently"
+msgstr "クリティカルな問題であるため速やかに解決する必要があります"
+
+#: classes/Statistics.class.php:305
+msgid "Trnks Offline"
+msgstr ""
+
+#: views/sections/statistics.php:298
+msgid "Trunks Offline"
+msgstr ""
+
+#: classes/Statistics.class.php:304 views/sections/statistics.php:297
+msgid "Trunks Reged"
+msgstr ""
+
+#: dashboard.i18n.php:26
+msgid ""
+"Update rate in seconds of all sections of the System Status panel except the "
+"Info box."
+msgstr ""
+"情報ボックスを除いた、システムステータスパネルの更新間隔(秒)を指定します。"
+
+#: dashboard.i18n.php:18
+msgid "Update rate in seconds of the Info section of the System Status panel."
+msgstr "システムステータスパネルの情報セクションの更新間隔(秒)を指定します。"
+
+#: classes/Statistics.class.php:120 sections/Uptime.class.php:15
+#: views/sections/statistics.php:17
+msgid "Uptime"
+msgstr "稼働時間"
+
+#: dashboard.i18n.php:22
+msgid ""
+"Use this to pre-set the scale for maximum calls on the Dashboard display. If "
+"not set, the the scale is dynamically sized based on the active calls on the "
+"system."
+msgstr ""
+"この設定項目では、ダッシュボードの最大通話数に対応するスケールを設定できま"
+"す。設定されていない場合には、アクティブな通話数に応じて動的にスケールを変更"
+"します。"
+
+#: classes/Statistics.class.php:267 views/sections/statistics.php:200
+msgid "Used"
+msgstr ""
+
+#: classes/Statistics.class.php:303 views/sections/statistics.php:296
+msgid "Users Offline"
+msgstr ""
+
+#: classes/Statistics.class.php:302 views/sections/statistics.php:295
+msgid "Users Online"
+msgstr ""
+
+#: sections/Overview.class.php:132
+msgid "Warnings Found"
+msgstr "通知が見つかりました"
+
+#: sections/Overview.class.php:141
+msgid "Web Server"
+msgstr "Webサーバー"
+
+#: classes/Statistics.class.php:135 classes/Statistics.class.php:146
+#: classes/Statistics.class.php:157 classes/Statistics.class.php:168
+#: classes/Statistics.class.php:179 classes/Statistics.class.php:190
+#: views/sections/statistics.php:11 views/sections/statistics.php:22
+#: views/sections/statistics.php:33 views/sections/statistics.php:44
+#: views/sections/statistics.php:55 views/sections/statistics.php:66
+msgid "Week"
+msgstr ""
+
+#: views/main.php:3 views/sections/overview.php:6
+#, php-format
+msgid "Welcome to %s"
+msgstr "%s へようこそ"
+
+#: classes/TimeUtils.class.php:15
+msgid "day"
+msgstr "日"
+
+#: classes/TimeUtils.class.php:16
+msgid "days"
+msgstr "日"
+
+#: classes/TimeUtils.class.php:17
+msgid "hour"
+msgstr "時間"
+
+#: classes/TimeUtils.class.php:18
+msgid "hours"
+msgstr "時間"
+
+#: classes/TimeUtils.class.php:19
+msgid "minute"
+msgstr "分"
+
+#: classes/TimeUtils.class.php:20
+msgid "minutes"
+msgstr "分"
+
+#: classes/TimeUtils.class.php:11
+msgid "month"
+msgstr "ヶ月"
+
+#: classes/TimeUtils.class.php:12
+msgid "months"
+msgstr "ヶ月"
+
+#: classes/TimeUtils.class.php:21
+msgid "second"
+msgstr "秒"
+
+#: classes/TimeUtils.class.php:22
+msgid "seconds"
+msgstr "秒"
+
+#: classes/TimeUtils.class.php:13
+msgid "week"
+msgstr "週間"
+
+#: classes/TimeUtils.class.php:14
+msgid "weeks"
+msgstr "週間"
+
+#: classes/TimeUtils.class.php:9
+msgid "year"
+msgstr "年"
+
+#: classes/TimeUtils.class.php:10
+msgid "years"
+msgstr "年"
+
+#~ msgid "OK"
+#~ msgstr "OK"
+
+#~ msgid "Warn"
+#~ msgstr "警告"
+
+#~ msgid "ERROR"
+#~ msgstr "エラー"
+
+#~ msgid "Disabled"
+#~ msgstr "無効"
+
+#~ msgid "System Statistics"
+#~ msgstr "システム統計情報"
+
+#~ msgid "Processor"
+#~ msgstr "プロセッサー"
+
+#~ msgid "Load Average"
+#~ msgstr "負荷状況"
+
+#~ msgid "App Memory"
+#~ msgstr "Appメモリー"
+
+#~ msgid "Swap"
+#~ msgstr "スワップ"
+
+#~ msgid "Disks"
+#~ msgstr "ディスク"
+
+#~ msgid "Networks"
+#~ msgstr "ネットワーク"
+
+#~ msgid "receive"
+#~ msgstr "受信"
+
+#~ msgid "transmit"
+#~ msgstr "送信"
+
+#~ msgid "%s Statistics"
+#~ msgstr "%s 統計情報"
+
+#~ msgid "Total active calls"
+#~ msgstr "現在の合計通話数"
+
+#~ msgid "Internal calls"
+#~ msgstr "内線通話数"
+
+#~ msgid "External calls"
+#~ msgstr "外線通話数"
+
+#~ msgid "Total active channels"
+#~ msgstr "現在の合計チャネル数"
+
+#~ msgid "%s Connections"
+#~ msgstr "%s 接続"
+
+#~ msgid "IP Phones Online"
+#~ msgstr "オンラインIP電話数"
+
+#~ msgid "IP Trunks Online"
+#~ msgstr "オンラインIPトランク数"
+
+#~ msgid "IP Trunk Registrations"
+#~ msgstr "IPトランク登録数"
+
+#~ msgid "System Information Table"
+#~ msgstr "システム情報テーブル"
+
+#~ msgid "Last Reload"
+#~ msgstr "リロード後経過時間"
+
+#~ msgid "Server Status"
+#~ msgstr "サーバーの状態"
+
+#~ msgid "Asterisk is running: %s"
+#~ msgstr "Asterisk は動作しています: %s"
+
+#~ msgid "Asterisk is not running, this is a critical service!"
+#~ msgstr "Asteriskは起動していません。Asteriskはクリティカルなサービスです!"
+
+#~ msgid "Manager Proxy"
+#~ msgstr "マネージャープロキシー"
+
+#~ msgid "Asterisk Manager Proxy is running"
+#~ msgstr "Asteriskマネージャプロキシーは動作しています"
+
+#~ msgid ""
+#~ "Asterisk Manager Proxy is not running, %s will fall back to using "
+#~ "Asterisk directly, which may result in poor performance"
+#~ msgstr ""
+#~ "Asteriskマネージャープロキシーは動作していません。%s は Asteriskに直接接続"
+#~ "しているため、パフォーマンスが低下している可能性があります。"
+
+#~ msgid "MySQL Server is running"
+#~ msgstr "MySQLサーバーは動作しています"
+
+#~ msgid "Web Server is running"
+#~ msgstr "Webサーバーは動作しています"
+
+#~ msgid "SSH Server"
+#~ msgstr "SSHサーバー"
+
+#~ msgid "SSH Server is running"
+#~ msgstr "SSHサーバーは動作しています"
+
+#~ msgid ""
+#~ "SSH Server is not running, you will not be able to connect to the system "
+#~ "console remotely"
+#~ msgstr ""
+#~ "SSHサーバーは動作していません。このため、システムコンソールにリモート接続"
+#~ "できません。"
+
+#~ msgid "Critical Error"
+#~ msgstr "致命的エラー"
+
+#~ msgid "Security Update"
+#~ msgstr "セキュリティアップデート"
+
+#~ msgid "Update"
+#~ msgstr "アップデート"
+
+#~ msgid "Error"
+#~ msgstr "エラー"
+
+#~ msgid "Warning"
+#~ msgstr "警告"
+
+#~ msgid "Notice"
+#~ msgstr "通知"
+
+#~ msgid "%s Notices"
+#~ msgstr "%s の通知"
+
+#~ msgid "Delete this"
+#~ msgstr "削除"
+
+#~ msgid "Ignore this"
+#~ msgstr "無視"
+
+#~ msgid "Added %s ago"
+#~ msgstr "%s 前に追加"
+
+#~ msgid "No notifications"
+#~ msgstr "通知はありません"
+
+#~ msgid "No new notifications"
+#~ msgstr "新しい通知はありません"
+
+#~ msgid "show new"
+#~ msgstr "新規通知を表示"
+
+#~ msgid "show all"
+#~ msgstr "すべて表示"
+
+#~ msgid "loading..."
+#~ msgstr "読み込み中..."
+
+#~ msgid "%s System Status"
+#~ msgstr "%s システムステータス"
+
+#~ msgid "VoiceXML IVR System Status"
+#~ msgstr "VoiceXML IVRシステムステータス"
+
+#~ msgid "%s changed from %s to %s"
+#~ msgstr "%s を %s から %s に変更しました。"
+
+#~ msgid "VoiceXML IVR Statistics"
+#~ msgstr "VoiceXML IVR統計"
+
+#~ msgid "Op Panel"
+#~ msgstr "Opパネル"
+
+#~ msgid ""
+#~ "FOP Operator Panel Server is not running, you will not be able to use the "
+#~ "operator panel, but the system will run fine without it."
+#~ msgstr ""
+#~ "FOPオペレーターパネルサーバーが実行されていません、オペレーターパネルを使"
+#~ "用することができませんが、それ以外システムは問題なく実行されます。"
+
+#~ msgid "FOP Operator Panel is disabled in Advanced Settings"
+#~ msgstr "FOPオペレーターパネルが高度な設定で無効にされています。"
+
+#~ msgid "FOP Operator Panel Server is running"
+#~ msgstr "FOP オペレーターパネルサーバーが実行されています。"
+
+#~ msgid "VoiceXML IVR Notices"
+#~ msgstr "VoiceXML IVR 通知"

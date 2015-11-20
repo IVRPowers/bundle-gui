@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<vxml version="2.1" xmlns="http://www.w3.org/2001/vxml">
+<property name="inputmodes" value="dtmf"/>
+  <menu dtmf="true">
+  	<prompt>Welcome to Interactive Powers Demo Service.
+  		<enumerate>
+  			Press <value expr="_dtmf"/>, for <value expr="_prompt"/>. 
+  		</enumerate>
+  	</prompt>
+  	<choice dtmf="1" next="datetime/date.vxml">Date.</choice>
+  	<choice dtmf="2" next="blackjack/blackjack.vxml">Blackjack Game.</choice>
+  	<choice dtmf="3" next="callercalled/index.vxml">Caller ID.</choice>
+  	<choice dtmf="4" next="helloworld/helloworld1.vxml">Hello World, TTS.</choice>
+  	<choice dtmf="5" next="helloworld/helloworld2.vxml">Hello World, Audio.</choice>
+    <choice dtmf="0" next="#exit">Exit.</choice>
+  	
+  </menu>
+  <form id="exit">
+  	<block>
+  		<prompt>Thank you!</prompt>
+  		<disconnect/>
+  	</block>
+  </form>
+</vxml>				

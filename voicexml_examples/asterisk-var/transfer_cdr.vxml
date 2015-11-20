@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<vxml version="2.0" xmlns="http://www.w3.org/2001/vxml">
+  <form id="demo">
+    <block>
+      <prompt>Set CDR user field.</prompt>
+    </block>
+    <transfer name="userfield" bridge="true" dest="execute:function(CDR(userfield))=12" />
+    <transfer name="userfield2" bridge="true" dest="execute:function(CDR(userfield))+=34" />
+    <block>
+      <prompt>End of call.</prompt>
+    </block>
+  </form>
+</vxml>

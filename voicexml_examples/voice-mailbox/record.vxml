@@ -1,0 +1,25 @@
+<?xml version = "1.0" ?>
+<vxml version = "2.1" xmlns="http://www.w3.org/2001/vxml" xml:lang="es-ES">
+  <property name="fetchtimeout" value="60s" />
+  <property name="fetchtimeout" value="30s" />
+  <form>
+    <var name="caller" expr="session.connection.remote.uri"/>
+    <catch event="connection.disconnect.hangup">
+      <submit namelist="caller record" method="post" enctype="multipart/form-data" next="send.php" />
+    </catch>
+    <noinput>
+      <reprompt/>
+    </noinput>
+    <nomatch>
+      <reprompt/>
+    </nomatch>
+    <record name="record" dtmfterm="false" maxtime="120s" type="audio/x-wav" beep="true">
+      <prompt bargein="false">
+        <audio src="audio/greeting.wav"/>
+      </prompt>
+    </record>
+    <block>
+      <submit namelist="caller record" method="post" enctype="multipart/form-data" next="send.php" />
+    </block>
+  </form>
+</vxml>

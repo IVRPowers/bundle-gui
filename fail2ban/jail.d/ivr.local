@@ -1,0 +1,74 @@
+#General
+[DEFAULT]
+background = true 	
+maxretry   = 3				
+bantime    = 36000		
+backend    = polling
+
+#SSH Protection
+[ssh]
+enabled  = true
+filter   = sshd
+action   = iptables[name=ssh, port=ssh, protocol=tcp]
+logpath  = /var/log/secure
+
+[ssh-ddos]
+enabled = true
+filter  = sshd-ddos
+action   = iptables[name=ssh-ddos, port=ssh, protocol=tcp]
+logpath  = /var/log/secure
+
+#Interface Protection
+[web-auth]
+enabled  = true
+filter   = freepbx-web
+action   = iptables[name=web-auth, port=http, protocol=tcp]
+logpath  = /var/log/asterisk/freepbx_security.log
+
+#Asterisk Protection
+[asterisk]
+enabled  = true
+filter   = asterisk
+action   = iptables-allports[name=asterisk, port=sip protocol=all]
+logpath  = /var/log/asterisk/full
+maxretry = 40
+
+#Apache Protection
+[apache-badbots]
+enabled  = true
+port     = http,https
+logpath  = /var/log/httpd/access_log
+bantime  = 172800
+maxretry = 1
+
+[apache-noscript]
+enabled  = true
+port     = http,https
+logpath  = /var/log/httpd/error_log
+maxretry = 6
+
+[apache-overflows]
+enabled  = true
+port     = http,https
+logpath  = /var/log/httpd/error_log
+maxretry = 2
+
+[apache-nohome]
+enabled  = true
+port     = http,https
+logpath  = /var/log/httpd/error_log
+maxretry = 2
+
+[apache-botsearch]
+enabled  = true
+port     = http,https
+logpath  = /var/log/httpd/error_log
+maxretry = 2
+
+[apache-fakegooglebot]
+enabled  = true
+port     = http,https
+logpath  = /var/log/httpd/access_log
+maxretry = 1
+ignorecommand = %(ignorecommands_dir)s/apache-fakegooglebot <ip>
+

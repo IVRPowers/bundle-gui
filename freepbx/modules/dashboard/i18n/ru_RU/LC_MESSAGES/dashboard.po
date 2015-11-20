@@ -1,0 +1,611 @@
+# This file is part of VoiceXML IVR.
+#
+#    VoiceXML IVR is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 2 of the License, or
+#    (at your option) any later version.
+#
+#    VoiceXML IVR is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with VoiceXML IVR.  If not, see <http://www.gnu.org/licenses/>.
+#
+#    Copyright 2008 VoiceXML IVR
+#
+# Russian freePBX ver. translation
+# Copyright (c) 2006-2008 PostMet Corporation
+# Alexander Kozyrev <ceo@postmet.com>, Sergey Nikolayev <sergey@postmet.com>, 2006-2008.
+#
+# Использовать iconv amp.new -f UTF-8 -t ISO-8859-5 -o amp.po
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-04-13 05:07+1000\n"
+"PO-Revision-Date: 2008-01-16 16:38+0100\n"
+"Last-Translator: Alexander Kozyrev <ceo@postmet.com>\n"
+"Language-Team: Russian <faq@postmet.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: classes/Statistics.class.php:365 classes/Statistics.class.php:368
+#, php-format
+msgid "%s Min Avg"
+msgstr ""
+
+#: views/sections/overview.php:66 views/sections/uptime.php:6
+#, php-format
+msgid "%s ago"
+msgstr ""
+
+#: classes/TimeUtils.class.php:23
+msgid "0 seconds"
+msgstr ""
+
+#: views/sections/uptime.php:16
+msgid "1 Minute"
+msgstr ""
+
+#: views/sections/uptime.php:22
+msgid "15 Minutes"
+msgstr ""
+
+#: views/sections/uptime.php:19
+msgid "5 Minutes"
+msgstr ""
+
+#: sections/Overview.class.php:41
+#, php-format
+msgid ""
+"<strong>'%s'</strong><br><i>(You can change this name in Advanced Settings)</"
+"i>"
+msgstr ""
+
+#: views/sections/statistics.php:299
+msgid "Active Calls"
+msgstr ""
+
+#: classes/Statistics.class.php:306
+msgid "Active Chans"
+msgstr ""
+
+#: classes/Statistics.class.php:121 sections/Overview.class.php:139
+msgid "Asterisk"
+msgstr "Asterisk"
+
+#: classes/Statistics.class.php:113
+msgid "Asterisk Uptime"
+msgstr "Asterisk жив"
+
+#: sections/Blogs.class.php:34 sections/Blogs.class.php:42
+msgid "Blogs"
+msgstr ""
+
+#: classes/Statistics.class.php:266 views/sections/statistics.php:199
+msgid "Buffers"
+msgstr ""
+
+#: classes/Statistics.class.php:122
+msgid "CPU"
+msgstr "ЦПУ"
+
+#: classes/Statistics.class.php:368
+msgid "CPU Temp"
+msgstr ""
+
+#: classes/Statistics.class.php:265 views/sections/statistics.php:198
+msgid "Cached"
+msgstr ""
+
+#: sections/Overview.class.php:128
+msgid "Critical Errors found"
+msgstr ""
+
+#: dashboard.i18n.php:14
+msgid "Dashboard Info Update Frequency"
+msgstr "Частота обновления информации системной панели"
+
+#: dashboard.i18n.php:20
+msgid "Dashboard Max Calls Initial Scale"
+msgstr "Начальная шкала максимального количества вызовов в панели"
+
+#: dashboard.i18n.php:28
+msgid "Dashboard Non-Std SSH Port"
+msgstr "Нестандартный SSH порт системной панели"
+
+#: dashboard.i18n.php:24
+msgid "Dashboard Stats Update Frequency"
+msgstr "Частота обновления статистики в панели системной информации"
+
+#: classes/Statistics.class.php:134 classes/Statistics.class.php:145
+#: classes/Statistics.class.php:156 classes/Statistics.class.php:167
+#: classes/Statistics.class.php:178 classes/Statistics.class.php:189
+#: views/sections/statistics.php:10 views/sections/statistics.php:21
+#: views/sections/statistics.php:32 views/sections/statistics.php:43
+#: views/sections/statistics.php:54 views/sections/statistics.php:65
+msgid "Day"
+msgstr ""
+
+#: views/sections/overview.php:54
+msgid "Delete This"
+msgstr ""
+
+#: classes/Statistics.class.php:124 views/sections/statistics.php:50
+msgid "Disk"
+msgstr ""
+
+#: sections/Blogs.class.php:33 sections/Blogs.class.php:41
+msgid "Feed"
+msgstr ""
+
+#: classes/Statistics.class.php:264 views/sections/statistics.php:197
+msgid "Free Mem"
+msgstr ""
+
+#: views/main.php:6
+msgid "Frobulating"
+msgstr ""
+
+#: dashboard.i18n.php:16
+msgid "GUI Behavior"
+msgstr "поведение интерфейса"
+
+#: classes/Statistics.class.php:133 classes/Statistics.class.php:144
+#: classes/Statistics.class.php:155 classes/Statistics.class.php:166
+#: classes/Statistics.class.php:177 classes/Statistics.class.php:188
+#: views/sections/statistics.php:9 views/sections/statistics.php:20
+#: views/sections/statistics.php:31 views/sections/statistics.php:42
+#: views/sections/statistics.php:53 views/sections/statistics.php:64
+msgid "Hour"
+msgstr ""
+
+#: views/sections/overview.php:53
+msgid "Ignore This"
+msgstr ""
+
+#: classes/Statistics.class.php:14
+msgid "Invalid Selection"
+msgstr ""
+
+#: classes/Statistics.class.php:26
+msgid "Invalid period"
+msgstr ""
+
+#: classes/Statistics.class.php:377
+msgid "Load"
+msgstr ""
+
+#: views/sections/uptime.php:13
+msgid "Load Averages"
+msgstr ""
+
+#: classes/Statistics.class.php:123 views/sections/statistics.php:39
+msgid "Memory"
+msgstr "Память"
+
+#: classes/Statistics.class.php:136 classes/Statistics.class.php:147
+#: classes/Statistics.class.php:158 classes/Statistics.class.php:169
+#: classes/Statistics.class.php:180 classes/Statistics.class.php:191
+#: views/sections/statistics.php:12 views/sections/statistics.php:23
+#: views/sections/statistics.php:34 views/sections/statistics.php:45
+#: views/sections/statistics.php:56 views/sections/statistics.php:67
+msgid "Month"
+msgstr ""
+
+#: sections/Overview.class.php:140
+msgid "MySQL"
+msgstr "MySQL"
+
+#: classes/Statistics.class.php:125 views/sections/statistics.php:61
+msgid "Network"
+msgstr ""
+
+#: sections/Overview.class.php:100
+msgid "No critical issues found"
+msgstr ""
+
+#: sections/Overview.class.php:16
+msgid "Overview"
+msgstr ""
+
+#: sections/Overview.class.php:127 sections/Overview.class.php:131
+msgid "Please check for errors in the notification section"
+msgstr ""
+
+#: dashboard.i18n.php:8
+msgid ""
+"Provides a system information dashboard, showing information about Calls, "
+"CPU, Memory, Disks, Network, and processes."
+msgstr ""
+"Отображает панель системной информации, информации о вызовах, загрузке CPU, "
+"памяти, занятость дисков, сети и процессов"
+
+#: classes/Statistics.class.php:107
+msgid "Reload"
+msgstr ""
+
+#: dashboard.i18n.php:6 dashboard.i18n.php:12
+msgid "Reports"
+msgstr "Отчеты"
+
+#: dashboard.i18n.php:32
+msgid ""
+"SSH port number configured on your system if not using the default port 22, "
+"this allows the dashboard monitoring to watch the poper port."
+msgstr ""
+"Номер SSH порта, если не используется стандартный порт 22. Данная настройка "
+"позволяет монитору панели обращаться на правильный порт"
+
+#: sections/Overview.class.php:109
+msgid "Security Issue"
+msgstr ""
+
+#: views/sections/overview.php:75
+msgid "Show All"
+msgstr ""
+
+#: views/sections/overview.php:77
+msgid "Show New"
+msgstr ""
+
+#: classes/Statistics.class.php:90 classes/Statistics.class.php:114
+msgid "Since Reload"
+msgstr ""
+
+#: sections/Statistics.class.php:27 sections/Statistics.class.php:28
+#: sections/Uptime.class.php:16
+msgid "Statistics"
+msgstr ""
+
+#: views/sections/overview.php:23
+msgid "Summary"
+msgstr ""
+
+#: classes/Statistics.class.php:268 views/sections/statistics.php:201
+msgid "Swap Used"
+msgstr ""
+
+#: views/sections/overview.php:36
+#, php-format
+msgid "SysInfo updated %s seconds ago"
+msgstr ""
+
+#: classes/Statistics.class.php:88 classes/Statistics.class.php:108
+msgid "System"
+msgstr ""
+
+#: sections/Overview.class.php:98
+msgid "System Alerts"
+msgstr ""
+
+#: dashboard.i18n.php:4
+msgid "System Dashboard"
+msgstr "Панель системы"
+
+#: views/sections/uptime.php:5
+msgid "System Last Rebooted"
+msgstr ""
+
+#: sections/Overview.class.php:15
+msgid "System Overview"
+msgstr ""
+
+#: dashboard.i18n.php:30
+msgid "System Setup"
+msgstr "Настройка Системы"
+
+#: dashboard.i18n.php:10
+msgid "System Status"
+msgstr ""
+
+#: classes/Statistics.class.php:112
+msgid "System Uptime"
+msgstr "Система жива"
+
+#: classes/Statistics.class.php:349 classes/Statistics.class.php:378
+msgid "Temp"
+msgstr ""
+
+#: sections/Overview.class.php:110
+msgid "This is a critical issue and should be resolved urgently"
+msgstr ""
+
+#: classes/Statistics.class.php:305
+msgid "Trnks Offline"
+msgstr ""
+
+#: views/sections/statistics.php:298
+msgid "Trunks Offline"
+msgstr ""
+
+#: classes/Statistics.class.php:304 views/sections/statistics.php:297
+msgid "Trunks Reged"
+msgstr ""
+
+#: dashboard.i18n.php:26
+msgid ""
+"Update rate in seconds of all sections of the System Status panel except the "
+"Info box."
+msgstr ""
+"Интервал обновления в секундах всех секций в панели Статуса Системы кроме "
+"окна Информации"
+
+#: dashboard.i18n.php:18
+msgid "Update rate in seconds of the Info section of the System Status panel."
+msgstr "Интервал обновления в секундах в секции Инфо панели 'Статус Системы'."
+
+#: classes/Statistics.class.php:120 sections/Uptime.class.php:15
+#: views/sections/statistics.php:17
+msgid "Uptime"
+msgstr "Время запуска"
+
+#: dashboard.i18n.php:22
+msgid ""
+"Use this to pre-set the scale for maximum calls on the Dashboard display. If "
+"not set, the the scale is dynamically sized based on the active calls on the "
+"system."
+msgstr ""
+"Используйте этот параметр для установки шкалы максимального количества "
+"звонков на панели. Если не установлено, шкала будет установлена "
+"автоматически в зависимости от количества звонков в системе"
+
+#: classes/Statistics.class.php:267 views/sections/statistics.php:200
+msgid "Used"
+msgstr ""
+
+#: classes/Statistics.class.php:303 views/sections/statistics.php:296
+msgid "Users Offline"
+msgstr ""
+
+#: classes/Statistics.class.php:302 views/sections/statistics.php:295
+msgid "Users Online"
+msgstr ""
+
+#: sections/Overview.class.php:132
+msgid "Warnings Found"
+msgstr ""
+
+#: sections/Overview.class.php:141
+msgid "Web Server"
+msgstr "Вэб сервер"
+
+#: classes/Statistics.class.php:135 classes/Statistics.class.php:146
+#: classes/Statistics.class.php:157 classes/Statistics.class.php:168
+#: classes/Statistics.class.php:179 classes/Statistics.class.php:190
+#: views/sections/statistics.php:11 views/sections/statistics.php:22
+#: views/sections/statistics.php:33 views/sections/statistics.php:44
+#: views/sections/statistics.php:55 views/sections/statistics.php:66
+msgid "Week"
+msgstr ""
+
+#: views/main.php:3 views/sections/overview.php:6
+#, php-format
+msgid "Welcome to %s"
+msgstr ""
+
+#: classes/TimeUtils.class.php:15
+msgid "day"
+msgstr "день"
+
+#: classes/TimeUtils.class.php:16
+msgid "days"
+msgstr "дней"
+
+#: classes/TimeUtils.class.php:17
+msgid "hour"
+msgstr "час"
+
+#: classes/TimeUtils.class.php:18
+msgid "hours"
+msgstr "часов"
+
+#: classes/TimeUtils.class.php:19
+msgid "minute"
+msgstr "минута"
+
+#: classes/TimeUtils.class.php:20
+msgid "minutes"
+msgstr "минут"
+
+#: classes/TimeUtils.class.php:11
+msgid "month"
+msgstr ""
+
+#: classes/TimeUtils.class.php:12
+msgid "months"
+msgstr ""
+
+#: classes/TimeUtils.class.php:21
+msgid "second"
+msgstr "секунда"
+
+#: classes/TimeUtils.class.php:22
+msgid "seconds"
+msgstr "секунды"
+
+#: classes/TimeUtils.class.php:13
+msgid "week"
+msgstr "неделя"
+
+#: classes/TimeUtils.class.php:14
+msgid "weeks"
+msgstr "недель"
+
+#: classes/TimeUtils.class.php:9
+msgid "year"
+msgstr "год"
+
+#: classes/TimeUtils.class.php:10
+msgid "years"
+msgstr "годы"
+
+#~ msgid "VoiceXML IVR System Status"
+#~ msgstr "Статус системы VoiceXML IVR"
+
+#~ msgid "%s changed from %s to %s"
+#~ msgstr "%s изменено с %s на %s"
+
+#~ msgid "OK"
+#~ msgstr "OK"
+
+#~ msgid "Warn"
+#~ msgstr "Ого!"
+
+#~ msgid "ERROR"
+#~ msgstr "Ошибка"
+
+#~ msgid "Disabled"
+#~ msgstr "Запрещено"
+
+#~ msgid "System Statistics"
+#~ msgstr "Статистика Системы"
+
+#~ msgid "Processor"
+#~ msgstr "Процессор"
+
+#~ msgid "Load Average"
+#~ msgstr "Средняя загрузка"
+
+#~ msgid "App Memory"
+#~ msgstr "Занято приложениями"
+
+#~ msgid "Swap"
+#~ msgstr "Файл подкачки"
+
+#~ msgid "Disks"
+#~ msgstr "Дисковая подсистема"
+
+#~ msgid "Networks"
+#~ msgstr "Сеть"
+
+#~ msgid "receive"
+#~ msgstr "получено"
+
+#~ msgid "transmit"
+#~ msgstr "передано"
+
+#~ msgid "VoiceXML IVR Statistics"
+#~ msgstr "VoiceXML IVR Статистика"
+
+#~ msgid "Total active calls"
+#~ msgstr "Активных звонков - всего"
+
+#~ msgid "Internal calls"
+#~ msgstr "Внутренних звонков"
+
+#~ msgid "External calls"
+#~ msgstr "Внешних звонков"
+
+#~ msgid "Total active channels"
+#~ msgstr "Активных каналов - всего"
+
+#~ msgid "VoiceXML IVR Connections"
+#~ msgstr "Соединений VoiceXML IVR"
+
+#~ msgid "IP Phones Online"
+#~ msgstr "ИП Телефонов в онлайне"
+
+#~ msgid "IP Trunks Online"
+#~ msgstr "IP транков в онлайне"
+
+#~ msgid "IP Trunk Registrations"
+#~ msgstr "Регистраций ИП транков"
+
+#~ msgid "System Information Table"
+#~ msgstr "Талица системной информации"
+
+#~ msgid "Last Reload"
+#~ msgstr "Перезагружался"
+
+#~ msgid "Server Status"
+#~ msgstr "Состояние сервера"
+
+#~ msgid "Asterisk is running: %s"
+#~ msgstr "Asterisk работает: %s"
+
+#~ msgid "Asterisk is not running, this is a critical service!"
+#~ msgstr "Asterisk не работает, это критично!"
+
+#~ msgid "Manager Proxy"
+#~ msgstr "Прокси менеджер"
+
+#~ msgid "Asterisk Manager Proxy is running"
+#~ msgstr "Asterisk Manager Proxy работает"
+
+#~ msgid ""
+#~ "Asterisk Manager Proxy is not running, VoiceXML IVR will fall back to using "
+#~ "Asterisk directly, which may result in poor performance"
+#~ msgstr ""
+#~ "Asterisk Manager Proxy не работает, VoiceXML IVR будет использовать Asterisk "
+#~ "напрямую, что может привести к ухудшению производительности"
+
+#~ msgid "MySQL Server is running"
+#~ msgstr "MySQL сервер работает"
+
+#~ msgid "Web Server is running"
+#~ msgstr "Web Server работает"
+
+#~ msgid "SSH Server"
+#~ msgstr "Сервер SSH"
+
+#~ msgid "SSH Server is running"
+#~ msgstr "SSH Server работает"
+
+#~ msgid ""
+#~ "SSH Server is not running, you will not be able to connect to the system "
+#~ "console remotely"
+#~ msgstr ""
+#~ "SSH Server не работает, Вы не сможете подключаться к системной консоли "
+#~ "удаленно"
+
+#~ msgid "Critical Error"
+#~ msgstr "Критическая ошибка"
+
+#~ msgid "Security Update"
+#~ msgstr "Обновление безопасности"
+
+#~ msgid "Update"
+#~ msgstr "Обновление"
+
+#~ msgid "Error"
+#~ msgstr "Ошибка"
+
+#~ msgid "Warning"
+#~ msgstr "Предупреждение"
+
+#~ msgid "Notice"
+#~ msgstr "Уведомление"
+
+#~ msgid "VoiceXML IVR Notices"
+#~ msgstr "VoiceXML IVR сообщения"
+
+#~ msgid "Delete this"
+#~ msgstr "Удалите это"
+
+#~ msgid "Ignore this"
+#~ msgstr "Вы можете не обращать внимание на это"
+
+#~ msgid "Added %s ago"
+#~ msgstr "Добавлено %s назад"
+
+#~ msgid "No notifications"
+#~ msgstr "Уведомлений нет"
+
+#~ msgid "No new notifications"
+#~ msgstr "Нет новых уведомлений"
+
+#~ msgid "show new"
+#~ msgstr "показать новых"
+
+#~ msgid "show all"
+#~ msgstr "показать все"
+
+#~ msgid "loading..."
+#~ msgstr "грузимся..."
+
+#~ msgid "Op Panel"
+#~ msgstr "Панель Оператора"

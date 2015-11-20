@@ -1,0 +1,4 @@
+#Customization for IVR
+[Definition]
+logtarget = /var/log/fail2ban
+loglevel  = INFO

@@ -1,0 +1,31 @@
+VoiceXML browser from i6net
+
+
+Install:
+
+Unzip and untar the openvxi package by using the command:
+
+# tar xvzf openvxi_Vx.x_date-distrib.tar.gz
+Go to the directory of the openvxi and type the following command.
+# cd openvxi_V1.1_date
+# ./install.sh
+
+ 
+Features and beneficts:
+
+- Application for Asterisk PBX (app_vxml.so)
+- Support VoiceXML V2.0
+- Support pluging objects with the VoiceXML tag, SDK with API available
+- Video support (prompt, record and stream)
+- Fax support (send and receive) (option)
+- Text-to-Speech (TTS) with HTTP connector
+- Text-to-Video (TTV) with HTTP connector
+- Voice-Silent Detection (VSD)
+
+
+The resources:
+
+- OpenVXI 3.0.1 (http://www.speech.cs.cmu.edu/openvxi/)
+- OpenSSL 0.9.8b (http://www.openssl.org/)
+- Xerces C/C++ 2.7 (http://xml.apache.org/xerces-c/)
+- SpiderMonkey 1.5 (http://www.mozilla.org/js/spidermonkey/)

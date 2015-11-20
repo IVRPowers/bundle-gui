@@ -1,0 +1,421 @@
+# This file is part of VoiceXML IVR.
+#
+# For licensing information, please see the file named LICENSE located in the module directory
+#
+# VoiceXML IVR language template for dashboard
+# Copyright (C) 2008-2015 Sangoma, Inc.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-04-13 05:07+1000\n"
+"PO-Revision-Date: 2015-02-20 19:18-0500\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: zh_CN\n"
+
+#: classes/Statistics.class.php:365 classes/Statistics.class.php:368
+#, php-format
+msgid "%s Min Avg"
+msgstr ""
+
+#: views/sections/overview.php:66 views/sections/uptime.php:6
+#, php-format
+msgid "%s ago"
+msgstr ""
+
+#: classes/TimeUtils.class.php:23
+msgid "0 seconds"
+msgstr ""
+
+#: views/sections/uptime.php:16
+msgid "1 Minute"
+msgstr ""
+
+#: views/sections/uptime.php:22
+msgid "15 Minutes"
+msgstr ""
+
+#: views/sections/uptime.php:19
+msgid "5 Minutes"
+msgstr ""
+
+#: sections/Overview.class.php:41
+#, php-format
+msgid ""
+"<strong>'%s'</strong><br><i>(You can change this name in Advanced Settings)</"
+"i>"
+msgstr ""
+
+#: views/sections/statistics.php:299
+msgid "Active Calls"
+msgstr ""
+
+#: classes/Statistics.class.php:306
+msgid "Active Chans"
+msgstr ""
+
+#: classes/Statistics.class.php:121 sections/Overview.class.php:139
+msgid "Asterisk"
+msgstr "Asterisk"
+
+#: classes/Statistics.class.php:113
+msgid "Asterisk Uptime"
+msgstr ""
+
+#: sections/Blogs.class.php:34 sections/Blogs.class.php:42
+msgid "Blogs"
+msgstr ""
+
+#: classes/Statistics.class.php:266 views/sections/statistics.php:199
+msgid "Buffers"
+msgstr ""
+
+#: classes/Statistics.class.php:122
+msgid "CPU"
+msgstr "CPU"
+
+#: classes/Statistics.class.php:368
+msgid "CPU Temp"
+msgstr ""
+
+#: classes/Statistics.class.php:265 views/sections/statistics.php:198
+msgid "Cached"
+msgstr ""
+
+#: sections/Overview.class.php:128
+msgid "Critical Errors found"
+msgstr ""
+
+#: dashboard.i18n.php:14
+msgid "Dashboard Info Update Frequency"
+msgstr ""
+
+#: dashboard.i18n.php:20
+msgid "Dashboard Max Calls Initial Scale"
+msgstr ""
+
+#: dashboard.i18n.php:28
+msgid "Dashboard Non-Std SSH Port"
+msgstr ""
+
+#: dashboard.i18n.php:24
+msgid "Dashboard Stats Update Frequency"
+msgstr ""
+
+#: classes/Statistics.class.php:134 classes/Statistics.class.php:145
+#: classes/Statistics.class.php:156 classes/Statistics.class.php:167
+#: classes/Statistics.class.php:178 classes/Statistics.class.php:189
+#: views/sections/statistics.php:10 views/sections/statistics.php:21
+#: views/sections/statistics.php:32 views/sections/statistics.php:43
+#: views/sections/statistics.php:54 views/sections/statistics.php:65
+msgid "Day"
+msgstr ""
+
+#: views/sections/overview.php:54
+msgid "Delete This"
+msgstr ""
+
+#: classes/Statistics.class.php:124 views/sections/statistics.php:50
+msgid "Disk"
+msgstr ""
+
+#: sections/Blogs.class.php:33 sections/Blogs.class.php:41
+msgid "Feed"
+msgstr ""
+
+#: classes/Statistics.class.php:264 views/sections/statistics.php:197
+msgid "Free Mem"
+msgstr ""
+
+#: views/main.php:6
+msgid "Frobulating"
+msgstr ""
+
+#: dashboard.i18n.php:16
+msgid "GUI Behavior"
+msgstr ""
+
+#: classes/Statistics.class.php:133 classes/Statistics.class.php:144
+#: classes/Statistics.class.php:155 classes/Statistics.class.php:166
+#: classes/Statistics.class.php:177 classes/Statistics.class.php:188
+#: views/sections/statistics.php:9 views/sections/statistics.php:20
+#: views/sections/statistics.php:31 views/sections/statistics.php:42
+#: views/sections/statistics.php:53 views/sections/statistics.php:64
+msgid "Hour"
+msgstr ""
+
+#: views/sections/overview.php:53
+msgid "Ignore This"
+msgstr ""
+
+#: classes/Statistics.class.php:14
+msgid "Invalid Selection"
+msgstr ""
+
+#: classes/Statistics.class.php:26
+msgid "Invalid period"
+msgstr ""
+
+#: classes/Statistics.class.php:377
+msgid "Load"
+msgstr ""
+
+#: views/sections/uptime.php:13
+msgid "Load Averages"
+msgstr ""
+
+#: classes/Statistics.class.php:123 views/sections/statistics.php:39
+msgid "Memory"
+msgstr "内存"
+
+#: classes/Statistics.class.php:136 classes/Statistics.class.php:147
+#: classes/Statistics.class.php:158 classes/Statistics.class.php:169
+#: classes/Statistics.class.php:180 classes/Statistics.class.php:191
+#: views/sections/statistics.php:12 views/sections/statistics.php:23
+#: views/sections/statistics.php:34 views/sections/statistics.php:45
+#: views/sections/statistics.php:56 views/sections/statistics.php:67
+msgid "Month"
+msgstr ""
+
+#: sections/Overview.class.php:140
+msgid "MySQL"
+msgstr "MySQL"
+
+#: classes/Statistics.class.php:125 views/sections/statistics.php:61
+msgid "Network"
+msgstr ""
+
+#: sections/Overview.class.php:100
+msgid "No critical issues found"
+msgstr ""
+
+#: sections/Overview.class.php:16
+msgid "Overview"
+msgstr ""
+
+#: sections/Overview.class.php:127 sections/Overview.class.php:131
+msgid "Please check for errors in the notification section"
+msgstr ""
+
+#: dashboard.i18n.php:8
+msgid ""
+"Provides a system information dashboard, showing information about Calls, "
+"CPU, Memory, Disks, Network, and processes."
+msgstr ""
+
+#: classes/Statistics.class.php:107
+msgid "Reload"
+msgstr ""
+
+#: dashboard.i18n.php:6 dashboard.i18n.php:12
+msgid "Reports"
+msgstr ""
+
+#: dashboard.i18n.php:32
+msgid ""
+"SSH port number configured on your system if not using the default port 22, "
+"this allows the dashboard monitoring to watch the poper port."
+msgstr ""
+
+#: sections/Overview.class.php:109
+msgid "Security Issue"
+msgstr ""
+
+#: views/sections/overview.php:75
+msgid "Show All"
+msgstr ""
+
+#: views/sections/overview.php:77
+msgid "Show New"
+msgstr ""
+
+#: classes/Statistics.class.php:90 classes/Statistics.class.php:114
+msgid "Since Reload"
+msgstr ""
+
+#: sections/Statistics.class.php:27 sections/Statistics.class.php:28
+#: sections/Uptime.class.php:16
+msgid "Statistics"
+msgstr ""
+
+#: views/sections/overview.php:23
+msgid "Summary"
+msgstr ""
+
+#: classes/Statistics.class.php:268 views/sections/statistics.php:201
+msgid "Swap Used"
+msgstr ""
+
+#: views/sections/overview.php:36
+#, php-format
+msgid "SysInfo updated %s seconds ago"
+msgstr ""
+
+#: classes/Statistics.class.php:88 classes/Statistics.class.php:108
+msgid "System"
+msgstr ""
+
+#: sections/Overview.class.php:98
+msgid "System Alerts"
+msgstr ""
+
+#: dashboard.i18n.php:4
+msgid "System Dashboard"
+msgstr "系统状态"
+
+#: views/sections/uptime.php:5
+msgid "System Last Rebooted"
+msgstr ""
+
+#: sections/Overview.class.php:15
+msgid "System Overview"
+msgstr ""
+
+#: dashboard.i18n.php:30
+msgid "System Setup"
+msgstr ""
+
+#: dashboard.i18n.php:10
+msgid "System Status"
+msgstr ""
+
+#: classes/Statistics.class.php:112
+msgid "System Uptime"
+msgstr ""
+
+#: classes/Statistics.class.php:349 classes/Statistics.class.php:378
+msgid "Temp"
+msgstr ""
+
+#: sections/Overview.class.php:110
+msgid "This is a critical issue and should be resolved urgently"
+msgstr ""
+
+#: classes/Statistics.class.php:305
+msgid "Trnks Offline"
+msgstr ""
+
+#: views/sections/statistics.php:298
+msgid "Trunks Offline"
+msgstr ""
+
+#: classes/Statistics.class.php:304 views/sections/statistics.php:297
+msgid "Trunks Reged"
+msgstr ""
+
+#: dashboard.i18n.php:26
+msgid ""
+"Update rate in seconds of all sections of the System Status panel except the "
+"Info box."
+msgstr ""
+
+#: dashboard.i18n.php:18
+msgid "Update rate in seconds of the Info section of the System Status panel."
+msgstr ""
+
+#: classes/Statistics.class.php:120 sections/Uptime.class.php:15
+#: views/sections/statistics.php:17
+msgid "Uptime"
+msgstr "已运行时间"
+
+#: dashboard.i18n.php:22
+msgid ""
+"Use this to pre-set the scale for maximum calls on the Dashboard display. If "
+"not set, the the scale is dynamically sized based on the active calls on the "
+"system."
+msgstr ""
+
+#: classes/Statistics.class.php:267 views/sections/statistics.php:200
+msgid "Used"
+msgstr ""
+
+#: classes/Statistics.class.php:303 views/sections/statistics.php:296
+msgid "Users Offline"
+msgstr ""
+
+#: classes/Statistics.class.php:302 views/sections/statistics.php:295
+msgid "Users Online"
+msgstr ""
+
+#: sections/Overview.class.php:132
+msgid "Warnings Found"
+msgstr ""
+
+#: sections/Overview.class.php:141
+msgid "Web Server"
+msgstr "Web服务器"
+
+#: classes/Statistics.class.php:135 classes/Statistics.class.php:146
+#: classes/Statistics.class.php:157 classes/Statistics.class.php:168
+#: classes/Statistics.class.php:179 classes/Statistics.class.php:190
+#: views/sections/statistics.php:11 views/sections/statistics.php:22
+#: views/sections/statistics.php:33 views/sections/statistics.php:44
+#: views/sections/statistics.php:55 views/sections/statistics.php:66
+msgid "Week"
+msgstr ""
+
+#: views/main.php:3 views/sections/overview.php:6
+#, php-format
+msgid "Welcome to %s"
+msgstr ""
+
+#: classes/TimeUtils.class.php:15
+msgid "day"
+msgstr "天"
+
+#: classes/TimeUtils.class.php:16
+msgid "days"
+msgstr "天"
+
+#: classes/TimeUtils.class.php:17
+msgid "hour"
+msgstr "小时"
+
+#: classes/TimeUtils.class.php:18
+msgid "hours"
+msgstr "小时"
+
+#: classes/TimeUtils.class.php:19
+msgid "minute"
+msgstr "分钟"
+
+#: classes/TimeUtils.class.php:20
+msgid "minutes"
+msgstr "分钟"
+
+#: classes/TimeUtils.class.php:11
+msgid "month"
+msgstr ""
+
+#: classes/TimeUtils.class.php:12
+msgid "months"
+msgstr ""
+
+#: classes/TimeUtils.class.php:21
+msgid "second"
+msgstr "秒"
+
+#: classes/TimeUtils.class.php:22
+msgid "seconds"
+msgstr "秒"
+
+#: classes/TimeUtils.class.php:13
+msgid "week"
+msgstr "星期"
+
+#: classes/TimeUtils.class.php:14
+msgid "weeks"
+msgstr "星期"
+
+#: classes/TimeUtils.class.php:9
+msgid "year"
+msgstr "年"
+
+#: classes/TimeUtils.class.php:10
+msgid "years"
+msgstr "年"

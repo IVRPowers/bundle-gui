@@ -1,0 +1,38 @@
+<html>
+<header>
+  <link rel="stylesheet" href="/themes/{$THEMENAME}/styles.css">
+  <link rel="stylesheet" href="/themes/{$THEMENAME}/help.css">
+</header>
+<body>
+<h1>{$node_name}</h1>
+<p>La opción "Logs de VoiceXML" en Elastix permite visualizar el contenido de los logs de VoiceXML para monitorear eventos/errors/ejecución. Usted puede filtrar los resultados por fecha o por palabras/frases específicas.</p>
+<div class="hlp_figures"><img src="../modules/{$node_id}/images/es_hlp_vxml_log.png" border="0" />
+<p>Figura 1</p></div>
+
+<p>A continuación una descripción de cada columna.</p>
+<table class="inline">
+  <tr>
+    <th>Columna</th><th>Descripción</th>
+  </tr>
+  <tr>
+    <td>Fecha</td><td>La fecha en que ocurrió el evento.</td>
+  </tr>
+  <tr>
+    <td>ThreadID</td><td>The threadID of the VoiceXML session.</td>
+  </tr>
+  <tr>
+    <td>SessionID</td><td>The ID of the local VoiceXML thread, but can be complete with the session ID and a make set from the VoiceXML account.</td>
+  </tr>
+  <tr>
+    <td>Level</td><td>The level of the log. There are several range correspondind to the differents VoiceXML internal API.</td>
+  </tr>
+  <tr>
+    <td>Event</td><td>The event name of the log. EVENT/DEV/CRITICAL.</td>
+  </tr>
+  <tr>
+    <td>Message</td><td>The description of the log.</td>
+  </tr>
+</table>
+
+</body>
+</html>

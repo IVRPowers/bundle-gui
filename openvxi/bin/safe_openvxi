@@ -1,0 +1,163 @@
+#!/bin/sh
+# vim:textwidth=80:tabstop=4:shiftwidth=4:smartindent:autoindent
+
+TTY=9						# TTY (if you want one) for OpenVXI to run on
+CONSOLE=yes					# Whether or not you want a console
+#NOTIFY=support@i6net.com	# Who to notify about crashes
+#EXEC=/path/to/somescript	# Run this command if OpenVXI crashes
+MACHINE=`hostname`			# To specify which machine has crashed when getting the mail
+DUMPDROP=/tmp
+SLEEPSECS=4
+OPENVXISBINDIR=/usr/sbin
+
+# run openvxi with this priority
+PRIORITY=0
+
+# set system filemax on supported OSes if this variable is set
+# SYSMAXFILES=262144
+
+# set max files open with ulimit. On linux systems, this will be automatically
+# set to the system's maximum files open devided by two, if not set here.
+# MAXFILES=32768
+
+# number of VoiceXML channels
+CHANNELS=100
+
+# configuration file
+CONFIG=/etc/openvxi/client.cfg
+
+# since we're going to change priority and open files limits, we need to be
+# root. if running openvxi as other users, pass that to openvxi on the command
+# line.
+# if we're not root, fall back to standard everything.
+if [ `id -u` != 0 ]
+then
+	echo "Ops. I'm not root. Falling back to standard prio and file max." >&2
+	echo "This is NOT suitable for large systems." >&2
+	PRIORITY=0
+else
+	if `echo $OSTYPE | grep linux 2>&1 > /dev/null `
+	then
+		# maximum number of open files is set to the system maximum divided by two if
+		# MAXFILES is not set.
+		if [ "$MAXFILES" = "" ]
+		then
+			# just check if file-max is readable
+			if [ -r /proc/sys/fs/file-max ]
+			then
+				MAXFILES=$(( `cat /proc/sys/fs/file-max` / 2 ))
+			fi
+		fi
+		SYSCTL_MAXFILES="fs.file-max"
+	elif `echo $OSTYPE | grep darwin 2>&1 > /dev/null `
+	then
+		SYSCTL_MAXFILES="kern.maxfiles"
+	fi
+
+
+	if [ "$SYSMAXFILES" != "" ]
+	then
+		if [ "$SYSCTL_MAXFILES" != "" ]
+		then
+			sysctl -w $SYSCTL_MAXFILES=$SYSMAXFILES
+		fi
+	fi
+
+	# set the process's filemax to whatever set above
+	ulimit -n $MAXFILES
+
+fi
+
+#
+# Let OpenVXI dump core
+#
+ulimit -c unlimited
+
+#
+# Don't fork when running "safely"
+#
+OPENVXIARGS=""
+if [ "$TTY" != "" ]; then
+	if [ -c /dev/tty${TTY} ]; then
+		TTY=tty${TTY}
+	elif [ -c /dev/vc/${TTY} ]; then
+		TTY=vc/${TTY}
+	else
+		echo "Cannot find your TTY (${TTY})" >&2
+		exit 1
+	fi
+fi
+if [ ! -w ${DUMPDROP} ]; then	
+	echo "Cannot write to ${DUMPDROP}" >&2
+	exit 1
+fi
+	
+OPENVXIARGS="${OPENVXIARGS} -channels ${CHANNELS}"
+OPENVXIARGS="${OPENVXIARGS} -config ${CONFIG}"
+
+#
+# Don't die if stdout/stderr can't be written to
+#
+trap '' PIPE
+
+#
+# Run scripts to set any environment variables or do any other system-specific setup needed
+#
+
+if [ -d /etc/openvxi/startup.d ]; then
+	for script in /etc/openvxi/startup.d/*.sh; do
+		if [ -x ${script} ]; then
+			source ${script}
+		fi
+	done
+fi
+
+run_openvxi()
+{
+	while :; do 
+
+		if [ "$TTY" != "" ]; then
+			cd /tmp
+			stty sane < /dev/${TTY}
+			nice -n $PRIORITY ${OPENVXISBINDIR}/openvxi ${OPENVXIARGS} > /dev/${TTY} < /dev/${TTY}
+		else
+			cd /tmp
+			nice -n $PRIORITY ${OPENVXISBINDIR}/openvxi ${OPENVXIARGS} > /dev/null
+		fi
+		EXITSTATUS=$?
+		ipcrm -Q 0x000007b5 > /dev/null 2> /dev/null
+		echo "OpenVXI ended with exit status $EXITSTATUS"
+		if [ "$EXITSTATUS" = "0" ]; then
+			# Properly shutdown....
+			echo "OpenVXI shutdown normally."
+			exit 0
+		elif [ $EXITSTATUS -gt 128 ]; then
+			let EXITSIGNAL=EXITSTATUS-128
+			echo "OpenVXI exited on signal $EXITSIGNAL."
+			if [ "$NOTIFY" != "" ]; then
+				echo "OpenVXI on $MACHINE exited on signal $EXITSIGNAL.  Might want to take a peek." | \
+				mail -s "OpenVXI Died" $NOTIFY
+			fi
+			if [ "$EXEC" != "" ]; then
+				$EXEC
+			fi
+			if [ -f /tmp/core ]; then
+				mv /tmp/core ${DUMPDROP}/core.`hostname`-`date -Iseconds` &
+			fi
+		else
+			if [ "${EXITSTATUS}" = "0" ]; then
+				echo "OpenVXI ended normally.  Aborting."
+				exit 0
+			else
+				echo "OpenVXI died with code $EXITSTATUS."
+				if [ -f /tmp/core ]; then
+					mv /tmp/core ${DUMPDROP}/core.`hostname`-`date -Iseconds` &
+				fi
+			fi
+		fi
+		echo "Automatically restarting OpenVXI."
+		sleep $SLEEPSECS
+	done
+}
+
+run_openvxi &

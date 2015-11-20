@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<vxml version="2.1" xmlns="http://www.w3.org/2001/vxml" xml:lang="es-ES">
+ <form>
+  <block>
+   <prompt>Error
+   </prompt>
+   <disconnect/>
+  </block>
+ </form>
+</vxml>

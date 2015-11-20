@@ -1,0 +1,33 @@
+<module>
+	<rawname>vxml</rawname>
+	<name>VoiceXML</name>
+	<category>Settings</category>
+	<version>1.0.0.0</version>
+	<candisable>yes</candisable>
+	<canuninstall>yes</canuninstall>
+	<changelog>
+		*1.0.0.0* Original Release (beta)
+	</changelog>
+	<description>
+		Provides configuration for app_vxml
+	</description>
+	<attention>
+		This will install a module to configure the app_vxml module. You can uninstall it whenever you want.
+	</attention>
+	<menuitems>
+		<VXML category="Connectivity">VoiceXML</VXML>
+        <VXMLSettings category="Settings">VoiceXML Settings</VXMLSettings>
+        <VXMLLogFiles category="Reports">VoiceXML Logs</VXMLLogFiles>
+        <VXMLStatistics category="Reports">VoiceXML Statistics</VXMLStatistics>
+        <VXMLEditor category="Editors">Editor (VoiceXML)</VXMLEditor>
+        <TTS category="Settings">TTS Resources</TTS>
+        <ASR category="Settings">ASR Resources</ASR>
+        <FAIL2BAN category="Reports">Fail2Ban Status</FAIL2BAN>
+	</menuitems>
+	<popovers>
+		<vxml>
+			<display>vxml</display>
+		</vxml>
+  	</popovers>
+</module>
+

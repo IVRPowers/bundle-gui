@@ -1,0 +1,124 @@
+#! /bin/bash
+# $id$
+#
+# Start/stop/restart the VoiceXML Browser
+#
+### BEGIN INIT INFO
+# Provides:          openvxi 
+# Required-Start:    $remote_fs
+# Required-Stop:     $remote_fs
+# Should-Start:      $syslog $network $named mysql
+# Should-Stop:       $syslog $network $named mysql
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: OpenVXI Vxml Browser
+# Description:       OpenVXI Vxml Browser
+### END INIT INFO
+
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+NAME=openvxi
+DESC="VoiceXML Client"
+# Full path to openvxi binary
+DAEMON=/usr/sbin/openvxi
+OPENVXIARGS="-config /etc/openvxi/client.cfg -mute"
+CONSOLE=/usr/sbin/adminvxi
+
+# Uncomment this ONLY if you know what you are doing.
+# export LD_ASSUME_KERNEL=2.4.1
+
+# Uncomment the following and set them to the user/groups that you
+# want to run OpenVXI as. NOTE: this requires substantial work to
+# be sure that OpenVXI's environment has permission to write the
+# files required  for  its  operation, including logs, its comm
+# socket, the openvxi database, etc.
+#OPENVXI_USER="root"
+#OPENVXI_GROUP="root"
+
+set -e
+
+if ! [ -x $DAEMON ] ; then
+        echo "ERROR: /usr/sbin/openvxi not found"
+        exit 0
+fi
+
+if ! [ -d /etc/openvxi ] ; then
+        echo "ERROR: /etc/openvxi directory not found"
+        exit 0
+fi
+
+# Use the LSB standar functions for services management
+. /lib/lsb/init-functions
+
+ipc_clean(){
+  # ':'  is Nop in bash
+  ipcrm -Q 0x7b5 >/dev/null 2>&1 || :
+}
+
+
+case "$1" in
+  start)
+	# Check if OpenVXI is already running.  If it is, then bug out, because
+	# starting up OpenVXI when OpenVXI is already running is very bad.
+	COUNTER=`ps -ef | grep "/usr/sbin/openvxi" | wc -l`
+	if [ "$COUNTER" -gt "1" ]; then
+		echo "OpenVXI is already running."
+		exit 1
+	fi
+
+	log_begin_msg "Starting $DESC: $NAME"
+        if [ $OPENVXI_USER ] ; then
+                OPENVXIARGS="`echo $OPENVXIARGS` -U $OPENVXI_USER"
+        fi
+        if [ $OPENVXI_GROUP ] ; then
+                OPENVXIARGS="`echo $OPENVXIARGS` -G $OPENVXI_GROUP"
+        fi
+    rm -rf /tmp/cacheContent
+    rm -rf /tmp/logContent
+    ipc_clean
+	# "start-stop-daemon --oknodo" returns 0 even if OpenVXI was already running (as LSB expects):        
+	start-stop-daemon --start --background --exec $DAEMON -- $OPENVXIARGS
+	log_end_msg $?
+	;;
+  stop)
+	log_begin_msg "Stopping $DESC: $NAME"
+	# "start-stop-daemon --oknodo" returns 0 even if OpenVXI was already stopped (as LSB expects):
+	start-stop-daemon --stop --oknodo --exec $DAEMON
+	log_end_msg $?  
+	#$CONSOLE -mode 0 -send 'exit' > /dev/null 2> /dev/null
+	sleep 1
+	ipc_clean
+	;;
+  kill)
+	log_begin_msg "Killing $DESC: $NAME"
+    ipc_clean
+	killall -9 openvxi
+	sleep 1
+	log_end_msg $?  
+	;;
+  status)
+	echo "Status $DESC: "
+	COUNTER=`ps -ef | grep "/usr/sbin/openvxi" | wc -l`
+	if [ "$COUNTER" -gt "1" ]; then
+	echo "OpenVXI is currently running";
+	else
+	echo "OpenVXI is not running";
+	fi
+	;;
+	 restart)
+	$0 stop
+	sleep 2  # It needs some time to really be stopped.
+	$0 start
+	# "restart" starts OpenVXI and returns 0 even if OpenVXI was stopped (as LSB expects).
+	;;
+	 purge)
+  rm -rf /tmp/cacheContent
+  rm -rf /tmp/logContent
+  ;;
+  *)
+	N=/etc/init.d/$NAME
+	echo "Usage: $N {start|stop|restart|status|kill|purge}" >&2
+	exit 1
+	;;
+esac
+
+exit 0

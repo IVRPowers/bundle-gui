@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<vxml version="2.0" xmlns="http://www.w3.org/2001/vxml" xml:lang="fr-FR" >
+  <property name="confidencelevel" value="0.6"/>
+  <property name="inputmodes" value="voice"/>
+  <form id="deck">
+    <field name="name">
+      <grammar xml:lang="fr-FR" root="name">
+        <rule id="name">
+          <one-of>
+            <item>chocolat
+              <tag>chocolat</tag>
+            </item>
+            <item>vanille
+              <tag>vanille</tag>
+            </item>
+          </one-of>
+        </rule>
+      </grammar>
+      <prompt>¿Que préférez-vous, le chocolat ou la vanille ?</prompt>
+    </field>
+    <filled>
+      <prompt>Vous savez choisi :
+        <value expr="name"/>
+      </prompt>
+    </filled>
+  </form>
+</vxml>

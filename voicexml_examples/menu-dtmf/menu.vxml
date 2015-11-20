@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<vxml version = "2.0" xmlns="http://www.w3.org/2001/vxml" xml:lang="en-US">
+  <menu>
+    <prompt>Say one of:
+      <enumerate/>
+    </prompt>
+    <choice next="page1.vxml">Page 1</choice>
+    <choice next="page2.vxml">Page 2</choice>
+    <choice next="page3.vxml">Page 3</choice>
+    <noinput>Please say one of
+      <enumerate/>
+    </noinput>
+  </menu>
+</vxml>

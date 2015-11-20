@@ -1,0 +1,26 @@
+#!/sbin/runscript
+# Start/stop/restart the VoiceXML Browser
+
+depend() {
+	need net logger
+}
+
+start() {
+	# Check if OpenVXI is already running.  If it is, then bug out, because
+	# starting up OpenVXI when OpenVXI is already running is very bad.
+	COUNTER=`ps -ef | grep "/usr/sbin/openvxi" | wc -l`
+	if [ "$COUNTER" -gt "1" ]; then
+		echo "OpenVXI is already running.  $0 will exit now."
+		exit 1
+	fi
+	
+	ebegin "Starting OpenVXI"
+	/usr/sbin/openvxi -channels 100 -config /etc/openvxi/client.cfg -mute &
+	eend $? "Failed to start OpenVXI"
+}
+
+stop() {
+	ebegin "Stopping OpenVXI"
+	kill $(cat /var/run/openvxi.pid)
+	eend $? "Failed to stop OpenVXI"
+}

@@ -1,0 +1,38 @@
+<html>
+<header>
+  <link rel="stylesheet" href="/themes/{$THEMENAME}/styles.css">
+  <link rel="stylesheet" href="/themes/{$THEMENAME}/help.css">
+</header>
+<body>
+<h1>{$node_name}</h1>
+<p>The option "VoiceXML Logs" of the "Reports" module allows visualizing the content of VoiceXML logs for monitoring the events/errors/processing. You can filter the results by date or strings that are in the content of the logs </p>
+<div class="hlp_figures"><img src="../modules/{$node_id}/images/hlp_vxml_log.png" border="0" />
+<p>Figure 1</p></div>
+
+<p>Below a description of each column.</p>
+<table class="inline">
+  <tr>
+    <th>Column</th><th>Description</th>
+  </tr>
+  <tr>
+    <td>Date</td><td>The date of the log.</td>
+  </tr>
+  <tr>
+    <td>ThreadID</td><td>The threadID of the VoiceXML session.</td>
+  </tr>
+  <tr>
+    <td>SessionID</td><td>The ID of the local VoiceXML thread, but can be complete with the session ID and a make set from the VoiceXML account.</td>
+  </tr>
+  <tr>
+    <td>Level</td><td>The level of the log. There are several range correspondind to the differents VoiceXML internal API.</td>
+  </tr>
+  <tr>
+    <td>Event</td><td>The event name of the log. EVENT/DEV/CRITICAL.</td>
+  </tr>
+  <tr>
+    <td>Message</td><td>The description of the log.</td>
+  </tr>
+</table>
+
+</body>
+</html>

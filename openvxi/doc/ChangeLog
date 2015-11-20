@@ -1,0 +1,607 @@
+12.1 (09/09/2015)
+------------------
+
+mod: Correction to parse the cookies parameter 'secure' and 'httponly'.
+mod: Correction to allow VoiceXML execution after throwing the event disconnect.
+add: mrcpsynthparams for accounts too.
+add: Clean text results from Loquendo ASR (speechclean parameter removes spaces and CR).
+mod: Correction to catch and process the error.grammar events.
+mod: Correction to support alternate prompt using <value>.
+mod: Correction to restore the readformat when the speech resource is released.
+mod: Set the Speech-Language property of the uniMRCP (for builtins grammars).
+mod: Correction to support launching https requests from the Vxml() parameter.
+
+
+12.0 (03/07/2015)
+------------------
+
+mod: Correction to support https:// uri as Vxml() parameter.
+mod: Correction to support Loquendo NLSML answers.
+mod: Correction to close speechrecord files (generate filedescriptors leak).
+add: Option to generate the logs to the Asterisk.
+mod: Correction to support builtin time and hour grammars results.
+mod: Remove the extra voice parameter in the xml:lang for the grammars.
+add: Add a parameter to force the grammar text encoding.
+mod: Correcion to save the Verbio format in ISO encoding.
+mod: Correction of a regression with the catch event hangup.
+add: FreePBX module.
+mod: Correction of a memory leak associated to the tag <data>.
+mod: Correction to avoid disk saturation with the recordutterance option.
+
+
+11.0 (05/12/2014)
+------------------
+
+add: Add sessions max duration.
+add: Add average sessions counter.
+add: Support for Vestec binary grammars.
+mod: Correction to disable the account mark.
+mod: Correction with the object Curl and Json parsing.
+add: Add new log file (voicexml.log) generated from tag <log>.
+mod: Add property interdigittimeout default value set to 3s.
+add: Add support JSON parsing to the <object> Curl.
+mod: Correction to avoid mode='' with inline grammars.
+add: Add support for the Asterisk Festival application.
+mod: Restore compatibility with Asterisk 1.4.
+mod: Disable the grammars of the field before processing its <filled>.
+mod: Correction VXI crash if VoiceXML document is <xml></xml> (OVH).
+mod: Correction VXI crash if debian 7 64bits.
+add: Add mode parseSrgs=dtmf to check always the grammar content.
+add: Add DTMF properties to the ASR engine.
+mod: Corrections to support the Nuance Call Steering (grammars).
+add: Add parameter recordrewind to disable the 1/4s of cut and the end of the record.
+mod: Pass the DTMF to the speech API if mode speechbargein is forced.
+add: Mode uri for the parseSRGS option (pass the URLs of the grammars to the ASR engine).
+mod: Load when enable the dynamic grammars (grammars with srcexpr).
+mod: Force UTF8 encoding for the grammar files.
+mod: Change the default value of speechscore to 0.
+mod: Correction issue with dtmf input without length.
+mod: Support 's' unit in maxage and maxstale attributs (for Nuance Call Steering).
+mod: Remove error event if multiple varaiable declarations with <var>.
+mod: Add shaddow variables if NLSML <instance> have extra tags.
+mod: Correction for noinput/nomatch events with uniMRCP.
+mod: Remove ;jsession= in the base URL for the TTS cache.
+mod: Disable the ECMAscript strict mode.
+mod: Correction fo Verbio sensibility.
+
+
+10.0 (09/04/2014)
+------------------
+
+mod: Set transfer variable if callee hangup (near_end_disconnect).
+add: Internal objects to process function:, set:, get:, execute: and application: prefix.
+mod: No wait after a grammar command.
+add: Integration of Resource Speech for Google Speech API.
+add: Porting to Asterisk 11/12.
+mod: Support original NLSML content response from uniMRCP.
+mod: Pass SWI* properties (Nuance ASR parameters) to the ASR engine.
+
+
+8.2 (16/12/2013)
+------------------
+
+mod: Set VXML_ERROR if an account reach the max limit.
+add: Add parameter 'speechmaxtimeout' (use property maxspeechtimeout too).
+add: Add parameter 'systemname' for asterisk (force name).
+mod: Change SpiderMonket library (1.5 to 1.8).
+add: Added the parameter speechtimeout.
+mod: Correction to support completetimeout with Verbio.
+mod: Correction to pop the ASR/VAD ('s') event if it is a DTMF inband.
+mod: Correction to support the option maxlength in the builtin grammars.
+mod: Correction to unmatch voice grammars with DTMF results.
+mod: Correction throw a nomatch if input different to length parameter with dtmf.
+mod: Correction of unclosed SSML files.
+mod: Correction to enable global grammars in <block>.
+mod: Correction to use count=0 to enable the reprompt feature.
+mod: Correction to support termchar with DTMF events.
+mod: Correction for Verbio ASR, to call once SPEECH_ENGINE(langiso).
+mod: Corrections in internal NLSML conversion/parsing.
+mod: Catch hangup event during record.
+
+
+8.1 (30/10/2013)
+------------------
+
+add: Support dynamic ABNF grammars (from option/menu).
+mod: Set default inputmodes to "dtmf voice".
+add: Get interrupted DTMF from synthMRCP.
+mod: Correction when speechunload=no (desactivate the grammar if unfree).
+mod: Correction bug in the filenames for the cache.
+add: Function VXML(mixmonitor), get default mixmonitor filename.
+mod: ASR timeout property set to milliseconds.
+mod: Small change for MRCPsynth.
+add: Feature to play an audio when waiting for an free VoiceXML channel.
+mod: Correction in the option cdrdial.
+add: Apache logs for service statistics.
+mod: Return Ok when the speechunload is set.
+mod: Correction to support the ASR 'hypotesis'.
+add: Added Flac record format (for google API).
+mod: Correction set the max speech timeout from 10s to 60s.
+
+
+8.0 (28/06/2013)
+------------------
+
+add: Pass the speech properties to the ASR engine (configure sendProperties).
+add: URI checks (rfc2806) with prefix 'tel:' in dest <transfer>.
+mod: Add reference uri: for uniMRCP grammars.
+mod: Correction of lastresult$.recordingsize.
+add: Add the file size recorded (shadow variable $.size).
+add: Throw error.noresource if the ASR is disable instead of error.grammar.
+mod: Throw disconnect.hangup only once (after exit execution).
+add: Record audio silence before the VAD dectection.
+add: Support of the timeout property for the record.
+mod: Added support connectiontimeout and maxtime for blind transfer.
+mod: Correction for special values returned by the Verbio ASR.
+mod: Correction to support HTTP proxy rules.
+add: Play/record FLV files (for RTMP channel).
+mod: Correction to use an executable content inside a <foreach>.
+add: Support of the recordutterance property.
+mod: Change the cache key for the audio (skip parameters from the url base).
+add: Parameter speechconcatenate used to merge the ASR results to a single string.
+mod: Correction of transfers results and events.
+add: Support of <mark> (added to block too).
+add: Support of fetchaudio with delay and min properties.
+mod: Correction hangup event when the caller hung up.
+mod: Correction VXI crash if bad encoding with a script.
+add: Added the builtin grammar 'dtmf/touchtone'.
+mod: Support of HawHaw's generated grammars.
+add: Support of <data> and XML dom parsing.
+mod: Integration of the last W3C schema.
+mod: Improvment with <break>.
+add: Support of <foreach>.
+add: Parameter to force the SSML format.
+add: Use of MRCPsynth for the TTS (method MRCP)
+add: Support of consultation transfert (mode keepcontext added too).
+add: Support of <grammar> srcexpr attribut.
+add: Support of <disconnect> namelist attribut.
+add: VoiceXML 2.1 support.
+mod: Add 'HttpOnly' attribut for the Cookies.
+add: Added CLI command vxml reset statistics.
+add: Added CLI command vxml set debug.
+
+
+7.1 (17/09/2012)
+------------------
+
+mod: Correction for the Verbio ASR with SRGS grammars.
+add: Parameter speechunload to disable the unloadgrammar functions.
+add: Range numbers and IP for the accounts.
+add: Support the prefix "uri:" for the grammars.
+add: Parameter originatedelay2 (time to wait for the originate retry).
+mod: Correction Object execution (disabled with the traces).
+mod: CURL with SSL support enabled.
+add: Account parameter to play an audio if account limit reached.
+add: Account parameter to change the volume.
+mod: Correction coredump in the curl object.
+mod: Correction for the score value for Vestec.
+
+
+7.0 (22/03/2012)
+------------------
+
+add: Prefix '@' in the account number to select by caller number.
+mod: Correction for S_ISREG symbol not found (load module).
+add: Special mode for <clear>, namelist with "." not clear eventcounters.
+add: Account parameter 'wait', wait before start the VoiceXML browser.
+add: Option account force 'vxml' to disable '@' execution.
+add: Prefix "record:" to access to the recorded local messages (record dest).
+add: Add attribute 'dest'/'destexpr' to the record (record in recorddirectory).
+add: Parameter to control the originate delay.
+
+
+6.3 (05/01/2012)
+------------------
+
+add: Support of date/time DTMF builtin grammars.
+add: Configuration parameter to disable to touch the entries (no write in the table).
+add: Support audio attributes maxage and maxstale.
+mod: Correction of the false VXI connection lost.
+add: Parameter monitorformat to set the monitor file format.
+mod: Support attribut expr in the tag grammar to evaluate the url (not standard).
+mod: Support attribut tag in the tag grammar (not standard).
+add: New transfer prefix "outgoing:", better then the standard originate.
+
+
+6.2 (11/08/2011)
+------------------
+
+mod: Correction to support the Dial alternative without the tel: prefix.
+mod: Correction add a fixe maxspeechtimeout to extend the timeout.
+add: Option to execute a CLI command after the load (for chan_h323).
+add: Option to load a dynamic library (for chan_h323).
+add: Monitor option to record the VoiceXML session.
+mod: Correction in Verbio/builtin grammar support.  
+
+
+6.1 (25/05/2011)
+------------------
+
+add: Support builtin grammar with uniMPRC (Loquendo).
+mod: Support of audio calls with VAD for the speech/ASR (Loquendo issue).
+add: Added XML/Text parser with the CURL object.
+mod: Correction to not send 100-Continue when body is empty.
+mod: Default optimize mode set to disabled.
+add: Added mixmonitor parameter to enable the call recording (randomize possible).
+mod: Corrections in the speechrecord parameter (randomize records).
+mod: Corrections in the ASR result response.
+
+
+6.0 (22/03/2011)
+------------------
+
+add: License option to disable the VoiceXML session.
+add: CLI command originate to generate a call (and link it to the vxml application).
+add: Callback feature (transfer blind, with connecttimeout null).
+add: Modes autoanswer=ringing and force=ringing.
+mod: Correction crash with the HTTP VoiceXML objects.
+add: Option to record the speech sequences (audio + results).
+add: Alternative TTS/TTV URLs.
+add: Feature to Dial 2 channels simultaneously, or as an alternative.
+add: Option to decode the URL in the Asterisk module.
+add: TTY/TDD send/receive from VoiceXML (first step).
+add: Support RFC5552 (exit/result in the BYE), update the SIP channel patch.
+add: Support RFC5552 (only the VoiceXML URL in the INVITE), needs a SIP channel patch.
+
+
+5.2 (30/11/2010)
+------------------
+
+mod: Modification to support the audiofetch.
+mod: Correction in the fonction wait/silence (wait for openvxi).
+add: Add the parameter dialnumbersonly to filter called numbers.
+mod: Change the open sequence for better reactivity.
+mod: Increase the number of accounts to 200.
+add: File descriptors counters (with show top).
+add: Average statistiques (duration, response and CAPS).
+mod: Replace the nanohttp library by the libcurl.
+add: Extra parameters in the transfer (after mark ',') for to the Dial command.
+add: Command line parameters -U and -G to change the OpenVXI linux user/group.
+mod: Correction for uniMRCP to stop the speech/ASR engine.
+mod: Correction for disable bargein with the speech/ASR.
+add: Increase the Asterisk compatibility (disable the using the channel context). 
+mod: Ignore the ASR result if a DTMF interaction occured.
+add: Support the attribut repeat for SRGS/XML DTMF grammars.
+add: Options to pass all the SRGS/XML grammars to the ASR engine (voice and DTMF).
+add: Support for Asterisk 1.8.
+add: Add the context support in the app_vxml redirect ('@exten@context').
+mod: Correction for MDTel (shadow 'out' value set).
+add: Option parseSRGS to disable the SRGS parsing in the browser.
+mod: Correction for speech unimrcp and Nuance (support <tag>out=).
+mod: Correction of the session contexts initalisation (ctx->url).
+mod: Enable the cdrupdate in case of vxml(@) using.
+mod: Correction to enable the H323 license option.
+add: Add the parameter param (to force the session.param variable in the VoiceXML context).
+add: Add the parameter priorityevents.
+mod: Correction for Vestec ASR (word compare without case sensitive).
+
+
+5.1 (02/09/2010)
+------------------
+
+mod: Corrections for the ASR (speech).
+mod: Correction to use the separator char parameter.
+add: Dialer, H232, RTMP options.
+mod: Correction of uninitialized account index in the context.
+mod: Correction of the nomatch when digits/minlength=1.
+mod: Correction to return the result/value of an executed application.
+mod: Corrections of the annoncement feature (Karaoke function with the record).
+mod: Correction of the Verbio Speech timeout.
+mod: Close the opendir when monitor action tries to purge the cache.
+mod: Remove "{out=value}" in the gererate ABNF grammars.
+mod: Disable the CDR modifications with cdrupdate=no.
+
+
+5.0 (25/05/2010)
+------------------
+
+mod: Add force Flash/RTMP for the future RTMP channel.
+mod: Correction to avoid the crash when the object http don't get parameters.
+mod: Correction to use h324m with Asterisk 1.6.
+add: Support audiofetch attribut.
+add: Cache manager to purge automatically the TTS cache.
+mod: Use UTF-8 for srgs/xml grammars.
+add: Porting of Vestec ASR (with asterisk speech API).
+mod: Correction to remove null file generated by the HTTP/TTS connector.
+add: use transfer/dest extra value ';ani=xxx' to change the CALLERID number and name.
+mod: Resize the messaging buffer.
+mod: Correction to support refered file for the dial annnouncement.
+mod: Correction to play mp3 streams with mp3player.
+add: ASR/speech uniMRCP support.
+mod: Correction in the start/strop script for Suse.
+mod: Replace usleep function (some server don't sleep).
+mod: Correction to pass the parameters for with "execute:" (Asterisk 1.4).
+mod: Correction to force ULAW/ALAW native format (parameter force=alaw).
+mod: Correction to set different filename during the multiparts/POST.
+
+
+4.4 (03/03/2010)
+------------------
+
+add: Complete DTMF buffering during HTTP long requests.
+add: Add paramter threshold to configure the VAD/silence (record).
+add: Add parameter autoexit to kill asterisk if the connection with VXI is lost.
+add: Set record maxtime shadow variable.
+add: Improve prompt hangup and bargein (skip HTTP processing, limit queue-fill).
+mod: Select the first account with redirection(s).
+add: Add clean support of noinput and hangup event during the record.  
+add: Add the account parameter "force" to set Transfercapability=VIDEO.
+mod: Improvement of the bridge transfer (use with transcode). 
+mod: Disable the msgqlock.
+add: Add parameter videoprofile (to controle the video codec transcoder).
+add: Check the account in the vxml(@) execution.
+mod: Correction to control the call answer. 
+add: bridge and spawn modes for localformat. 
+mod: Add the DOCTYPE in the grammars.
+mod: Correction in the session release (wait for playall).
+mod: Correction for better speech support.
+
+
+4.3 (11/01/2010)
+------------------
+
+add: Property announcememory for the <transfer>.
+mod: Corrections in the <object> "property". 
+mod: Corrections in the <transfer> features (maxtime property added).
+add: Parameter durationlimit in the accounts.
+add: Use the 3rd language item as the voice (en-UK-brian).
+add: EC2 and Xen support.
+mod: Correction to not cut float numbers and hours with the option cutprompt.
+mod: Support of GRXML in DTMF mode.
+add: Parameter messaging to control the MWI notification.
+mod: Correction for the originate feature.
+mod: Correction to allow the Video Conference (Konference integration).
+add: Optimization option (disable full parsing).
+add: builtin:amd grammar to detect the Ansering Machines.
+mod: Get the variable result of a application, application:app()=RES.
+mod: Corrections for the Fax support (return number of pages)
+mod: Enable to execute Applications after the hangup.
+add: Integration with the Dialer.
+add: Build modules for Asterisk 1.6.0.x and 1.6.1.x
+mod: Correction in the license lock.
+mod: Set the DTMF dial timeout and duration (dial:xxxx,timeout,duration)
+mod: Use the values 99/98 in the confidence attribut for events/field. 
+mod: Updates for the Asterisk 1.6.1.x (ast_dsp_set_digitmode).
+
+
+4.2  (17/09/2009)
+-----------------
+
+mod: Correction for speech using (disable speech if no grammar active).
+mod: Support returning speech results during controled prompts.
+add: Support VOICE/SRGS (application/srgs+xml) load grammars.
+add: Record types "format/..." to support all the Asterisk formats. 
+add: Support DTMF/JSGF (text/x-grammar-choice-dtmf) load grammars.
+add: blindapplication parameter (select an application or use a end dial).
+add: CDR option cdrconference to enable CDR generation for the conferences.
+add: Add append variable/function feature (with '+=').
+mod: Correction in the read function feature.
+add: Asterisk 1.6.1.x Porting. 
+add: Add addition version informations.
+add: Support VCR command from the ASR/speech.
+add: Support of 'hotword' with the bargeintype.
+mod: Correction in the "uri:" prefix.
+add: Memory for media files.
+mod: Correction to support an empty URL.
+mod: Correction for the 64bits portability.
+add: object 'delete'
+add: URI with "originate:" to generate outgoing calls frome the <transfer> tag.
+mod: Corrections in the internal objects (string conversions).
+add: Add the maxEvents configuration parameter.
+mod: Support passing parameters to the conference (conf:test/M).
+add: URI with "app:" to execute an application from the <audio> tag.
+mod: Stop the speech resource on DTMF key pressed.
+mod: Correction to check the structure of speech results.
+mod: Correction to match an account with the name.
+add: Add parameter speechbargein to disable the voice bargein. 
+
+
+4.1  (29/05/2009)
+-----------------
+
+add: CDR option cdrspeech to enable CDR generation for the speech/ASR (recognize).
+mod: Modification in the object 'pick'.
+add: Prompt cut feature, cutPrompt parameter and promptcut proprerty.
+add: Option to force a Silence (after prompts).
+add: Support maxlength and minlength in the DTMF digits builtin grammar.
+add: Option autohangup to hangup the call after the VoiceXML session.
+add: Support Asterisk .h263, .h263p and .h264 files.
+add: Set and function write from the transfer tag.
+mod: Send DTMF modifications (for Asterisk 1.6).
+mod: Link VXML_PARAM and VXML_AAI to session.connection.aai. 
+mod: Account matching (refund and Asterisk Dialplan patterns support).
+add: Parameter mark for the accounts (to add a mark in the OpenVXI traces).
+add: Additionnal marks in the logs/traces for VoiceXML hosting.
+add: VXML_URL2 as VXML_URL alias because the channel SIP use the same variable name.
+add: Protection against infinite loops in the account redirections. 
+mod: Set a minimal size for the msgq.
+mod: Correction for Asterisk 1.6 (disable build options sum check).
+add: New lock system for the i6net modules.
+add: Add autoreload parameter alias for the configuration.
+mod: Change the format of the prompt CDR.
+add: Transfer "tel:function(X)" get the function value of X with the shadow $.value. 
+add: Dump the installation date.
+add: Values of the prompt properties used for the prompt cache key.
+mod: Reload configuration if the configuration file date change.
+mod: Correction to disable the debug traces.
+add: CDR option cdrparam to set the userfield with VXML_PARAM.
+mod: Add local/remote info in the session dump.
+mod: Mode speech=emulation (disable messages).
+add: Use '@' in the url to redirect an account to another.
+mod: Correction for accounts, '*' to catch all the numbers.
+add: Transfer "tel:get(X)" get the extention variable value of X with the shadow $.value. 
+add: CDR option cdroverwrite to update the CDR with the variables VXML_LOCAL and VXML_DISTANT.
+add: CDR option cdrprompt to enable CDR generation for the prompt (audio).
+add: CDR option cdrdial to disable the CDR creation with Dial (transfer).
+mod: Correction for the property promptbackground
+mod: Correction for the grammars generated with <option>
+
+
+4.0  (18/01/2009)
+-----------------
+
+add: Modules for each Asterisk releases (1.4, 1.6 and videocaps)
+add: Celudan/3Gbuilder application control
+add: Asterisk 1.6 support
+add: Multiple ASR/speech configuration
+add: Set the record/termchar shadow variable
+add: ASR score result
+add: ASR configuration (enable GRXML dynamic grammars)
+mod: ASR/speech integration redisgned (use Asterisk application instead the API)
+add: ASR configuration (enable isolated and ABNF dynamic grammars)
+add: objects 'save' and 'pick'
+add: dialformatvideo to set the transfer parameters for the video
+mod: Enable to customize the transfer applicatuin used 
+mod: Bug license code correction for the 64bits version
+add: Update CDR/accountcode with the name of the vxml account
+mod: Correction of the SRGS sytnax for Lumenvox
+mod: Correction for the jsession
+mod: Refund of the transfer execution
+mod: Return the rigth duration after a transfer
+add: Keep CDR after the transfer (with Dial)
+mod: Http 302 support (as Mozilla)
+add: Internals parameters and dump information
+add: Default timeout and interdigittimout configurable
+mod: Bug timeout correction (due to timeout in prompts)
+add: MaxLoopIterations and MaxDocuments configurable
+add: Trace level for VoiceXML development
+mod: Cache/localfile bug correction
+mod: Simplification of the properties dump
+add: Parameter speechscore to throw a nomatch
+add: Support to audiomaxage and audiomaxstale
+add: Option to auto reload the configuration 
+mod: Support timeout attribut of prompt section
+mod: Correction for the coredump when using the ASR (speech)
+add: Top dump (from the CLI Asterisk)
+add: Add a specifc HTTP connector for the TTS/TTV (allow HTTP connected)
+add: Enable/disable interpreter traces
+add: Get the delay for the first command after an open
+
+
+3.1  (31/08/2008)
+-----------------
+
+add: additional properties for the TextToVideo
+mod: Disable SIGPIPE generation
+add: Specific video URL in the accounts
+add: Video detection
+add: Counters (PEAK, DENIED, SPEECHS)
+add: Set VXML_ERROR if the session cannot be open (content the cause)
+add: End date to the session dump
+add: Use Number (calledif)) to identify the account
+mod: Open sessions locks
+mod: support Jsession (java sessions)
+mod: Start/stop script (without safe_openvxi)
+add: Option mute to openvxi
+mod: Disable log Stdout by default
+add: CLI admin commands
+mod: Remove direct chan access
+add: alias mimitype video/3gp
+add: VXML() asterisk function to get/set parameters
+add: Porting for Asterisk 1.2
+add: Priority configuration
+add: Sessions dump
+add: CDRupdate parameter
+add: Asterisk vxml application dates
+mod: vxml show application
+add: Add the dial: transfer prefix
+add: CDR updates at the end of the VoiceXML session
+add: .alaw and .ulaw formats for the TTS 
+add: ASR automatic allocation
+add: speech configuration for the accounts
+mod: Correction in the offset object
+mod: Small correction for CLI commands
+add: Object property to get internal properties values
+mod: Correction to use the MP3Player application
+mod: Correction to support exec: in the transfer
+add: Configuration of DTMF controls
+
+
+3.0  (07/05/2008)
+-----------------
+
+mod: Remove applications integration (call from Asterisk)
+add: Conference from the transfer tag with conf:
+add: Call a Asterisk application fom the VoiceXML session.
+mod: Prompt local file not exits correction (item increment removed)
+add: Support 3gp file format extension
+mod: Update from sip.fontventa.com (12/01)
+mod: Update from sip.fontventa.com (15/12)
+add: Test tool to check the code
+mod: Update from sip.fontventa.com (29/11)
+add: builtin and dynamic speech grammar supported
+mod: Number of account changed to 100
+mod: Update from sip.fontventa.com (22/10)
+mod: License bug correction
+add: First step of speech integration
+
+2.2  (08/10/2007)
+-----------------
+
+mod: Update from sip.fontventa.com (08/10)
+mod: Correction to prompt local file
+mod: Not overwrite the client.cfg for the upgrades
+mod: Start/stop script option "kill" to purge
+add: Offset support with audio/wav (".wav:1233") and property <control>
+mod: Change context item type : form int to long (offset)
+mod: Remove TTS/HTTP overwriting gobal HTTP request paramaters
+
+
+2.1  (12/09/2007)
+-----------------
+
+add: Infinite loop dealock detection (generate error event)
+add: First step to support UTF-8 message from gtalk
+mod: Update from sip.fontventa.com (18/08)
+add: DTMF interrupt / bargein during RTSP
+add: Support simple <break> tags.
+add: Control VCR function for wav clips with property "control"
+add: Dial format in the account configuration.
+add: Support RTSP uri with <audio>
+mod: Correction for multi-records
+add: Accounts managment
+mod: Bugfix for SpiderMonkey (js_FreeRuntimeScriptState)
+mod: Invert DNI and ANI (with the same shift in the configurtion file)
+mod: Update the ChangeLog
+
+
+2.0  (xx/03/2007)
+-----------------
+
+Official release for Etch (gcc4)
+add: QOS counters (prompts, recognizes, records ...)
+add: MP4 from Asterisk-Video (Sergio / sipfonta).
+mod: remove ffmpeg dependencies
+mod: remove mov / 3gp format
+
+
+1.5.beta  (xx/03/2007)
+----------------------
+
+mod: Etch support
+
+
+1.4.beta2  (13/02/2007)
+--------------------
+
+mod: Remove the message "Bad video codec" after the configuration load.
+mod: Allow record multiple files
+add: Makefile options
+mod: Bug wrong ID grammars (0x7FFFFFF)
+mod: Don't lock if OpenVXI is not started
+add: Support of mp4 file format (from app_mp4)
+mod: termchar empty disable the "#" default key
+
+
+1.4.beta  (04/10/2006)
+--------------------
+
+Initial Release (for distribution)
+add: Add information files
+add: Add licensing files
+add: Add asterisk application source for GPL (app_vxml)
+mod: Change the licensing interface
+add: Option recordsilence
+add: Option videoupdate
+mod: Corrections for video recording
+

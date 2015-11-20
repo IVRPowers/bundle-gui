@@ -1,0 +1,545 @@
+Last Updated: July 10, 2015
+
+IVRPOWERS End User License Agreement
+
+
+PLEASE READ THIS SOFTWARE LICENSE AGREEMENT CAREFULLY. BY DOWNLOADING,
+INSTALLING OR USING THE SOFTWARE YOU INDICATE ACCEPTANCE OF AND AGREE TO
+THE TERMS AND CONDITIONS OF THIS AGREEMENT. IF YOU DO NOT AGREE TO THESE
+TERMS AND CONDITIONS, DO NOT DOWNLOAD, INSTALL OR USE THE SOFTWARE.
+THIS AGREEMENT DOES NOT SUPERCEDE ANY OTHER WRITTEN AGREEMENT
+BETWEEN YOU AND IVRPOWERS. 
+
+This IVRPOWERS End User License Agreement ("EULA") is a legal agreement between you
+and/or your company, (hereinafter "Licensee") and Interactive Powers (“IVRPOWERS”), or any
+subsidiary or affiliate of IVRPOWERS from which you have purchased the license
+(“IVRPOWERS"), for the IVRPOWERS software product(s) identified in Part-2 for which
+you have purchased a license ("Software"). Any software provided along with
+the Software that is associated with a separate end-user license agreement is
+licensed to you under the terms of its own license agreement. By installing,
+copying, downloading, accessing or otherwise using this software product, you
+agree to be bound by the terms of this EULA. If you do not agree to the terms
+of this EULA, do not install or use the software product. IVRPOWERS and Licensee
+hereby agree as follows:
+
+Part 1 - Software License 
+
+1.1 License grant
+
+Subject to the terms and conditions contained herein, IVRPOWERS hereby grants to Licensee,
+and Licensee hereby accepts, a non-exclusive, nontransferable, non-sublicensable, world-wide
+perpetual license to use and copy the Software as defined in Part-2.
+
+1.2 Proprietary Rights
+
+Except for the license rights granted to Licensee in this EULA, Licensee acknowledges
+that IVRPOWERS retains all right, title and interest in and to the original and any copies
+of the Software, and ownership of all patent, copyright, trade secret, trademarks and
+other intellectual property rights pertaining thereto, shall be and remain the sole
+property of IVRPOWERS.
+
+1.3 Restrictions
+
+Licensee shall not (a) use the Software except as licensed in this EULA;
+(b) sell, lease, license, sublicense, market or distribute the Software;
+however selling or providing a service that relies on the Software
+shall not be considered a sublicense of the Software; (c) knowingly take any
+action that would cause any Software to be placed in the public domain; (d)
+reverse engineer, decompile, disassemble or translate the Software; (e) use
+anything other than IVRPOWERS provided, unmodified license keys to the Software;
+(f) use the Software in any manner inconsistent with the express license grant
+in this EULA.
+
+1.4 Maintenance and Support
+
+Provided that Licensee has paid the appropriate fees, IVRPOWERS shall
+provide Licensee with upgrades to the Software in
+accordance with the terms provided in Part-2.
+
+1.5 Term and Termination
+
+This EULA shall be effective on the first date of
+installation of the Software and shall continue in accordance with this EULA.
+IVRPOWERS may terminate this EULA immediately upon notice to Licensee in the event
+of any material breach of this EULA and a failure to cure such breach within
+thirty (30) days from written notice of the breach by IVRPOWERS, Licensee shall
+immediately cease use of the Software (in any form, including partial copies in
+its possession or under its control), and, within ten (10) days of such
+termination, return all copies of the Software to IVRPOWERS and certify in writing
+to IVRPOWERS that no copies have been retained.
+
+1.6 Product Limited Warranty
+
+IVRPOWERS warrants that the Software shall
+conform in all material respects to the specifications contained in the
+documentation for a period of thirty (30) days from the first date of
+installation. For any breach of this warranty, Licensee's exclusive remedy,
+and IVRPOWERS's entire obligation and liability, shall be the exercise of
+commercially reasonable efforts to modify the Software so that the foregoing
+warranty is true, and deliver the modified Software to licensee. Except as
+expressly provided herein, the Software is provided "as is" and with all
+faults, and without warranty of any kind, whether express, implied, statutory,
+oral or otherwise. There is no warranty of merchantability or fitness for a
+particular purpose.
+
+1.7 Limitation of liability
+
+IN NO EVENT WILL IVRPOWERS, ITS SUBSIDIARIES OR ANY OF THE
+LICENSORS, DIRECTORS, OFFICERS, EMPLOYEES OR AFFILIATES
+OF ANY OF THE FOREGOING BE LIABLE TO LICENSEE UNDER ANY CONTRACT,
+NEGLIGENCE, STRICT LIABILITY OR OTHER LEGAL OR EQUITABLE THEORY
+FOR ANY CONSEQUENTIAL, INCIDENTAL, INDIRECT OR SPECIAL DAMAGES
+WHATSOEVER (INCLUDING, BUT NOT LIMITED TO, DAMAGES FOR LOSS
+OF BUSINESS PROFITS, BUSINESS INTERRUPTION, LOSS OF BUSINESS
+INFORMATION AND THE LIKE), WHETHER FORESEEABLE OR UNFORESEEABLE,
+OR FOR COST OF PROCUREMENT OF SUBSTITUTE GOODS, TECHNOLOGY
+OR SERVICES, REGARDLESS OF THE BASIS OF THE CLAIM AND EVEN IF IVRPOWERS
+OR A IVRPOWERS REPRESENTATIVE HAS BEEN ADVISED OF THE POSSIBILITY
+OF SUCH DAMAGE. IVRPOWERS'S CUMULATIVE LIABILITY FOR DAMAGES
+FOR ANY CAUSE WHATSOEVER, AND REGARDLESS OF THE FORM OF
+THE ACTION, WILL BE LIMITED TO NO GREATER THAN THE AMOUNT
+OF MONEY PAID TO IVRPOWERS FOR THE SOFTWARE THAT CAUSED
+THE DAMAGES. NO ACTION MAY BE BROUGHT AGAINST IVRPOWERS LATER
+THAN ONE YEAR FROM THE TERMINATION OF THIS AGREEMENT.
+
+1.8 Disclaimer of other rights
+
+1.8.1. Disclaimer. This Agreement does not give Licensee any
+rights not expressly granted herein. If Licensee wishes to use the Software
+beyond the terms of this Agreement, Licensee must obtain IVRPOWERS's prior written
+consent, which, (i) may be withheld in IVRPOWERS's sole discretion; and (ii) may be
+given subject to additional terms and conditions, including without limitation,
+additional license fees, as determined by IVRPOWERS at that time
+
+1.8.2. U.S. Government restricted rights. The Software is deemed to be commercial
+computer software as defined in FAR 12.212 and subject to restricted rights as
+defined in FAR Section 52.227-19 "Commercial Computer Software - Restricted
+Rights" and DFARS 227.7202, "Rights in Commercial Computer Software or
+Commercial Computer Software Documentation", as applicable, and any successor
+regulations. Any use, modification, reproduction release, performance, display
+or disclosure of the Software by the U.S. Government shall be solely in
+accordance with this EULA.
+
+1.8.3. General Provisions. This EULA shall be interpreted and construed in
+accordance with the laws of the jurisdiction that governs the IVRPOWERS office from
+which the Software was purchased. The United Nations Convention on Contracts
+for the International Sale of Goods does not apply except as mandated by law.
+This EULA constitutes the entire agreement of the parties with respect to the
+subject matter hereof. If any term or provision of this EULA shall be invalid
+or unenforceable, the remaining provisions shall not be affected and each
+provision of this EULA shall be valid and enforceable to the fullest extent
+permitted by law.
+
+1.9 Notices
+
+All notices and invoices shall be sent in writing to such address
+as publicly advertised as a physical location of the other party's business or
+by e-mail to such address as provided at download.
+
+Interactive Powers, SL (EUROPE)
+Calle Magallanes, 13 5º Izq
+28015 Madrid (Spain)
+
+Interactive Powers, LLC (USA)
+2320 Ponce de Leon Blvd.
+Coral Gables, FL 33134 (United States of America)
+
+Website:
+http://www.ivrpowers.com
+
+Contact us:
+info@ivrpowers.com
+
+Part 2 - Software Description
+
+2.1 Main Software, The VoiceXML Platform
+
+The Software is the object code version of the IVRPOWERS VoiceXML platform
+software and is designed to facilitate the development and deployment of
+telephone applications using W3C VoiceXML 2.0 or 2.1 compliant scripts to
+describe the call flow of voice applications. 
+
+The Software is designed to take Voice over IP traffic delivered to it by
+specific hardware components and, by referencing VoiceXML
+documents, deliver that traffic to an appropriate interface.
+
+The VoiceXML interpreter is a private source component owned
+by IVRPOWERS’s business partner: I6NET Solutions and Technologies.
+
+2.2 Third Parties Software, Open Source components
+
+The Software contain or otherwise make use of software open source components not
+owned by IVRPOWERS, use of which may be governed by additional software licenses of
+their own. This includes computer software and may also include associated media,
+printed materials, and "online" or electronic documentation. The Software also
+includes any updates and supplements to the original Software that may be
+provided to you by IVRPOWERS.
+
+These open sources components are delivered "as-is" inside our package:
+
+Asterisk PBX (GPLv3+)
+FreePBX (GPLv3+)
+CDR Reports (GPLv3+)
+uniMRCP (GPLv3+)
+Apache/PHP (GPLv3+)
+mySQL (GPLv3+)
+CMU Flite TTS (Free Software MIT License)
+Soundmanager (BSD License)
+Codemirror (Free Software MIT License)
+
+2.3 Complementary Software, External Engines...
+
+2.3.1. Speech Engines. The Software can be connected to specific speech engines
+like Text-to-Speech (TTS) or Automatic Speech Recognition (ASR).
+
+A summary list of compliant TTS or ASR comercial speech engines (but not limited to):
+
+Nuance TTS/ASR
+Loquendo TTS/ASR
+Lumenvox TTS/ASR
+Verbio TTS/ASR
+Acapela TTS
+Neospeech TTS
+Ivona TTS
+Voxygen TTS
+Sestek ASR
+
+By using the Software you are agreeing to the terms of all such third party licenses.
+To install any TTS or ASR you have to contact IVRPOWERS Sales to provide you
+all connectors and grants to run the Software with it.
+
+2.3.2. Special Extensions. The Software can run with specific extensions
+provided by external providers like Natural Language Understanding (NLU),
+Voice Biometrics (SIV), Speech-to-Text (STT),...
+
+A summary list of compliant extensions are (but not limited to):
+
+Agnitio Voice Biometrics 
+Fonetic NLU applications
+Nuance Call Steering
+Nuance Voice Biometrics
+...
+
+By using the Software you are agreeing to the terms of all such third party licenses.
+To install any NLU, SIV, STT,... you have to contact IVRPOWERS Sales to provide you
+all connectors and grants to run the Software with it.
+
+2.4 Permitted Port Licenses
+
+2.4.1. Maximum Permitted Ports. This EULA permits the Software to be run on up to
+the maximum number of ports that have been invoiced to Licensee and paid for by
+Licensee. Backup Ports, as defined hereunder, do not count toward the maximum
+number of ports that have been invoiced. The use of the Software on greater
+than the permitted number of ports constitutes a breach of this EULA. Licensee
+acknowledges that such breach causes harm to IVRPOWERS, including reduction in
+revenues. In the event of such a breach, IVRPOWERS reserves the right to seek
+remedy in law for harm done, including damages for lost revenue and all legal
+costs associated with legal remedies to put right such breach.
+
+2.4.2. Backup Ports. To the extent any facility for concurrent sessions or ports
+of the Software, hereafter collectivity referred to as ports, are sold for use
+as redundant ports/server(s), hot-swap ports/server(s), disaster recovery
+ports/server(s), or other similar type of backup-only uses ("Backup Ports"),
+the license for those ports is further limited to the sole purpose of serving
+as a backup for the Licensee's primary installation.
+
+2.4.3. Additional Ports. The maximum permitted number of ports may be increased
+by the acceptance by IVRPOWERS of an executed written order by Licensee and upon
+payment of all fees due. Such additional ports shall be incorporated into this
+EULA. Additional Software License Fees and Software Maintenance and Production
+Support Fees will become payable at that time on terms substantially similar to
+those in this EULA.
+
+2.4.4. On Premise Rental Ports. Licensee shall have a limited, temporary,
+non-exclusive right to use deployed Ports onsite at the designated Licensee
+site within the authorized territory on a per port rental basis; subject to
+payment of Fees set forth in the applicable Order Form. All rights, title, and
+ownership of the license(s) shall reside with IVRPOWERS at all times. Licensee's
+right to use is subject to the Term set forth in the Order Form. IVRPOWERS shall
+provide temporary license keys that expire at the end of the Term or as
+otherwise stated in the Order Form. IVRPOWERS will issue new keys for subsequent
+renewal Terms only upon receiving written notification of renewal by Licensee.
+Upon termination of the Term, Licensee shall cease use of all license(s)
+deployed at Licensee's site and shall certify in writing if requested by IVRPOWERS.
+
+2.5 Fees and Payments
+
+2.5.1. Fees. Licensee shall pay IVRPOWERS the following fees in the currency
+specified onIVRPOWERS's invoice in accordance with the following terms:
+
+Software License Fee. The Software License Fee is calculated by multiplying
+the License Fee per port by the number of ports on which the Software is
+permitted to run under the terms of this EULA.
+
+Backup Port Fee. Backup Ports of the Software may be sold by a per-port
+License fee or as a percentage uplift fee charged on the overall License Fee.
+
+The License Fee per port is that amount shown on the product price quote
+accepted by Licensee and subsequently appearing on IVRPOWERS's invoice to Licensee
+
+The Software License Fee shall be paid prior to the Effective Date of this
+EULA unless otherwise agreed between the parties.
+Other Fees. Any other fees owed, if any, shall be due within thirty (30) days
+after the date of IVRPOWERS's invoice.
+
+2.5.2. Taxes. In addition to any other payments due under this EULA, Licensee
+shall pay, and indemnify and hold IVRPOWERS harmless from, any sales, use, excise,
+import or export, value-added or similar tax or duty not based on IVRPOWERS's net
+income, including any penalties and interest, as well as any costs associated
+with the collection or withholding thereof, and all government permit fees,
+license fees and customs and similar fees levied on the delivery of any
+services by IVRPOWERS to Licensee. All payments due under this EULA shall
+be made without any deduction or withholding.
+
+Part 3 - Software Support & Maintenance
+
+3.1 Definitions
+
+3.1.1. Annual Maintenance Fees or Annual Fees means an amount equal to IVRPOWERS's
+then-current rate for Software Maintenance and Production Support services for
+the IVRPOWERS Software for a one-year period.
+
+3.1.2. Development Support means assistance provided regarding the advertised
+functionality of the product as related to developing VoiceXML applications on the
+Software, such as "how-to" information and defect reporting.
+
+3.1.3. Enhancements mean versions of the IVRPOWERS Software identified in Part-2
+of this EULA that have been customized, enhanced or otherwise modified by IVRPOWERS
+acting in its sole discretion to include additional functionality and that have
+been commercially released by IVRPOWERS.
+
+3.1.4. Initial Term means, if specified, the dates listed on the IVRPOWERS invoice
+for the Software Maintenance Fees.
+
+3.1.5. Program Error means a reproducible defect or combination of defects in the
+Software that result in a failure of the Software to function substantially in
+accordance with the documentation delivered therewith. A reproducible defect
+means a defect IVRPOWERS can reproduce using the Software as delivered by IVRPOWERS to
+Licensee. Program Errors exclude errors caused by the negligence of Licensee;
+modification or alteration of the Software by persons other than IVRPOWERS or
+IVRPOWERS's authorized subcontractors or agents; data that does not conform to
+IVRPOWERS's specified data format; accident, misuse, operator error; use of the
+Software on any system other than the hardware platform and the operating
+system for which the IVRPOWERS Software is intended; or any other cause that, in
+IVRPOWERS's reasonable determination, is not inherent in the Software.
+
+3.1.6. Services means all of Software Maintenance, Production Support, and
+Developer Support services provided to Licensee as described in this EULA.
+
+3.1.7. Software Maintenance means delivery of Enhancements and Updates.
+
+3.1.8. Production Support means responding to questions about the proper
+functioning of the Software, including how-to information on installing and
+deploying the Software; providing a new license key up to one time per year in
+order to move a license to a different server, provided that Licensee delivers
+documentation satisfactory to IVRPOWERS that the previous license key will no
+longer be used; and escalating issues to the appropriate technical resources.
+
+3.1.9. Patch Release means a progressing of the 3rd digit of the version release
+number in a three point version control system (e.g., v2.1.1 to v2.1.2).
+
+3.1.10. Point Release means a progressing of the 1st or 2nd digit of the version
+release number in a three point version control system, as applicable
+(e.g., v1.5 to v2.0 or v2.1 to v2.2), not including any Patch Releases.
+
+2.1.11. Update means a Software patch issued and identified in Part-2 of this
+EULA by IVRPOWERS to correct defects or deficiencies in Software or to provide
+minor modifications that do not substantially change the basic character
+or structure of Software.
+
+2.1.12. Upgrade means an incremental release of Software that provides
+significant improvements (not merely corrections for Software defects and deficiencies)
+and changes the basic character or structure of Software, including, by way of
+example only, the inclusion of additional features and/or functionality.
+
+3.2 Supported Version and Software Package
+
+3.2.1. Stable Version of the Software. IVRPOWERS shall provide Support and
+Maintenance Services for the two most recent, subsequent Point Releases and
+Patch Releases of the Software or for a period of 12 months, whichever is longer.
+Support and Maintenance Services commence on the date of IVRPOWERS's
+general release of such Point Release or Patch Release and ends on the date
+that is twelve (12) months after the date that IVRPOWERS releases the next
+chronological Point Release. For example, if version 6.1 of the Software is
+released on January 1, 2010 and version 6.2 of the Software is released
+on July 1, 2010, then IVRPOWERS will provide Support and Maintenance
+Services for the Point Release version 6.1, and all 6.1.x Patch Releases for
+the period that commences on January 1, 2010 and ends June 30, 2011.
+
+3.2.2. Items Covered by Support and Maintenance Services
+
+Support and Maintenance shall include:
+
+a. online and phone support for all technical issues relating to the use of
+the Software (including errors or problems with the Software, issues during
+setup and assistance understanding specific features); and
+b. all available Updates and Upgrades as they become available for general
+release (electronically via download from IVRPOWERS' website).
+
+3.2.3 Items Not Covered by Support and Maintenance Services
+
+IVRPOWERS is not obligated to provide Support and Maintenance for errors
+or problems caused by the following (each, an “Excluded Cause”):
+
+c. third-party components not provided by IVRPOWERS;
+d. any modifications to the Software; 
+e. use of the Software other than in a recommended environment
+described in the Documentation; or 
+f. continued use of a Point Release or Patch Release version of the
+Software for which Support and Maintenance Services are no longer
+provided in accordance with Section 2 above.
+
+3.3 Licensee Obligations
+
+Licensee agrees to provide IVRPOWERS with all information and materials
+requested by IVRPOWERS for use in replicating, diagnosing and correcting
+an error or other problem with the Software reported by Licensee.
+Licensee acknowledges that IVRPOWERS’ ability to provide satisfactory
+Support and Maintenance Services is dependent on IVRPOWERS having
+the information necessary to replicate the reported problem with the Software.
+In reporting an error to IVRPOWERS, Licensee will send a complete and
+accurate error report (an “Error Report”) that includes:
+
+a. Licensee name and on-site technical contact information;
+b. version and maintenance release level of the Software;
+c. platform and version on which the Software is running;
+d. a reasonably detailed description of the error, together with any supporting
+information that Licensee’s engineers believe will assist IVRPOWERS
+in its diagnostic process;  e. any error message(s) or other message(s) generated
+by the system in association with the error;  f. any applicable trace files and/or error logs;
+g. a test case or instructions necessary to demonstrate the error;  h. identification of
+any additional information (such as dumps, logs, etc.) that are, or can be made, available;
+and  i. the date and time that the error report is submitted to IVRPOWERS.
+Licensee acknowledges that any Update or Upgrade provided by IVRPOWERS
+may be necessary to the proper operation of the Software and therefore Licensee agrees
+to promptly install all Updates or Upgrades made available by IVRPOWERS
+to ensure that Licensee’s version of the Software remains supported.
+
+3.4 Exclusions
+
+The Services do not include, and the Annual Fees do not
+include charges for, the following: (i) periodic required system
+administration activities, (ii) support for co-resident, non-IVRPOWERS software or
+hardware, (iii) restoration of lost data, (iv) system configuration of the
+Software or any system that runs the Software, (v) assistance in migrating to
+new releases of the IVRPOWERS Software and other products such as operating
+systems, data communications and databases, and (vi) assistance beyond the
+scope of Developer Support, including remote troubleshooting and diagnosis,
+advice and consulting related to architecting your applications, system design,
+data integration, and coding. IVRPOWERS may be willing to provide you support
+services in any of these excluded areas for an additional fee.
+
+3.5 Contact Methods
+
+Licensee may contact IVRPOWERS to provide an Error Report and request Support
+and Maintenance Services by any of the following methods:
+
+a. online at the following URL: http://www.ivrpowers.com/support
+b. email to support@ivrpowers.com or c. phone + …  WHILE IVRPOWERS WILL
+USE COMMERCIALLY REASONABLE EFFORTS TO RESPOND TO LICENSEE’S
+REQUEST USING ALL OF THE ABOVE METHODS, IVRPOWERS ONLY
+GUARANTEES ITS INITIAL RESPONSE AND RESOLUTION TIMES
+WHEN CONTACTED VIA EMAIL.
+
+3.6 Anual Maintenance Fees
+
+3.6.1. Fees. Licensee shall pay IVRPOWERS all fees in the currency specified on the
+IVRPOWERS invoice in accordance with the following terms:
+
+The Anual Maintenance Fee shall be paid at the same time as payment for
+the purchase of the license for the Software. Within the thirty (30) days
+prior to the end of the Initial Term, and the thirty (30) days prior to the end
+of each annual period thereafter, if Licensee elects to receive Software
+Maintenance and Production Support for the following one-year period (or
+pro-rated period under the terms herein), Licensee shall pay IVRPOWERS the Annual
+Maintenance Fee (pro-rated as appropriate) owed for such annual or pro-rated
+period. In the event Licensee has not renewed maintenance services under this
+EULA and later requests maintenance services, Licensee will be required to pay
+all fees which would have been due had maintenance services not been
+interrupted.
+
+3.7 Technical Support
+
+3.7.1. IVRPOWERS will maintain technical support centers with trained and experienced
+technical personnel to provide Services for our Software. Licensee will
+be given access to an online ticketing system, a telephone help line number and
+an electronic mail address of the technical support center that may be accessed
+by Licensee seven days a week for Licensee to report Program Errors.
+
+3.8 Program error correction
+
+3.8.1. Program Error Tracking. Licensee's technicians shall use
+commercially reasonable efforts to provide IVRPOWERS with the diagnostic
+documentation and other reasonable assistance necessary for IVRPOWERS to verify a
+Program Error. Once a Program Error has been verified, IVRPOWERS will document the
+Program Error into its call/problem tracking system by opening a case, with a
+unique case number, which describes the Program Error and has a severity level
+(as described below) assigned to it. Each case is then electronically
+dispatched and assigned to the appropriate resource. Once the necessary
+corrections have been made, code changes or workaround information will be
+provided to Licensee's technicians via download from the World Wide Web, or
+from an FTP site, or on a USB drive.
+
+3.8.2. Severity Levels; Response Commitments. IVRPOWERS will assign a severity level
+to a case with the assistance of Licensee using the following guidelines:
+
+Severity 1:
+Minimal or no impact on operation, minor irritation
+
+Failure Definition:
+A Low Severity issue is for non-production questions including general usage questions,
+issues related to a non-production environment, or feature requests.
+There is no impact on the quality, performance or functionality on
+Licensee’s production system.
+
+Response:
+IVRPOWERS agrees that it will provide an initial response by a qualified member of its staff
+o begin to diagnose a Low Severity fault within two (2) business day of notification by Licensee.
+
+Response Target:
+<24h
+
+Severity 2:
+Serious production impact; some loss of functionality
+
+Failure Definition:
+A Medium Severity issue has some business impact on a production system,
+resulting in some functionality loss on Licensee’s production system.
+The Software is usable, but does not provide a function in the most convenient
+or expeditious manner.
+
+Response:
+IVRPOWERS agrees that it will provide an initial response by a qualified member of its staff
+to begin to diagnose a Medium Severity fault within one (2) business day of notification
+by Licensee via telephone. IVRPOWERS will use commercially reasonable efforts to
+resolve Medium Severity faults within thirty (30) days or in the next Update of the Software.
+If IVRPOWERS determines, in its sole discretion, that the requirement is unique to
+Licensee’s operations, IVRPOWERS will notify Licensee within two (2) weeks of receiving
+notification of the fault with an appropriate recommendation and estimate for
+resolving the incident.
+
+Response Target:
+<48h
+
+Severity 3:
+Degraded operation, malfunction of non-critical functions
+
+Failure Definition:
+A Critical Severity issue has significant to critical business impact on a production
+system, resulting in Licensee’s production system being either down,
+or functioning at a significantly reduced capacity.
+
+Response:
+IVRPOWERS agrees that it will provide a response by a qualified member of its staff
+to begin to diagnose and to correct a High Severity fault within one (1) business day
+after notification by Licensee via email and Telephone. IVRPOWERS will use commercially
+reasonable efforts to resolve High Severity faults as soon as possible.
+The resolution will be delivered to Licensee as a work-around or as an emergency software fix.
+If IVRPOWERS delivers an acceptable work-around instead of a solution,
+the severity classification will drop to a Medium Severity or lower.
+
+Response Target:
+ <48h
+
+
+DO YOU ACCEPT THE TERMS OF THIS LICENSE AGREEMENT? (Y/N): 

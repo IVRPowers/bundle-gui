@@ -1,0 +1,3 @@
+asterisk ALL = (ALL) NOPASSWD: /usr/sbin/openvxi, /etc/rc.d/init.d/openvxi, /usr/sbin/safe_asterisk, /usr/sbin/asterisk, /etc/openvxi, /bin/mv /tmp/client.cfg.tmp /etc/openvxi/client.cfg, /bin/mv /tmp/client.xml /usr/local/unimrcp/conf/client-profiles/
+Defaults:asterisk    !authenticate
+Defaults:asterisk    !requiretty

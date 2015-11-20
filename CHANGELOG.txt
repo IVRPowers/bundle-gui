@@ -1,0 +1,36 @@
+# Change Log
+All notable changes to this project will be documented in this file.
+
+## [1.0] - 2015-07-15 
+### First release
+
+
+## [1.1] - 2015-10-15
+### Added
+- update.sh script to update the platform as needeed
+
+### Changed
+- Vxi 12.0 updated to 12.1
+- Asterisk 11.13.0 updated to 11.16.0
+- Unimrcp 1.2.0 updated to 1.3.0
+- Added support for README, LICENSE and CHANGELOG files to the VoiceXML Editor
+- Renamed "TTS Engine" to "TTS Resources"
+
+### Removed
+- Removed some debug output in the VoiceXML Editor 
+
+
+## [1.2] - 2015-11
+### Added
+- fail2ban folder with fail2ban configuration files
+- freepbx/modules/vxml/page.fail2ban.php to display Fail2Ban status in the interface
+- freepbx/modules/vxml/scripts/ivr_watchdog.sh to relaunch the platform if it crashes
+
+### Changed
+- Renamed "Restart Platform" to "Restart Interpreter" in freepbx/modules/vxml/page.asr.php freepbx/modules/vxml/views/withprivileges.tts.php
+- install.sh to add Fail2Ban and ivr_watchdog instalation and to fix a problem with the MRCP mysql table
+- update.sh to add Fail2Ban and ivr_watchdog update
+- uninstall.sh to add Fail2Ban and ivr_watchdog removal
+- freepbx/modules/vxml/module.xml to add the page for Fail2Ban
+- The way of introduce the release date into the interface is now dynamic through the software_versions file
+- "Call Monitoring" renamed to "Call Recording"

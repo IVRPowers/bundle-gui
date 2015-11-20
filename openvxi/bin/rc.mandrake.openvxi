@@ -1,0 +1,132 @@
+#! /bin/sh
+# $id$
+#
+# Start/stop/restart the VoiceXML Browser
+#
+
+TTY=9			# TTY (if you want one) for OpenVXI to run on
+NOTIFY=root		# Who to notify about crashes
+DUMPDROP=/tmp
+HOSTNAME=`hostname`
+if [ 0`readlink $0` = "0" ]; then
+	CONFIGFILE=/etc/sysconfig/`basename $0`
+else
+	CONFIG0=`readlink $0`
+	CONFIGFILE=/etc/sysconfig/`basename $CONFIG0`
+fi
+
+# Put overrides in /etc/sysconfig/openvxi
+[ -f $CONFIGFILE ] && . $CONFIGFILE
+
+# Source function library.
+. /etc/rc.d/init.d/functions
+
+#
+# Don't fork when running "safely"
+#
+OPENVXIARGS="-config /etc/openvxi/client.cfg -mute"
+if [ "$TTY" != "" ]; then
+	if [ -c /dev/tty${TTY} ]; then
+		TTY=tty${TTY}
+	elif [ -c /dev/vc/${TTY} ]; then
+		TTY=vc/${TTY}
+	else
+		echo "Cannot find your TTY (${TTY})" >&2
+		exit 1
+	fi
+fi
+if [ ! -w ${DUMPDROP} ]; then	
+	echo "Cannot write to ${DUMPDROP}" >&2
+	exit 1
+fi
+
+#
+# Let OpenVXI dump core
+#
+ulimit -c unlimited
+
+#launch_openvxi()
+#{
+#}
+
+SIGMSG=("None", "Hangup" "Interrupt" "Quit" "Illegal instruction" "Trace trap" "IOT Trap" "Bus Error" "Floating-point exception" "Killed" "User-defined signal 1" "Segmentation violation" "User-defined signal 2" "Broken pipe" "Alarm clock" "Termination" "Stack fault")
+
+run_openvxi()
+{
+	while :; do 
+
+		if [ "$TTY" != "" ]; then
+			cd /tmp
+			stty sane < /dev/${TTY}
+			openvxi ${OPENVXIARGS} > /dev/${TTY} 2>&1 < /dev/${TTY}
+		else
+			cd /tmp
+			openvxi ${OPENVXIARGS}
+		fi
+		EXITSTATUS=$?
+		echo "OpenVXI ended with exit status $EXITSTATUS"
+		if [ "$EXITSTATUS" = "0" ]; then
+			# Properly shutdown....
+			echo "OpenVXI shutdown normally."
+			exit 0
+		elif [ $EXITSTATUS -gt 128 ]; then
+			EXITSIGNAL=$(($EXITSTATUS - 128))
+			EXITMSG=${SIGMSG[$EXITSIGNAL]}
+			echo "OpenVXI exited on signal $EXITSIGNAL - $EXITMSG."
+			if [ "$NOTIFY" != "" ]; then
+				echo "OpenVXI exited on signal $EXITSIGNAL - $EXITMSG.  Might want to take a peek." | \
+				mail -s "OpenVXI Died ($HOSTNAME)" $NOTIFY
+			fi
+			if [ -f /tmp/core ]; then
+				mv /tmp/core ${DUMPDROP}/core.`hostname`-`date -Iseconds` &
+			fi
+		else
+			echo "OpenVXI died with code $EXITSTATUS.  Aborting."
+			if [ -f /tmp/core ]; then
+				mv /tmp/core ${DUMPDROP}/core.`hostname`-`date -Iseconds` &
+			fi
+			exit 0
+		fi
+		echo "Automatically restarting OpenVXI."
+	done
+}
+
+case "$1" in
+	start)
+		gprintf "Starting openvxi: "
+		run_openvxi >/dev/null 2>&1 &
+		sleep 2	# Give it time to die
+		succeeded=`pidof openvxi|awk '{print NF}'`
+		if [ $succeeded = "0" ]; then
+			failure
+		else
+			success
+		fi
+		echo
+		;;
+	stop)
+		gprintf "Stopping openvxi: "
+		$CONSOLE -mode 0 -send 'exit' >/dev/null 2>&1
+		success
+		echo
+		;;
+	restart)
+		$0 stop
+		usleep 100000
+		$0 start
+		;;
+	status)
+		succeeded=`pidof openvxi|awk '{print NF}'`
+		if [ $succeeded = "0" ]; then
+			echo "OpenVXI is not running"
+		else
+			echo "OpenVXI is currently running with $succeeded threads"
+		fi
+		;;
+	*)
+		gprintf "*** Usage: $0 {start|stop|status}\n"
+		exit 1
+esac
+
+exit 0
+

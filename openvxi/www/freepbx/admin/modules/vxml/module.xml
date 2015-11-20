@@ -1,0 +1,33 @@
+<module>
+	<rawname>vxml</rawname>
+	<name>VoiceXML</name>
+	<version>1.0.0.0</version>
+	<publisher>i6net/Ulex</publisher>
+	<license>Commercial</license>
+	<licenselink>http://www.i6net.com</licenselink>
+	<repo>commercial</repo>
+	<category>Applications</category>
+	<candisable>yes</candisable>
+	<canuninstall>yes</canuninstall>
+	<changelog>
+		*1.0.0.0* Original Release (beta)
+	</changelog>
+	<description>
+		Provides configuration for app_vxml
+	</description>
+	<attention>
+		This will install a module to configure the app_vxml module. You can uninstall it whenever you want.
+	</attention>
+	<menuitems>
+				<VXML category="Applications">VoiceXML</VXML>
+                <VXMLSettings category="Settings">VoiceXML Settings</VXMLSettings>
+                <VXMLLogFiles category="Reports">VoiceXML Logfiles</VXMLLogFiles>
+                <VXMLStatistics category="Reports">VoiceXML Statistics</VXMLStatistics>
+	</menuitems>
+	<popovers>
+		<vxml>
+			<display>vxml</display>
+		</vxml>
+  	</popovers>
+</module>
+
