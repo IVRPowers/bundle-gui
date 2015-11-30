@@ -31,7 +31,7 @@ enabled  = true
 filter   = asterisk
 action   = iptables-allports[name=asterisk, port=sip protocol=all]
 logpath  = /var/log/asterisk/full
-maxretry = 40
+maxretry = 15
 
 #Apache Protection
 [apache-badbots]
