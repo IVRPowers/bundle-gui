@@ -20,6 +20,11 @@ if(isset($_POST['need_csv'])) {
 	ob_clean();
 }
 
+include_once 'userAssets/userAssets.php';
+
+if (strpos($GLOBALS['backgroundColor'],'#fff') !== false || strpos($GLOBALS['backgroundColor'],'#FFF') !== false || $GLOBALS['backgroundColor'] == "white" || $GLOBALS['backgroundColor'] == "WHITE") $backgroundcolor = $GLOBALS['colorLoginButton'];
+else $backgroundcolor = $GLOBALS['backgroundColor'];
+
 global $amp_conf, $db;
 // Are a crypt password specified? If not, use the supplied.
 $REC_CRYPT_PASSWORD = (isset($amp_conf['AMPPLAYKEY']) && trim($amp_conf['AMPPLAYKEY']) != "")?trim($amp_conf['AMPPLAYKEY']):'TheWindCriesMary';
@@ -798,11 +803,14 @@ if ( $tot_calls_raw ) {
 
 	$i = $h_step - 1;
 	$id = -1;  // tracker for recording index
+	$pageNumber = 0;
 	foreach($resultscdr as $row) {
 		++$id;  // Start at table row 1
 		++$i;
 		if ($i == $h_step) {
 		?>
+		</table>
+		<table id="cdr_table_<?php echo ++$pageNumber?>" class="cdr <?php echo ($pageNumber > 1)? "hidden_page" : "";?>">
 			<tr>
 			<th class="record_col"><?php echo _("Call Date")?></th>
 			<th class="record_col"><?php echo _("Recording")?></th>
@@ -929,7 +937,172 @@ if ( $tot_calls_raw ) {
 	}
 	echo "</table>";
 }
+
+
+
 ?>
+
+<style>
+.hidden_page {
+	display: none;
+}
+
+.cdrPage.noMore {
+	display: none;
+}
+
+.cdrPage.clip {
+	display: none;
+}
+
+.cdrPagination {
+	display: table;
+	margin: 20px auto;
+	padding: 0;
+}
+
+.cdrPagination li {
+	display: inline-block;
+	border: 1px solid <?php echo $backgroundcolor?>;
+	background-color: <?php echo $backgroundcolor?>;
+	color: <?php echo $GLOBALS['fontColorLoginButton']?>;
+	border-radius: 5px;
+	margin: 3px;
+	padding: 5px;
+	min-width: 25px;
+	text-align: center;
+	font-size: 11px;
+	font-weight: bold;
+}
+
+.cdrPagination .cdrPage:hover {
+	cursor: pointer;
+	border-color: #424242;
+	background-color: #424242;
+	color: white;	
+}
+
+.cdrPagination .active {	
+	border-color: #424242;
+	background-color: #424242;
+	color: white;
+}
+
+.cdrPagination .active:hover {	
+	border-color: <?php echo $backgroundcolor?>;
+	background-color: <?php echo $backgroundcolor?>;
+	color: <?php echo $GLOBALS['fontColorLoginButton']?>;
+}
+</style>
+<?php if ($tot_calls_raw) {
+?>
+
+<ul class="cdrPagination" id="cdrPages">
+	<li class="total">Page <span id="currentCDRPage">1</span> of <?php echo $pageNumber?></li>
+	<li class="cdrPage noMore" page="first">First</li>
+	<li class="cdrPage noMore" page="previous">Prev</li>
+	<?php for ($i = 1; $i <= $pageNumber; $i++) {?>
+	<li class="cdrPage<?php echo (($i == 1) ? ' active' : '');?><?php echo (($i > 11) ? ' clip' : '')?>" page="<?php echo $i?>"><?php echo $i?></li>
+	<?php }?>
+    <li class="cdrPage" page="next">Next</li>
+    <li class="cdrPage" page="last">Last</li>
+</ul>
+<?php }?>
+
+<script type="text/javascript">
+document.getElementById("cdrPages").onclick = function(event) {
+	if (event.target.matches('.cdrPage')) {
+		var dstPage = event.target.getAttribute("page");
+		var current = document.getElementsByClassName("cdrPage active")[0];
+		var currentPage = parseInt(current.getAttribute("page"));
+		var totalPages = parseInt(document.getElementsByClassName("cdrPage").length) - 4;
+		if (dstPage == "previous") {
+			dstPage = currentPage - 1;
+		} else if (dstPage == "next") {
+			dstPage = currentPage + 1;
+		} else if(dstPage == "first") {
+ 			dstPage = 1;
+		} else if(dstPage == "last") {
+ 			dstPage = totalPages;
+		} else {
+			if (currentPage == dstPage) return;	
+		}
+		dstPage = parseInt(dstPage);
+		document.getElementById("cdr_table_" + currentPage).className = "cdr hidden_page";
+		document.getElementById("cdr_table_" + dstPage).className = "cdr";
+		document.getElementById("currentCDRPage").innerHTML = dstPage;
+		if (dstPage == 1) {
+			document.getElementById("cdrPages").querySelector('[page="previous"]').className = "cdrPage noMore";
+			document.getElementById("cdrPages").querySelector('[page="first"]').className = "cdrPage noMore";
+			document.getElementById("cdrPages").querySelector('[page="next"]').className = "cdrPage";
+			document.getElementById("cdrPages").querySelector('[page="last"]').className = "cdrPage";
+		} else if (dstPage > 1 && dstPage < totalPages) {
+			document.getElementById("cdrPages").querySelector('[page="previous"]').className = "cdrPage";
+			document.getElementById("cdrPages").querySelector('[page="first"]').className = "cdrPage";
+			document.getElementById("cdrPages").querySelector('[page="next"]').className = "cdrPage";
+			document.getElementById("cdrPages").querySelector('[page="last"]').className = "cdrPage";
+		} else if (dstPage == totalPages) {
+			document.getElementById("cdrPages").querySelector('[page="previous"]').className = "cdrPage";
+			document.getElementById("cdrPages").querySelector('[page="first"]').className = "cdrPage";
+			document.getElementById("cdrPages").querySelector('[page="next"]').className = "cdrPage noMore";
+			document.getElementById("cdrPages").querySelector('[page="last"]').className = "cdrPage noMore";
+		}
+		if (totalPages > 11) {
+			for (var i = 1; i <= totalPages; i++) {
+				document.getElementById("cdrPages").querySelector('[page="' + i + '"]').className = "cdrPage clip";
+			}
+			if (dstPage <= 5) {
+				for (var i = 1; i <= 11; i++) {
+					document.getElementById("cdrPages").querySelector('[page="' + i + '"]').className = "cdrPage";
+				}
+			} else if (dstPage >= (totalPages - 5)) {
+				for (var i = (totalPages - 10); i <= totalPages; i++) {
+					document.getElementById("cdrPages").querySelector('[page="' + i + '"]').className = "cdrPage";
+				}
+			} else {
+				for (var i = (dstPage - 5); i <= (dstPage + 5); i++) {
+					document.getElementById("cdrPages").querySelector('[page="' + i + '"]').className = "cdrPage";
+				}
+			}
+			/*
+			console.log(currentPage + " > 5 && " + currentPage + " < (" + totalPages + " - 5)");
+			if (currentPage <= 5) {
+					for (var i = 1; i <= 11; i++) {
+						document.getElementById("cdrPages").querySelector('[page="' + i + '"]').className = "cdrPage clip";
+					}	
+				if (!dstPage <= 5) {
+				}					
+			} else if (currentPage >= (totalPages - 5)) {
+					for (var i = (totalPages - 10); i <= totalPages; i++) {
+						document.getElementById("cdrPages").querySelector('[page="' + i + '"]').className = "cdrPage clip";
+					}
+				if (!dstPage <= totalPages - 5) {	
+				}	
+			} else {
+				for (var i = (currentPage - 5 < 1 ? 1 : (currentPage - 5)); i <= (currentPage + 5 > totalPages ? totalPages : (currentPage + 5)); i++) {
+					document.getElementById("cdrPages").querySelector('[page="' + i + '"]').className = "cdrPage clip";
+				}
+			}
+			if (dstPage <= 5) {
+				for (var i = 1; i <= 11; i++) {
+					document.getElementById("cdrPages").querySelector('[page="' + i + '"]').className = "cdrPage";
+				}
+			} else if (dstPage >= (totalPages - 5)) {
+				for (var i = (totalPages - 10); i <= totalPages; i++) {
+					document.getElementById("cdrPages").querySelector('[page="' + i + '"]').className = "cdrPage";
+				}
+			} else {
+				for (var i = (dstPage - 5 < 1 ? 1 : (dstPage - 5)); i <= (dstPage + 5 > totalPages ? totalPages : (dstPage + 5)); i++) {
+					document.getElementById("cdrPages").querySelector('[page="' + i + '"]').className = "cdrPage";
+				}
+			}*/
+		} else {
+			current.className = "cdrPage";
+		}
+		document.getElementById("cdrPages").querySelector('[page="' + dstPage + '"]').className = "cdrPage active";	
+	}
+};
+</script>
 
 
 <script type="text/javascript">
