@@ -561,6 +561,12 @@ function fail2ban_installation() {
 	install -m $perm_def $src/fail2ban/filter.d/freepbx-web.local $dst/etc/fail2ban/filter.d/freepbx-web.local
 	install -m $perm_def $src/fail2ban/jail.d/ivr.local $dst/etc/fail2ban/jail.d/ivr.local
 	
+	echo "Initialization of the freepbx_security.log if not exists"
+	if [ ! -f $dst/var/log/asterisk/freepbx_security.log ]; then
+		touch $dst/var/log/asterisk/freepbx_security.log
+		(amportal chown) >/dev/null 2>&1
+	fi
+	
 	echo "Creating Fail2Ban log file..."
 	touch $dst/var/log/fail2ban
 	chown -f asterisk.asterisk $dst/var/log/fail2ban 
