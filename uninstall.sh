@@ -139,7 +139,7 @@ function remove_freepbx() {
 	
 	echo "--- FreePBX $FREEPBX Remove ---"
 	
-	echo "Deleting Wbe Interface..."
+	echo "Deleting Web Interface..."
 	rm -rf --interactive=never ${dst}${webdir}/freepbx
 	
 	echo "Restoring apache configuration..."
