@@ -220,11 +220,14 @@ function asterisk_installation() {
 
 	echo "Installing modules..."
 	install -m $perm_files $src/asterisk/modules/*.so $dst/usr/lib/asterisk/modules/
+	if [ "$flavour" == "presence" ]; then
+	    install -m $perm_files $src/extras/presence/modules/app_prsdecodeuuinfo.so.asterisk_v${ASTERISK:1} $dst/usr/lib/asterisk/modules/app_prsdecodeuuinfo.so
+	fi
 
 	echo "Installing libraries..."
 	install -m $perm_files $src/asterisk/lib/* $dst/usr/lib/
 	mv $dst/usr/lib/libasteriskssl.so.1 $dst/usr/lib64/
-	
+
 	#It is very unlikely that this would happend but just in case we check it
 	which -a asterisk 2>&1 >/dev/null
 	if [ ! "$?" = "0" ];then
@@ -235,38 +238,38 @@ function asterisk_installation() {
 
 	echo "--- Asterisk IP/PABX $ASTERISK installation has finished ---"
 	return
-							
+
 }
 
 #Installation of OpenVXI
 function openvxi_installation() {
-		
+
 	echo "--- VXI $OPENVXI Installation ---"
-	
+
 	modulesdir=$dst/usr/lib/asterisk/modules
-	soundsdir=$dst/var/lib/asterisk/sounds		
-	
+	soundsdir=$dst/var/lib/asterisk/sounds
+
 	echo "Creating directories..."
 	mkdir -p $dst/usr/lib/openvxi
 	mkdir -p $dst/etc/openvxi
 	mkdir -p $dst/usr/bin
 	mkdir -p $dst/usr/sbin
-	mkdir -p $dst/var/lib/openvxi/grammars	
+	mkdir -p $dst/var/lib/openvxi/grammars
 	mkdir -p $dst/tmp/logContent/
 	mkdir -p $dst/tmp/cacheContent/
-	
-	
+
+
 	echo "Installing binaries..."
 	install -m $perm_dir $src/openvxi/bin/openvxi $dst/usr/sbin/
 	install -m $perm_dir $src/openvxi/bin/adminvxi $dst/usr/sbin/
 	install -m $perm_dir $src/openvxi/bin/safe_openvxi $dst/usr/sbin/
 	#install -m $perm_dir $src/openvxi/bin/rc.redhat.openvxi $dst/etc/rc.d/init.d/openvxi #V11.1 or less
-	install -m $perm_dir $src/openvxi/bin/rc.freepbx.openvxi $dst/etc/rc.d/init.d/openvxi #V12.0 or greater	
-	
+	install -m $perm_dir $src/openvxi/bin/rc.freepbx.openvxi $dst/etc/rc.d/init.d/openvxi #V12.0 or greater
+
 	echo "Installing configuration files..."
 	#We need to put this file, even tho is empty, otherwise we will not be able of launchig Asterisk due to segmentation fault
 	echo "" > $dst/etc/asterisk/vxml_custom.conf
-	
+
 	install -m $perm_files $src/openvxi/etc/defaults.xml $dst/etc/openvxi/defaults.xml.sample
 	if test ! -f $dst/etc/openvxi/client.cfg ; then
 		install -m $perm_files $src/openvxi/etc/VBclient.cfg $dst/etc/openvxi/client.cfg
@@ -278,9 +281,12 @@ function openvxi_installation() {
 	else
 		install -m $perm_files $src/openvxi/etc/vxml.conf.sample $dst/etc/asterisk/
 	fi
-		
+
 	echo "Installing libraries..."
 	install -m $perm_files $src/openvxi/lib/* $dst/usr/lib/openvxi/
+	if [ "$flavour" == "presence" ]; then
+	    install -m $perm_files $src/extras/presence/lib/* $dst/usr/lib/openvxi/
+	fi
 
 	astflavour=$(echo ${ASTERISK:1} | cut -d'.' -f 1)
 	echo "Installing app openvxi for asterisk $astflavour..."
@@ -560,6 +566,12 @@ function fail2ban_installation() {
 	install -m $perm_def $src/fail2ban/action.d/iptables-common.local $dst/etc/fail2ban/action.d/iptables-common.local
 	install -m $perm_def $src/fail2ban/filter.d/freepbx-web.local $dst/etc/fail2ban/filter.d/freepbx-web.local
 	install -m $perm_def $src/fail2ban/jail.d/ivr.local $dst/etc/fail2ban/jail.d/ivr.local
+	
+	echo "Initialization of the freepbx_security.log if not exists"
+	if [ ! -f $dst/var/log/asterisk/freepbx_security.log ]; then
+		touch $dst/var/log/asterisk/freepbx_security.log
+		(amportal chown) >/dev/null 2>&1
+	fi
 	
 	echo "Creating Fail2Ban log file..."
 	touch $dst/var/log/fail2ban
