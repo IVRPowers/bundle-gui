@@ -375,6 +375,15 @@ function update_fail2ban() {
 				
 }
 
+#Function to update the extras
+function update_extras() {
+    if [ "$flavour" == "presence" ]; then
+        install -m $perm_files $src/extras/presence/modules/app_prsdecodeuuinfo.so.asterisk_v${newASTERISK:1} $dst/usr/lib/asterisk/modules/app_prsdecodeuuinfo.so
+	    install -m $perm_files $src/extras/presence/lib/* $dst/usr/lib/openvxi/
+	    restart=1
+	fi
+}
+
 if [[ "$newASTERISK" > "$oldASTERISK" ]]; then
 	update_asterisk
 fi
@@ -393,6 +402,7 @@ fi
 if [[ "$newFAIL2BAN" > "$oldFAIL2BAN" ]]; then
 	update_fail2ban
 fi
+update_extras
 if [ "$restart" -eq "1" ]; then
 	echo "--- Restarting components ---"
 	restart_software
