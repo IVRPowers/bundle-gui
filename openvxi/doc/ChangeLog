@@ -1,6 +1,17 @@
-12.1 (09/09/2015)
+13.0 (31/05/2016)
 ------------------
 
+mod: Correction of a memoryleak with dynamic grammars.
+mod: Correction coredump with long speech responses (NLU).
+
+
+12.1 (11/12/2015)
+------------------
+
+mod: Correction in the number and accurency DMTF builtin grammars.
+mod: Correction to not inspect the tags with DTMF grammars.
+add: Support sln format (PCM 16bit 8kHz Raw).
+add: Add a parameter to use CALLERID with originate.
 mod: Correction to parse the cookies parameter 'secure' and 'httponly'.
 mod: Correction to allow VoiceXML execution after throwing the event disconnect.
 add: mrcpsynthparams for accounts too.

@@ -2,17 +2,14 @@
 if (!defined('FREEPBX_IS_AUTH')) { die('No direct script access allowed'); };
 ?>
 <style>
-#current {
-	text-decoration: underline;
-}
-ul#tabnav {
+ul.tabnav {
     font: bold 11px verdana, arial, sans-serif;
     list-style-type: none;
     padding-bottom: 24px;
     border-bottom: 1px solid #808080;
     margin: 0;
 }
-ul#tabnav li {
+ul.tabnav li {
     float: left;
     height: 21px;
     background-color: #dbf1ff;
@@ -20,21 +17,21 @@ ul#tabnav li {
     border: 1px solid #808080;
     height: 23px;
 }
-ul#tabnav li.active {
+ul.tabnav li.active {
     border-bottom: 1px solid #fff;
     background-color: #fff;
 }
-ul#tabnav li.active a {
+ul.tabnav li.active a {
     color: #000;
 }
-#tabnav a {
+.tabnav a {
     float: left;
     display: block;
     color: black;
     text-decoration: none;
     padding: 4px;
 }
-#tabnav a:hover {
+.tabnav a:hover {
     background: #fff;
 }
 </style>
@@ -44,18 +41,12 @@ ul#tabnav li.active a {
 		<tr>
 			<td>
 				<br>
-				<ul id="tabnav">
+				<ul id="tabnav" class="tabnav">
 	     			<li <?php echo (!isset($_GET['view']) || $_GET['view'] == "cdrsearch") ? 'class="active"' : ''?>><a href="config.php?display=cdr&view=cdrsearch">CDR Search</a></li>
 	     			<li <?php echo ($_GET['view'] == "callscompare") ? 'class="active"' : ''?>><a href="config.php?display=cdr&view=callscompare">Calls Compare</a></li>
 	     			<li <?php echo ($_GET['view'] == "monthlytraffic") ? 'class="active"' : ''?>><a href="config.php?display=cdr&view=monthlytraffic">Monthly Traffic</a></li>
 	     			<li <?php echo ($_GET['view'] == "dailyload") ? 'class="active"' : ''?>><a href="config.php?display=cdr&view=dailyload">Daily Load</a></li>
 				</ul>
-				<?php /*?>
-				<h5>Categories: &nbsp;&nbsp;&nbsp;&nbsp;<a href="config.php?display=cdr&view=cdrsearch"><span <?php echo (!isset($_GET['view']) || $_GET['view'] == "cdrsearch") ? 'id="current"' : ''?>>CDR Search</span></a>&nbsp;&nbsp;&nbsp;&nbsp;|
-			                    &nbsp;&nbsp;&nbsp;&nbsp;<a href="config.php?display=cdr&view=callscompare"><span <?php echo ($_GET['view'] == "callscompare") ? 'id="current"' : ''?>>Calls Compare</span></a>&nbsp;&nbsp;&nbsp;&nbsp;|
-			                    &nbsp;&nbsp;&nbsp;&nbsp;<a href="config.php?display=cdr&view=monthlytraffic"><span <?php echo ($_GET['view'] == "monthlytraffic") ? 'id="current"' : ''?>>Monthly Traffic</span></a>&nbsp;&nbsp;&nbsp;&nbsp;|
-			                    &nbsp;&nbsp;&nbsp;&nbsp;<a href="config.php?display=cdr&view=dailyload"><span <?php echo ($_GET['view'] == "dailyload") ? 'id="current"' : ''?>>Daily Load</span></a>
-			    </h5>*/?>
 			</td>		
 		</tr>
 	</table><br>

@@ -17,6 +17,12 @@ if ($dir != "$WEBDIR/vxml") {
 	$formurlRenameDir = "&dir=".dirname($_GET['dir']);
 }
 
+$realDir = realpath($dir);
+$minPath = "$WEBDIR/vxml";
+if (strpos($realDir, $minPath) === false) {
+	$dir = $minPath;
+}
+
 if (isset($_POST['oldname']) && isset($_POST['newname'])) {
 	
 	//print_r("OLD: ".$_POST['oldname']."<br>");
