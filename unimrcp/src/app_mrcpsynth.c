@@ -168,6 +168,16 @@ typedef struct mrcpsynth_session_t mrcpsynth_session_t;
  */
 #define DEFAULT_FRAMESIZE						320
 
+/* --- MRCP SPEECH CHANNEL INTERFACE TO UNIMRCP --- */
+
+/* Get speech channel associated with provided MRCP session. */
+static APR_INLINE speech_channel_t * get_speech_channel(mrcp_session_t *session)
+{
+	if (session)
+		return (speech_channel_t *)mrcp_application_session_object_get(session);
+
+	return NULL;
+}
 
 /*! \brief Helper function used by datastores to destroy the synthesi structure upon hangup */
 static void destroy_callback(void *data)
@@ -261,9 +271,11 @@ static apt_bool_t speech_on_channel_add(mrcp_application_t *application, mrcp_se
 			if (!descriptor) {
 				ast_log(LOG_ERROR, "(%s) Unable to determine codec descriptor\n", schannel->name);
 				speech_channel_set_state(schannel, SPEECH_CHANNEL_ERROR);
+#if 0
 				ast_log(LOG_DEBUG, "(%s) Terminating MRCP session\n", schannel->name);
 				if (!mrcp_application_session_terminate(session))
 					ast_log(LOG_WARNING, "(%s) Unable to terminate application session\n", schannel->name);
+#endif
 				return FALSE;
 			}
 
@@ -280,8 +292,11 @@ static apt_bool_t speech_on_channel_add(mrcp_application_t *application, mrcp_se
 				schannel->rate);
 			speech_channel_set_state(schannel, SPEECH_CHANNEL_READY);
 		} else {
-			ast_log(LOG_ERROR, "(%s) Channel error!\n", schannel->name);
+		  int rc = mrcp_application_session_response_code_get(session);
+		  ast_log(LOG_ERROR, "(%s) Channel error status=%d, response code=%d!\n", schannel->name, status, rc);
+		  speech_channel_set_state(schannel, SPEECH_CHANNEL_ERROR);
 
+#if 0
 			if (session != NULL) {
 				ast_log(LOG_DEBUG, "(%s) Terminating MRCP session\n", schannel->name);
 				speech_channel_set_state(schannel, SPEECH_CHANNEL_ERROR);
@@ -289,6 +304,7 @@ static apt_bool_t speech_on_channel_add(mrcp_application_t *application, mrcp_se
 				if (!mrcp_application_session_terminate(session))
 					ast_log(LOG_WARNING, "(%s) Unable to terminate application session\n", schannel->name);
 			}
+#endif
 		}
 	} else
 		ast_log(LOG_ERROR, "(unknown) channel error!\n");
@@ -340,12 +356,11 @@ static apt_bool_t synth_message_handler(const mrcp_app_message_t *app_message)
 /* Handle the MRCP synthesizer responses/events from UniMRCP. */
 static apt_bool_t synth_on_message_receive(mrcp_application_t *application, mrcp_session_t *session, mrcp_channel_t *channel, mrcp_message_t *message)
 {
-	speech_channel_t *schannel;
-
-	if (channel != NULL)
-		schannel = (speech_channel_t *)mrcp_application_channel_object_get(channel);
-	else
-		schannel = NULL;
+	speech_channel_t *schannel = get_speech_channel(session);
+	if (!schannel || !message) {
+		ast_log(LOG_ERROR, "synth_on_message_receive: unknown channel error!\n");
+		return FALSE;
+	}
 
 	if ((schannel != NULL) && (application != NULL) && (session != NULL) && (channel != NULL) && (message != NULL)) {
 		if (message->start_line.message_type == MRCP_MESSAGE_TYPE_RESPONSE) {
@@ -429,6 +444,49 @@ static apt_bool_t synth_on_message_receive(mrcp_application_t *application, mrcp
 	return TRUE;
 }
 
+/* Fill the frame with data. */
+static APR_INLINE void ast_frame_fill(ast_format_compat *format, struct ast_frame *fr, void *data, apr_size_t size)
+{
+	memset(fr, 0, sizeof(*fr));
+	fr->frametype = AST_FRAME_VOICE;
+	ast_frame_set_format(fr, format);
+	fr->datalen = size;
+	fr->samples = size / format_to_bytes_per_sample(format);
+	ast_frame_set_data(fr, data);
+	fr->mallocd = 0;
+	fr->offset = AST_FRIENDLY_OFFSET;
+	fr->src = __PRETTY_FUNCTION__;
+	fr->delivery.tv_sec = 0;
+	fr->delivery.tv_usec = 0;
+}
+
+/* Incoming TTS data from UniMRCP. */
+static apt_bool_t synth_stream_write2(mpf_audio_stream_t *stream, const mpf_frame_t *frame)
+{
+	speech_channel_t *schannel;
+
+	if (stream != NULL)
+		schannel = (speech_channel_t *)stream->obj;
+	else
+		schannel = NULL;
+
+	if(!schannel || !frame) {
+		ast_log(LOG_ERROR, "synth_stream_write: unknown channel error!\n");
+		return FALSE;
+	}
+
+	if (frame->codec_frame.size > 0 && (frame->type & MEDIA_FRAME_TYPE_AUDIO) == MEDIA_FRAME_TYPE_AUDIO) {
+		struct ast_frame fr;
+		ast_frame_fill(schannel->format, &fr, frame->codec_frame.buffer, frame->codec_frame.size);
+
+		if (ast_write(schannel->chan, &fr) < 0) {
+			ast_log(LOG_WARNING, "(%s) Unable to write frame to channel: %s\n", schannel->name, strerror(errno));
+		}
+	}
+
+	return TRUE;
+}
+
 /* Incoming TTS data from UniMRCP. */
 static apt_bool_t synth_stream_write(mpf_audio_stream_t *stream, const mpf_frame_t *frame)
 {
@@ -441,7 +499,7 @@ static apt_bool_t synth_stream_write(mpf_audio_stream_t *stream, const mpf_frame
 
 	if ((schannel != NULL) && (stream != NULL) && (frame != NULL)) {
 		apr_size_t size = frame->codec_frame.size;
-		speech_channel_write(schannel, frame->codec_frame.buffer, &size); 
+		speech_channel_write(schannel, frame->codec_frame.buffer, &size);
 	} else
 		ast_log(LOG_ERROR, "(unknown) channel error!\n");
 

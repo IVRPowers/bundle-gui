@@ -28,7 +28,7 @@
 #include "ast_compat_defs.h"
 
 #define AST_MODULE "res_speech_unimrcp" 
-ASTERISK_FILE_VERSION(__FILE__, "$Revision: 1.73 $")
+ASTERISK_FILE_VERSION(__FILE__, "$Revision: 1.78 $")
 
 #include <asterisk/module.h>
 #include <asterisk/config.h>
@@ -300,7 +300,8 @@ static int uni_recog_create_internal(struct ast_speech *speech, ast_format_compa
 	uni_speech->language[0] = 0;
   uni_speech->dtmf_generator = NULL;
 
-	uni_speech->speech_base = speech;
+  uni_speech->speech_base = speech;
+
 	speech->data = uni_speech;
 
 	/* Create cond wait object and mutex */
@@ -390,6 +391,10 @@ static void uni_recog_cleanup(uni_speech_t *uni_speech)
 
 	if(uni_speech->speech_base) {
 		uni_speech->speech_base->data = NULL;
+
+    mrcp_application_session_object_set(uni_speech->session, NULL);
+
+	  uni_speech->speech_base = NULL;
 	}
 	if(uni_speech->mutex) {
 		apr_thread_mutex_destroy(uni_speech->mutex);
@@ -405,21 +410,9 @@ static void uni_recog_cleanup(uni_speech_t *uni_speech)
 	}
 
 	if (uni_speech->session) {
-	  if (uni_speech->speech_base)
-    mrcp_application_session_object_set(uni_speech->session, NULL);
-		else
-		{
-      ast_log(LOG_DEBUG, "(%s) Destroy application session\n", uni_speech->name);
-  		mrcp_application_session_destroy(uni_speech->session);
-		}
-
-    uni_speech->session = NULL;
-	}
-
-  if (uni_speech->speech_base)
-	{
-	  uni_speech->speech_base->data = NULL;
-	  uni_speech->speech_base = NULL;
+    ast_log(LOG_DEBUG, "(%s) Destroy application session\n", uni_speech->name);
+		mrcp_application_session_destroy(uni_speech->session);
+      // destroy the session and so, uni_speech no more refere to it !!!
 	}
 }
 
@@ -573,14 +566,14 @@ static int uni_recog_load_grammar(struct ast_speech *speech, ast_compat_const ch
 	    uni_speech->properties = mrcp_message_header_create(
 		    mrcp_generic_header_vtable_get(mrcp_message->start_line.version),
 		    mrcp_recog_header_vtable_get(mrcp_message->start_line.version),
-		    uni_engine.pool);
+		    pool);
 #else
 	    uni_speech->properties = apr_palloc(pool,sizeof(mrcp_message_header_t));
 	    mrcp_message_header_init(speech->properties);
 	    speech->properties->generic_header_accessor.vtable = mrcp_generic_header_vtable_get(mrcp_message->start_line.version);
     	speech->properties->resource_header_accessor.vtable = mrcp_recog_header_vtable_get(mrcp_message->start_line.version);
-    	mrcp_header_allocate(&properties->generic_header_accessor,uni_engine.pool);
-	    mrcp_header_allocate(&properties->resource_header_accessor,uni_engine.pool);
+    	mrcp_header_allocate(&properties->generic_header_accessor,pool);
+	    mrcp_header_allocate(&properties->resource_header_accessor,pool);
 #endif
 	  }
 
@@ -621,9 +614,9 @@ static int uni_recog_load_grammar(struct ast_speech *speech, ast_compat_const ch
 
     ast_log(LOG_DEBUG, "load_grammar set property %s=%s\n", grammar_path, grammar_name);
 
-  	header_field = apt_header_field_create_c(grammar_path,grammar_name, uni_engine.pool);
+  	header_field = apt_header_field_create_c(grammar_path,grammar_name, pool);
 		if(header_field) {
-			if(mrcp_header_field_add(uni_speech->properties,header_field,uni_engine.pool) == FALSE) {
+			if(mrcp_header_field_add(uni_speech->properties,header_field, pool) == FALSE) {
 				ast_log(LOG_WARNING, "Unknown MRCP header %s=%s\n", grammar_path, grammar_name);
 				return -1;
 			}
@@ -635,8 +628,8 @@ static int uni_recog_load_grammar(struct ast_speech *speech, ast_compat_const ch
 
 		apt_string_set(&pair.name,grammar_path);
 		apt_string_set(&pair.value,grammar_name);
-		if(mrcp_header_parse(&uni_speech->properties->resource_header_accessor,&pair,uni_engine.pool) != TRUE) {
-			if(mrcp_header_parse(&uni_speech->properties->generic_header_accessor,&pair,uni_engine.pool) != TRUE) {
+		if(mrcp_header_parse(&uni_speech->properties->resource_header_accessor,&pair, pool) != TRUE) {
+			if(mrcp_header_parse(&uni_speech->properties->generic_header_accessor,&pair, pool) != TRUE) {
 				ast_log(LOG_WARNING, "Unknown MRCP header %s=%s\n", grammar_path, grammar_name);
 				return -1;
 			}
@@ -1275,8 +1268,11 @@ static struct ast_speech_result* uni_recog_speech_result_build(uni_speech_t *uni
 		  }
       interpretation = nlsml_next_interpretation_get(result, interpretation);
 	  }
-	  nlsml_result_trace(result, pool);
 	}
+
+#if 1 /* enable/disable debug output of parsed results */
+	nlsml_result_trace(result, pool);
+#endif
 
 	first_speech_result = NULL;
 #if AST_VERSION_AT_LEAST(1,6,0)
@@ -1573,6 +1569,8 @@ static apt_bool_t on_session_terminate(mrcp_application_t *application, mrcp_ses
 
 	  if (!speech)
 		{
+      speech->data = NULL;
+
     	ast_log(LOG_DEBUG, "(%s) Session terminated status: %d\n","unref", status);
 
     	ast_log(LOG_DEBUG, "Destroy application session\n");
@@ -1612,12 +1610,13 @@ static apt_bool_t on_session_terminate(mrcp_application_t *application, mrcp_ses
 static apt_bool_t on_channel_add(mrcp_application_t *application, mrcp_session_t *session, mrcp_channel_t *channel, mrcp_sig_status_code_e status)
 {
 	uni_speech_t *uni_speech = mrcp_application_channel_object_get(channel);
+  apr_pool_t *pool = mrcp_application_session_pool_get(uni_speech->session);
 
   //if (0)
   if (uni_speech->stream != NULL)
   if (uni_speech->dtmf_generator == NULL)
   {
-				uni_speech->dtmf_generator = mpf_dtmf_generator_create(uni_speech->stream, uni_engine.pool);
+				uni_speech->dtmf_generator = mpf_dtmf_generator_create(uni_speech->stream, pool);
 
 				if (uni_speech->dtmf_generator != NULL)
 					ast_log(LOG_DEBUG, "(%s) DTMF generator created\n", uni_speech->name);
@@ -1821,6 +1820,7 @@ static apt_bool_t uni_recog_channel_create(uni_speech_t *uni_speech, ast_format_
 /** \brief Set properties */
 static apt_bool_t uni_recog_properties_set(uni_speech_t *uni_speech)
 {
+	apr_pool_t *pool = mrcp_application_session_pool_get(uni_speech->session);
 	mrcp_message_t *mrcp_message;
 	mrcp_message_header_t *properties;
 
@@ -1957,7 +1957,7 @@ static apt_bool_t uni_recog_properties_set(uni_speech_t *uni_speech)
 
     ast_log(LOG_DEBUG, "Set Vendor-Specific-Parameters : %s\n", vendorparameters);
 
-  	header_field = apt_header_field_create_c("Vendor-Specific-Parameters",vendorparameters, uni_engine.pool);
+  	header_field = apt_header_field_create_c("Vendor-Specific-Parameters",vendorparameters, pool);
 		apt_header_section_field_add(&mrcp_message->header.header_section,header_field);
  	}
 
