@@ -883,7 +883,7 @@ function install_cron_scheduler() {
 
 // Check and install the freepbx-cron-scheduler.php manager
 //
-install_cron_scheduler();
+//install_cron_scheduler();
 
 
 // run retrieve_conf_post_custom
