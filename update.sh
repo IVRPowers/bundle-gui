@@ -291,6 +291,9 @@ function update_freepbx() {
 	
 	echo "Instaling new interface..."
 	cp -r $src/freepbx/freepbx/amp_conf/htdocs/* ${dst}${webdir}/
+
+	echo "Installing new binaries..."
+	cp -r $src/freepbx/freepbx/amp_conf/bin/* ${dst}/var/lib/asterisk/bin/
 	
 	#We set the flavour
 	sed -i "s|//\$GLOBALS\['company'\] = \"$currentFlavour\";|\$GLOBALS\['company'\] = \"$currentFlavour\";|" ${dst}${webdir}/admin/userAssets/userAssets.php 
